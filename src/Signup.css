@@ -1,0 +1,140 @@
+.Signuppage{
+    background-color: #f8f8f8;
+}
+
+.Signup_container{
+    width: auto;
+    height: 540px;
+    display: flex;
+    margin-top: 6%;
+    margin-left: 15%;
+    margin-bottom: 6%;
+}
+
+.sp_container1{
+    background-color: white;
+    width:800px;
+}
+
+.lg_form{
+    margin-top: -20px;
+}
+
+.logo{
+    margin-left: 40%;
+}
+
+.email_refer{
+    display:flex;
+    width: 650px;
+    margin-left: 8%;
+    margin-top: -19px;
+}
+
+.subtitle{
+    margin-left: 26%;
+}
+.email_content{
+    margin-top: 5px;
+    margin-left: 24px;
+}
+
+.edu_email{
+    width:325px;
+    height: 130px;
+    background-color: rgba(203, 235, 248, 0.913);
+}
+
+.refer_email{
+    width:325px;
+    height: 130px;
+    background-color: rgba(191, 234, 250, 0.913); 
+}
+
+
+.verify{
+    display:flex; 
+}
+
+.veri_btn{
+    margin-left: 10px;
+    width: 50px;
+    height: 30px;
+    border: none;
+    background-color: #4B9CD3;
+    color: white;
+    border-radius: 5px;
+}
+
+.invite{
+    display: flex;
+    margin-top: 12px;
+}
+.inv_p{
+    margin-right: 10px;
+}
+
+.User_info{
+    display:flex;  
+    margin-left: 14%;  
+    margin-top: 15px;
+}
+
+.info{
+    margin-right: 50px;
+}
+
+.user_name{
+    margin-left: 14%;  
+    padding-top: 9px;
+}
+
+.sp_pwd{
+    display:flex;
+    margin-left: 14%; 
+    padding-top: 8px;
+}
+
+
+.sp_btn{
+    margin-left: 73%;
+    margin-top: 25px;
+    width: 150px;
+    height: 30px;
+    border: none;
+    background-color: #4B9CD3;
+    color: white;
+    border-radius: 5px;
+}
+
+.nd_signin{
+    margin-left: 10%;
+    margin-top: 10px;
+    font-size: smaller;
+    color: #4B9CD3;
+}
+
+.input{
+    height: 26px;
+    width: 210px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f8f8ad;
+}
+
+.input2{
+    height: 26px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f8f8ad;
+    width: 182px;
+}
+
+.sp_container2{
+    background-color: white;
+    width: 140px;
+}
+.svg1{
+    margin-top: 350px;
+    margin-left: -160px;
+}
