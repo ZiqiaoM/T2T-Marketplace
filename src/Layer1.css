@@ -1,0 +1,49 @@
+.logo_layer1{
+    width: 90px;
+    object-fit: scale-down;
+    /* margin:0 40px;  */
+    /* margin-top:12px; */
+}
+
+.logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .ant-row-rtl .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
+  }
+  
+  .site-layout-background {
+    background: #fff;
+    display: inline-block;
+  }
+  
+  .cut_line {
+    width: 50%;
+    height: 1px;
+    border-top: solid #ACC0D8 1px;
+}
+.site-card-wrapper {
+    padding: 30px;
+    background: #ececec;
+  }
+  .show_goods{
+
+    width: 100%;
+    text-align: center; 
+    vertical-align: center;      
+     /* display:flex;                                      */
+  }
+
+  /* .goods{
+    height :100%;
+    width: 100%;
+
+    margin: auto ;                     
+
+  } */
