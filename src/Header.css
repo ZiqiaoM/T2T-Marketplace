@@ -1,0 +1,102 @@
+.header{
+    height:80px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    position:sticky;
+    top:0;
+    z-index: 100;
+    margin-left: -303px;
+}
+
+.header_logo{
+    width: 130px;
+    object-fit: contain;
+    margin:0 40px;
+    margin-top:12px;
+}
+
+/* .header_search{
+    display:flex;
+    flex: 1;
+    align-items: center;
+    border-radius: 24px;
+}
+
+.header_searchInput{
+    height: 12px;
+    padding: 10px;
+    border: none;
+    width: 100%;
+}
+
+.header_searchIcon{
+    padding:5px;
+    height:22px !important;
+    background-color: #4B9CD3;
+} */
+
+.header_optionLineOne{
+    font-size:13px;
+}
+
+.header_optionLineTwo{
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.header_nav{
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 35%;
+}
+
+.header_option{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 50px;
+    color: #13294B;
+    width: 15%;
+}
+
+.header_optionBasket{
+    display: flex;
+    align-items: center;
+}
+.header_basketCount{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.header_optionChat{
+    display: flex;
+    align-items: center; 
+    margin-right: 15px;   
+}
+
+.header_chatCount{
+    margin-left: 10px;
+    margin-right: 10px;    
+}
+
+.header_publish{
+    width: 180px;
+    display: flex;
+    margin-left: 40px;
+
+}
+.button{
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 20px;
+    background-color: #4B9CD3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-color: transparent;
+    color: #fff;
+
+}

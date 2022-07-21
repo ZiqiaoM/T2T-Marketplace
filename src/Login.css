@@ -1,0 +1,61 @@
+.Loginpage{
+    background-color: #f8f8f8;
+}
+
+.Login_container{
+    width: 800px;
+    height: 400px;
+    display: flex;
+    padding-left: 19%;
+    padding-top: 6%;
+}
+
+.lg_container1{
+    width:400px;
+}
+
+.lg_container2{
+    background-color: white;
+    width: 400px;
+    padding-left: 100px;
+}
+
+
+
+.logo{
+    padding-left: 17%;
+    padding-top: 3%;
+}
+
+.input{
+    padding-left: 7%;
+    margin-top: 15px;
+    height: 28px;
+    width: 210px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f8f8ad;
+}
+
+.lg_btn{
+    width: 150px;
+    margin-top: 30px;
+    height: 30px;
+    border: none;
+    background-color: #4B9CD3;
+    color: white;
+    border-radius: 5px;
+    margin-left: 15%;
+}
+
+.lg_p1{
+    margin-left: 22%; 
+    color: grey;
+    font-size: 0.85em;
+}
+
+.nd_signup{
+    margin-top: 25px;
+    font-size: 0.85em;
+    color: #4B9CD3;
+}
