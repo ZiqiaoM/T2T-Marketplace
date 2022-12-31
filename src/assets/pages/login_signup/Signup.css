@@ -1,0 +1,160 @@
+.Signuppage{
+    /* background-color: #674d4d; */
+    /* background: rgb(222, 240, 247); */
+    height: 740px;
+}
+
+.Signup_container{
+    width: 940px;
+    height: 680px;
+    display: flex;
+    margin-top: 4%;
+    margin-left: 15%;
+    margin-bottom: 6%;
+    /* background-color: olive; */
+    padding-top: 40px;
+}
+
+.sp_container1{
+    background-color: white;
+    width:800px;
+}
+
+.lg_form{
+    margin-top: -20px;
+}
+
+.logo2{
+    margin-left: 325px;
+    /* background-color: rebeccapurple; */
+}
+
+.email_refer{
+    display:flex;
+    width: 650px;
+    height: 140px;
+    margin-left: 8%;
+    margin-top: -19px;
+}
+
+.subtitle{
+    margin-left: 26%;
+}
+.email_content{
+    margin-top: 5px;
+    margin-left: 24px;
+}
+.email_content p{
+    margin: 0;
+}
+
+
+.edu_email{
+    width:330px;
+    height: 140px;
+    background-color: rgba(203, 235, 248, 0.913);
+}
+
+.refer_email{
+    width:330px;
+    height: 140px;
+    background-color: rgba(191, 234, 250, 0.913); 
+}
+
+
+.verify{
+    display:flex; 
+}
+
+.veri_btn{
+    margin-left: 10px;
+    margin-top: 12px;
+    width: 50px;
+    height: 30px;
+    border: none;
+    background-color: #4B9CD3;
+    color: white;
+    border-radius: 5px;
+}
+
+.invite{
+    display: flex;
+    margin-top: 12px;
+}
+.inv_p{
+    margin-right: 10px;
+}
+
+.User_info{
+    display:flex;  
+    margin-left: 14%;  
+    margin-top: 15px;
+}
+
+.info{
+    margin-right: 50px;
+}
+
+.user_name{
+    margin-left: 14%;  
+    padding-top: 9px;
+}
+
+.sp_pwd{
+    display:flex;
+    margin-left: 14%; 
+    padding-top: 8px;
+}
+
+
+.sp_btn{
+    margin-left: 73%;
+    margin-top: 25px;
+    width: 150px;
+    height: 30px;
+    border: none;
+    background-color: #4B9CD3;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nd_signin{
+    margin-left: 10%;
+    margin-top: 10px;
+    font-size: smaller;
+    color: #4B9CD3;
+}
+.nd_signin a{
+    color: #4B9CD3;
+}
+.nd_signin a:hover{
+    color: #26628a;
+}
+
+.input{
+    height: 26px;
+    width: 210px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f8f8ad;
+    margin: 0;
+}
+
+.input2{
+    height: 26px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f8f8ad;
+    width: 182px;
+    margin-left: 5px;
+}
+
+.sp_container2{
+    background-color: white;
+    width: 140px;
+}
+.svg1{
+    margin-top: 440px;
+    margin-left: -160px;
+}
