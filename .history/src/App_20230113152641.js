@@ -8,21 +8,12 @@ import  PersonalInfo from './components/PersonalInfo';
 import 'antd/dist/reset.css';
 
 function App() {
-
+  // return <Layout />;
   return (
-
-  <div>
-
-  {/* Index  */}
-  <Layout />
-
-
-  { /* Personal Info */ }
-  {/* <PersonalInfo />
-      <Category />
-      <Pages /> */}
-
+  <div className="App">
+  <PersonalInfo />
   </div>
+
   );
 }
 

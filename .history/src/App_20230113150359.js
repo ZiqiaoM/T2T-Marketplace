@@ -5,23 +5,19 @@ import Pages from "./pages/Pages";
 import Category from "./components/Category";
 import {BrowserRouter} from "react-router-dom";
 import  PersonalInfo from './components/PersonalInfo';
-import 'antd/dist/reset.css';
 
 function App() {
-
+  // return <Layout />;
   return (
-
-  <div>
-
-  {/* Index  */}
-  <Layout />
-
-
-  { /* Personal Info */ }
-  {/* <PersonalInfo />
-      <Category />
-      <Pages /> */}
-
+  <div className="App">
+  <PersonalInfo />
+  <BrowserRouter>
+    
+    <Category />
+    
+    <Pages />
+    
+  </BrowserRouter>
   </div>
   );
 }
