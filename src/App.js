@@ -13,14 +13,11 @@ function App() {
 
   <div>
 
-  {/* Index  */}
-  <Layout />
+  {/* <Layout/> */}
 
-
-  { /* Personal Info */ }
-  {/* <PersonalInfo />
+  <PersonalInfo />
       <Category />
-      <Pages /> */}
+      <Pages />
 
   </div>
   );
