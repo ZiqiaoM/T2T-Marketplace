@@ -3,11 +3,11 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+
 import Layout from "../layout";
+import Header from "../header"
+
 import { api } from "../utils/api";
-import TestComp from "../test";
-import ActiveLink from "../test";
-// import  PersonalInfo from './myaccount'
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -15,10 +15,8 @@ const Home: NextPage = () => {
   return (
     <main>
     {/* <PersonalInfo /> */}
-    {/* <Layout/> */}
-    {/* <TestComp/> */}
+    <Header/>
 
-    <ActiveLink/>
     </main>
   );
 };
