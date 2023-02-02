@@ -1,0 +1,34 @@
+.home_container{
+    margin-left: -12px;
+    
+}
+
+.feature_subtitle{
+    color: orange;
+}
+.feature_title span{
+    color: orange;
+}
+.feature_text{
+    color: grey;
+}
+
+.pro_category{
+    background-color: rgb(78, 163, 216);
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px 0px;
+    border-radius: 8px;
+}
+.pro_category button{
+    border:none;
+    outline:none;
+    padding:7px 20px;
+    background: transparent;
+    color: white;
+}
+.proBtnActive{
+    background-color:white !important;
+    border-radius: 5px;
+    color: rgb(78, 163, 216) !important;
+}

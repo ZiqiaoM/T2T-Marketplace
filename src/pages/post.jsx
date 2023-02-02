@@ -1,11 +1,13 @@
 import React from "react";
+import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col } from "reactstrap";
 // import CommonSection from '../components/UI/common-section/CommonSection'
-// import productImg from "../images/product_01_image_01.jpg";
-import "../styles/post.module.css";
+import productImg from "../images/product_01_image_01.jpg";
+import "./Post.css";
 
 const Post = () => {
   return (
+    <Helmet>
       <section>
         <Container>
           <body>
@@ -165,6 +167,7 @@ const Post = () => {
           </body>
         </Container>
       </section>
+    </Helmet>
   );
 };
 

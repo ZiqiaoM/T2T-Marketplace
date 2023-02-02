@@ -1,0 +1,65 @@
+.FooterContainer{
+    padding: 5rem calc((100vw-1100px)/2);
+    color: #000;
+    background: rgb(234,237,237);
+}
+
+
+
+.FooterLinksWrapper{
+    display: flex;
+    margin-left: 6%;
+    margin-top: -20px;
+
+}
+
+.FooterDesc{
+    padding: 0 2rem;
+    margin-left: 8%;
+    margin-top: 5px;
+    width: 35%;
+    margin-bottom: 25px;
+}
+.header_logo{
+    margin-left: 20%;
+    margin-bottom: -15px;
+}
+
+
+.FooterLinkItems{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 2rem;
+    margin-top: 4%;
+    margin-left: 8%;
+}
+
+.FooterLinkTitle{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom:16px;
+    color: #4B9CD3;
+}
+
+.FooterLink{
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    color: #3d3d4e;
+}
+.info{
+    font-family: "RocknRoll One", sans-serif !important;
+    font-size: 14px;
+    color: #595969;
+}
+
+.copyright{
+    margin-left: auto;
+    margin-right: auto;
+    width:32em;
+    font-size: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: grey;
+}

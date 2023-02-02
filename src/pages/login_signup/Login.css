@@ -1,0 +1,80 @@
+.Loginpage{
+    /* background-color: white; */
+    /* background: rgb(222, 240, 247); */
+    height: 600px;
+}
+
+.Login_container{
+    width: 800px;
+    height: 450px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 120px;
+}
+
+.lg_container1{
+    width:400px;
+    /* background-color: red; */
+    padding-top: 20px;
+    /* background-color:#f8f8f8; */
+    
+}
+
+.lg_container2{
+    background-color: white;
+    /* background-color:blue; */
+    width: 400px;
+    padding-left: 100px;
+    padding-top: 20px;
+
+}
+
+
+
+.logo{
+    /* background-color: aquamarine;  */
+    padding-left: -100px; 
+}
+
+.input{
+    padding-left: 7%;
+    margin-top: 15px;
+    height: 28px;
+    width: 210px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f8f8ad;
+}
+
+.lg_btn{
+    width: 150px;
+    margin-top: 30px;
+    height: 30px;
+    border: none;
+    background-color: #4B9CD3;
+    color: white;
+    border-radius: 5px;
+    margin-left: 15%;
+}
+
+.lg_p1{
+    margin-left: 22%; 
+    color: grey;
+    font-size: 0.85em;
+}
+
+.nd_signup{
+    margin-top: 25px;
+    font-size: 0.85em;
+    color: #4B9CD3;
+    padding: 0;
+}
+.nd_signup a{
+    color: #4B9CD3;
+}
+
+.nd_signup a:hover{
+    color: #26628a;
+}
