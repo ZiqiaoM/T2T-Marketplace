@@ -20,19 +20,20 @@ const nav_links=[
   {
     display:'Home',
     path:'/home'
-  },
-  {
+},
+{
     display:'Products',
     path:'/products'
-  },
-  {
+},    
+{
     display:'About',
     path:'/contact'
-  },
-  {
+},
+{
     display:'Publish Post',
     path:'/post'
-  },
+},
+
 ]
 
 const Header = () => {
@@ -62,16 +63,11 @@ const Header = () => {
             {/* menu */}
             <div className='navigation' ref={menuRef} onClick={toggleMenu}>
               <div className="menu d-flex align-items-center gap-5">
-                
-                {
-                  nav_links.map((item,index)=>(
-                    <Link 
-                      href={item.path} key={index}
-                      className={navClass => navClass.isActive ? 'active_menu':''}
-                      style={{ fontSize: "1rem",color: "rgb(19, 41, 75)",fontWeight: "600",transition: "0.3s"}}
-                    >{item.display}</Link>
-                  ))
-                }
+              {
+                       nav_links.map((item,index)=>(
+                        <Link href={item.path}>{item.display}</Link>
+                       )) 
+                    }
               </div>
             </div>
             {/* nav icons */}
