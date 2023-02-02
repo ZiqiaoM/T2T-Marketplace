@@ -23,7 +23,7 @@ const nav_links=[
 },
 {
     display:'Products',
-    path:'/products'
+    path:'/AllProducts'
 },    
 {
     display:'About',
@@ -77,7 +77,7 @@ const Header = () => {
                     <span className='wishlt_badge'>{totalQuantity}</span>
                 </span>
               <span className="user">
-                    <Link href='/Personal/PersonalHome'><PersonOutlineIcon /></Link>
+                    <Link href='/Personal/myaccount'><PersonOutlineIcon /></Link>
                 {/* <Link to='/userpages'><PersonOutlineIcon /></Link> */}
                 </span>
               {/* <span className="mobile_menu" onClick={toggleMenu}>
