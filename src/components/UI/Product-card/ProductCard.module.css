@@ -1,0 +1,35 @@
+.product_item{
+    border: 1px solid #fde4e4;
+    text-align: center;
+    padding: 30px;
+    cursor: pointer;
+}
+
+.product_img{
+    margin-bottom: 20px;
+    transition: 0.4s;
+}
+.product_img:hover{
+    transform: scale(1.2);
+}
+.product_content h5 a{
+    color: navy;
+    text-decoration: none;
+}
+.product_content h5{
+    margin-bottom: 10px;
+}
+
+.product_price{
+    font-weight: bold;
+    font-size: 1.1rem;
+    color:rgb(243, 93, 39)
+}
+.addToWl_btn{
+    border: none;
+    padding: 7px 25px;
+    background-color: rgb(78, 163, 216);
+    color: white;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}

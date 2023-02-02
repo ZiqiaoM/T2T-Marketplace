@@ -1,0 +1,14 @@
+.cate_container{
+    background-color: blues;
+}
+.category_item{
+    background-color: rgb(226, 244, 244);
+    padding: 15px 8px;
+    border-radius: 5px;
+    cursor:pointer;
+    transition: 0.4s;
+}
+
+.category_item:hover{
+    transform:translateY(-15px);
+}
