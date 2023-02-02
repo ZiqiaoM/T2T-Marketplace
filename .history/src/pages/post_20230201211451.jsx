@@ -33,6 +33,7 @@ const App = () => {
       size={componentSize}
       style={{
         maxWidth: 600,
+        color:red,
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}

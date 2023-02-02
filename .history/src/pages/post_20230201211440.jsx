@@ -1,5 +1,4 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { color } from "@mui/system";
 import { Button, Form, Input, InputNumber, Radio, Upload } from "antd";
 import { useState } from "react";
 
@@ -33,6 +32,7 @@ const App = () => {
       size={componentSize}
       style={{
         maxWidth: 600,
+        background-color:red,
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}

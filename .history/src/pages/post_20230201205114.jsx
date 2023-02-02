@@ -1,5 +1,4 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { color } from "@mui/system";
 import { Button, Form, Input, InputNumber, Radio, Upload } from "antd";
 import { useState } from "react";
 
@@ -17,7 +16,6 @@ const App = () => {
     setComponentSize(size);
   };
   return (
-    // <div className="post">
     <Form
       labelCol={{
         span: 8,
@@ -162,11 +160,6 @@ const App = () => {
         </Button>
       </Form.Item>
     </Form>
-    // <style jsx>{`
-    // background-color:red;
-    // `}</style>
-    // </div>
-    
   );
 };
 export default App;
