@@ -4,12 +4,12 @@ import Helmet from "../components/Helmet/Helmet";
 
 import { Container, Row, Col } from "reactstrap";
 
-import ProductDetails from "./ProductDetails";
+// import ProductDetails from "./ProductDetails";
 
 import SearchIcon from "@mui/icons-material/Search";
 import products from "../sample-data/products";
 import ProductCard from "../components/UI/Product-card/ProductCard";
-import "./AllProduct.css";
+// import "./AllProduct.css";
 
 import ReactPaginate from "react-paginate";
 
