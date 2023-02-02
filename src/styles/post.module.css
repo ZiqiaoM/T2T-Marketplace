@@ -1,0 +1,62 @@
+.uploadProduct {
+  font-size: 2.1rem;
+  font-weight: 600;
+  color: rgb(19, 41, 75);
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.inToCenter {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.textBorder {
+  border: none;
+  border-radius: 10px;
+  background-color: #f8f8f8ad;
+}
+
+.tabs {
+  border-bottom: 1px solid white;
+}
+
+.tabs h6 {
+  cursor: pointer;
+}
+
+.tab_content {
+  padding: 10px 0px;
+}
+
+.tab_content p {
+  line-height: 30px;
+  color: rgb(91, 90, 90);
+}
+
+.tab_active {
+  color: rgb(16, 144, 187);
+}
+
+.input-title {
+  padding-left: 7%;
+  margin-top: 15px;
+  height: 30px;
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f8f8f8ad;
+}
+
+.input-price {
+  padding-left: 7%;
+  margin-top: 15px;
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f8f8f8ad;
+}
