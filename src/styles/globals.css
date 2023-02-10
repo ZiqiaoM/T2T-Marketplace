@@ -2,7 +2,9 @@
 
 @import url("https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Istok+Web&display=swap");
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* reset default style */
 * {
   margin: 0;
@@ -25,27 +27,32 @@ body {
     monospace;
 } */
 
-
-h1,h2,h3,h4,h5,h6,h8 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h8 {
   font-family: "RocknRoll One", sans-serif !important;
 }
 
-a{
+a {
   text-decoration: none !important;
   color: rgb(19, 41, 75) !important;
 }
 
-a:hover{
+a:hover {
   color: orange !important;
 }
 
- h1,h2 {
+h1,
+h2 {
   font-size: 2.1rem;
   font-weight: 600;
-  color: rgb(19, 41, 75);  
- }
+  color: rgb(19, 41, 75);
+}
 
- section {
+section {
   padding: 60px 0px;
- }
-
+}
