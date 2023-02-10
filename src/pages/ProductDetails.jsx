@@ -1,27 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import products from "../sample-data/products";
-// import Helmet from "../components/Helmet/Helmet";
-// import { Container, Row, Col } from "reactstrap";
-
-// const ProductDetails = () => {
-//   return (
-//   <div>
-//     <h1>???????????</h1>
-//   </div>
-//   )
-// };
-// export default ProductDetails;
-
-// tailwind.config.js
-// module.exports = {
-//   // ...
-//   plugins: [
-//     // ...
-//     require('@tailwindcss/typography'),
-//   ],
-// }
-// ```
-
 import { useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
