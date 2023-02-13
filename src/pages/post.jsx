@@ -1,169 +1,358 @@
-import { PlusOutlined } from "@ant-design/icons";
-import { color } from "@mui/system";
-import { Button, Form, Input, InputNumber, Radio, Col, Upload } from "antd";
-import { useState } from "react";
+import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
+const ProductCategory = [
+  { id: "cloth", title: "Cloth" },
+  { id: "kitchenware", title: "Kitchenware" },
+  { id: "Electronics", title: "Electronics" },
+  { id: "funiture", title: "Funiture" },
+  { id: "other", title: "Other" },
+];
 
-const { TextArea } = Input;
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+const Locations = [
+  { id: "on_campus", title: "On campus" },
+  { id: "off_campus", title: "Off campus" },
+];
 
-const App = () => {
-  const [componentSize, setComponentSize] = useState("default");
-  const onFormLayoutChange = ({ size }) => {
-    setComponentSize(size);
-  };
+const Conditions = [
+  { id: "new", title: "New" },
+  { id: "used", title: "Used" },
+];
+
+export default function Example() {
   return (
-    // <div className="post">
-    <Col type="flex" align="middle">
-      <Form
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 26,
-        }}
-        layout="horizontal"
-        initialValues={{
-          size: componentSize,
-        }}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize}
-        style={{
-          maxWidth: 600,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <header class="uploadProduct">
-          <h1>Upload Product</h1>
-        </header>
+    <div className="space-y-6">
+      <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
+        <div className="md:grid md:grid-cols-3 md:gap-6">
+          <div className="md:col-span-1">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">
+              Post product
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              This information will be displayed publicly so be careful what you
+              share.
+            </p>
+          </div>
 
-        <Form.Item
-          label="Category"
-          rules={[
-            {
-              required: true,
-              message: "Please choose your catagory!",
-            },
-          ]}
-        >
-          <Radio.Group>
-            <Radio value="cloth"> Cloth </Radio>
-            <Radio value="kitchenware"> Kitchenware </Radio>
-            <Radio value="funiture"> Funiture </Radio>
-            <Radio value="book"> Book </Radio>
-            <Radio value="other"> Other </Radio>
-          </Radio.Group>
-        </Form.Item>
-
-        <Form.Item
-          label="Post title"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Post title!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Price(Enter 0 if free)"
-          rules={[
-            {
-              required: true,
-              message: "Please input your price!",
-            },
-          ]}
-        >
-          <InputNumber />
-        </Form.Item>
-
-        <Form.Item
-          label="Condition"
-          name="condition"
-          rules={[
-            {
-              required: true,
-              message: "Please choose your condition!",
-            },
-          ]}
-        >
-          <Radio.Group>
-            <Radio.Button value="new">New</Radio.Button>
-            <Radio.Button value="used">Used</Radio.Button>
-          </Radio.Group>
-        </Form.Item>
-
-        <Form.Item
-          label="Location"
-          name="location"
-          rules={[
-            {
-              required: true,
-              message: "Please choose your location!",
-            },
-          ]}
-        >
-          <Radio.Group>
-            <Radio.Button value="on_campus">On campus</Radio.Button>
-            <Radio.Button value="off_campus">Off campus</Radio.Button>
-          </Radio.Group>
-        </Form.Item>
-
-        <Form.Item label="Product details">
-          <TextArea rows={4} />
-        </Form.Item>
-
-        <Form.Item label="Reference links">
-          <TextArea rows={4} />
-        </Form.Item>
-
-        <Form.Item
-          label="Contact information"
-          rules={[
-            {
-              required: true,
-              message: "Please provide your contact information!",
-            },
-          ]}
-        >
-          <TextArea rows={4} />
-        </Form.Item>
-
-        <Form.Item label="Upload" valuePropName="fileList">
-          <Upload action="/upload.do" listType="picture-card">
-            <div>
-              <PlusOutlined />
-              <div
-                style={{
-                  marginTop: 8,
-                }}
-              >
-                Upload Pictures
+          <div className="mt-5 md:mt-0 md:col-span-2">
+            <form className="space-y-6" action="#" method="POST">
+              {/* Product details */}
+              <div className="grid grid-cols-3 gap-6">
+                <div className="col-span-3 sm:col-span-2">
+                  <label className="text-base font-medium text-gray-900">
+                    Product title
+                  </label>
+                  <div className="mt-1 flex rounded-md shadow-sm">
+                    <input
+                      required
+                      type="text"
+                      name="product_title"
+                      id="product_title"
+                      aria-invalid="true"
+                      inputProps={{ maxLength: 30 }}
+                      aria-describedby="product_title_error"
+                      className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <ExclamationCircleIcon
+                        className="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm text-red-600" id="email-error">
+                    Your title must be less than 30 characters.
+                  </p>
+                </div>
               </div>
-            </div>
-          </Upload>
-        </Form.Item>
+              {/* Price */}
+              <div className="grid grid-cols-5 gap-6">
+                <div className="col-span-3 sm:col-span-2">
+                  <label
+                    htmlFor="price"
+                    className="text-base font-medium text-gray-900"
+                  >
+                    Price
+                  </label>
+                  <div className="relative mt-1 rounded-md shadow-sm">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <span className="text-gray-500 sm:text-sm">$</span>
+                    </div>
+                    <input
+                      type="text"
+                      name="price"
+                      id="price"
+                      className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      placeholder="0.00"
+                    />
+                  </div>
+                  <p className="text-sm leading-5 text-gray-500">
+                    Enter 0.00 if this product is free.
+                  </p>
+                </div>
+              </div>
+              {/* Product category */}
+              <div>
+                <fieldset className="mt-6">
+                  <label className="text-base font-medium text-gray-900">
+                    Product category
+                  </label>
+                  <p className="text-sm leading-5 text-gray-500">
+                    What is the category of your product?
+                  </p>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    </Col>
+                  <div className="space-y-4">
+                    {ProductCategory.map((ProductCategory) => (
+                      <div
+                        key={ProductCategory.id}
+                        className="flex items-center"
+                      >
+                        <input
+                          id={ProductCategory.id}
+                          name="product_category"
+                          type="radio"
+                          defaultChecked={ProductCategory.id === "cloth"}
+                          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                        />
+                        <label
+                          htmlFor={ProductCategory.id}
+                          className="ml-3 block text-sm font-medium text-gray-700"
+                        >
+                          {ProductCategory.title}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
+              {/* Product Condition */}
+              <div>
+                <label className="text-base font-medium text-gray-900">
+                  Conditions
+                </label>
+                <p className="text-sm leading-5 text-gray-500">
+                  What is the condition of your product?
+                </p>
+                <fieldset className="mt-4">
+                  <legend className="sr-only">Condition</legend>
+                  <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                    {Conditions.map((condition) => (
+                      <div key={condition.id} className="flex items-center">
+                        <input
+                          id={condition.id}
+                          name="notification-method"
+                          type="radio"
+                          defaultChecked={condition.id === "new"}
+                          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                        />
+                        <label
+                          htmlFor={condition.id}
+                          className="ml-3 block text-sm font-medium text-gray-700"
+                        >
+                          {condition.title}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
+              {/* Product location */}
+              <div>
+                <label className="text-base font-medium text-gray-900">
+                  Locations
+                </label>
+                <p className="text-sm leading-5 text-gray-500">
+                  Where do you prefer to trade your product?
+                </p>
+                <fieldset className="mt-4">
+                  <legend className="sr-only">Location</legend>
+                  <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                    {Locations.map((Location) => (
+                      <div key={Location.id} className="flex items-center">
+                        <input
+                          id={Location.id}
+                          name="location_product"
+                          type="radio"
+                          defaultChecked={Location.id === "email"}
+                          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                        />
+                        <label
+                          htmlFor={Location.id}
+                          className="ml-3 block text-sm font-medium text-gray-700"
+                        >
+                          {Location.title}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
+              {/* Product details */}
+              <div>
+                <label
+                  htmlFor="about"
+                  className="text-base font-medium text-gray-900"
+                >
+                  Product details
+                </label>
+                <span className="text-sm text-gray-500" id="detail-optional">
+                  (Optional)
+                </span>
+                <div className="mt-1">
+                  <textarea
+                    id="product_details"
+                    name="product_details"
+                    rows="5"
+                    cols="80"
+                    className="border-gray-300 rounded-md sm:text-sm shadow-sm"
+                    aria-describedby="detail-optional"
+                  />
+                </div>
+                <p className="mt-2 text-sm text-gray-500">
+                  Brief description for your Product.
+                </p>
+              </div>
+              {/* Product reference */}
+              <div>
+                <label
+                  htmlFor="reference_link"
+                  className="text-base font-medium text-gray-900"
+                >
+                  Reference link
+                </label>
+                <span className="text-sm text-gray-500" id="link-optional">
+                  (Optional)
+                </span>
+                <div className="mt-1">
+                  <textarea
+                    id="reference_link"
+                    name="reference_link"
+                    rows="4"
+                    cols="80"
+                    className="border-gray-300 rounded-md sm:text-sm shadow-sm"
+                    aria-describedby="link-optional"
+                  />
+                </div>
+                <p className="mt-2 text-sm text-gray-500">
+                  Give some reference links for your product. URLs are
+                  hyperlinked.
+                </p>
+              </div>
+              {/* Product photo */}
+              <div>
+                <label className="text-base font-medium text-gray-900">
+                  Upload photo
+                </label>
+                {/* <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"></div> */}
+                <div className="border-gray-300 border-dashed mt-1 flex px-9 pt-2 pb-9 justify-center border-2 rounded-md">
+                  <div className="space-y-1 text-center">
+                    <svg
+                      className="mx-auto h-12 w-12 text-gray-400"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 48 48"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <div className="flex text-sm text-gray-600">
+                      <label
+                        htmlFor="file-upload"
+                        className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                      >
+                        <span>Upload a photo</span>
+                        <input
+                          id="file-upload"
+                          name="file-upload"
+                          type="file"
+                          className="sr-only"
+                        />
+                      </label>
+                      <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      PNG, JPG, GIF up to 10MB
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* Contact information */}
+              <div>
+                <label
+                  htmlFor="reference_link"
+                  className="text-base font-medium text-gray-900"
+                >
+                  Contact information
+                </label>
+                <span className="text-sm text-gray-500" id="email-optional">
+                  (Optional)
+                </span>
+                {/* Phone */}
+                <div className="grid grid-cols-5 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <label
+                      htmlFor="phone-number"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Phone Number
+                    </label>
+                    <div className="relative mt-1 rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        name="phone-number"
+                        id="phone-number"
+                        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-16 sm:text-sm border-gray-300 rounded-md"
+                        placeholder="+1 (555) 987-6543"
+                        aria-describedby="phone-optional"
+                      />
+                    </div>
+                  </div>
+                </div>
+                {/* email */}
+                <div className="grid grid-cols-5 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <label
+                      htmlFor="email_address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email address
+                    </label>
+
+                    <div className="mt-1 relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        name="email_address"
+                        id="email_address"
+                        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-16 sm:text-sm border-gray-300 rounded-md"
+                        placeholder="your@email.com"
+                        aria-describedby="email-optional"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Submit botton */}
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Save draft
+                </button>
+                <button
+                  type="submit"
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-};
-export default App;
+}
