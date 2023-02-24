@@ -7,24 +7,20 @@ generator client {
 
 datasource db {
     provider = "sqlite"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
 
-
 model User{
     id   Int  @id @default(autoincrement())
-    username String @unique
-    email String @unique
+    username String?
+    email String?
     products Product[]
 }
 
 model Product {
    id   Int  @id @default(autoincrement())
-   category String
+   catagory String
+   seller_name String
    post_title String?
    price Float
    condition String?
@@ -35,6 +31,4 @@ model Product {
    photo String?
    if_sold Boolean
    update_time  DateTime  @default(now())
-   seller User  @relation(fields: [seller_id], references: [id])
-   seller_id Int 
-   }
+}
