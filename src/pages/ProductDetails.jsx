@@ -18,76 +18,28 @@ import {
   XIcon,
 } from "@heroicons/react/24/outline";
 
-const navigation = {
-  categories: [
-    {
-      name: "Women",
-      featured: [
-        { name: "Sleep", href: "#" },
-        { name: "Swimwear", href: "#" },
-        { name: "Underwear", href: "#" },
-      ],
-      collection: [
-        { name: "Everything", href: "#" },
-        { name: "Core", href: "#" },
-        { name: "New Arrivals", href: "#" },
-        { name: "Sale", href: "#" },
-      ],
-      categories: [
-        { name: "Basic Tees", href: "#" },
-        { name: "Artwork Tees", href: "#" },
-        { name: "Bottoms", href: "#" },
-        { name: "Underwear", href: "#" },
-        { name: "Accessories", href: "#" },
-      ],
-      brands: [
-        { name: "Full Nelson", href: "#" },
-        { name: "My Way", href: "#" },
-        { name: "Re-Arranged", href: "#" },
-        { name: "Counterfeit", href: "#" },
-        { name: "Significant Other", href: "#" },
-      ],
-    },
-    {
-      name: "Men",
-      featured: [
-        { name: "Casual", href: "#" },
-        { name: "Boxers", href: "#" },
-        { name: "Outdoor", href: "#" },
-      ],
-      collection: [
-        { name: "Everything", href: "#" },
-        { name: "Core", href: "#" },
-        { name: "New Arrivals", href: "#" },
-        { name: "Sale", href: "#" },
-      ],
-      categories: [
-        { name: "Artwork Tees", href: "#" },
-        { name: "Pants", href: "#" },
-        { name: "Accessories", href: "#" },
-        { name: "Boxers", href: "#" },
-        { name: "Basic Tees", href: "#" },
-      ],
-      brands: [
-        { name: "Significant Other", href: "#" },
-        { name: "My Way", href: "#" },
-        { name: "Counterfeit", href: "#" },
-        { name: "Re-Arranged", href: "#" },
-        { name: "Full Nelson", href: "#" },
-      ],
-    },
-  ],
-  pages: [
-    { name: "Company", href: "#" },
-    { name: "Stores", href: "#" },
-  ],
-};
-
+const relatedProducts = [
+  {
+    id: 1,
+    name: "Basic Tee",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg",
+    imageAlt: "Front of men's Basic Tee in white.",
+    price: "$35",
+    color: "Aspen White",
+  },
+  // More products...
+];
 const product = {
   name: "Zip Tote Basket",
   price: "$140",
   condition: "New",
   location: "on campus",
+  breadcrumbs: [
+    { id: 1, name: "Men", href: "#" },
+    { id: 2, name: "Clothing", href: "#" },
+  ],
   images: [
     {
       id: 1,
@@ -108,7 +60,6 @@ const product = {
       src: "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-02.jpg",
       alt: "Front of women's Basic Tee in black.",
     },
-    // More images...
   ],
   description: `
     <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
@@ -125,6 +76,45 @@ export default function Example() {
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <nav aria-label="Breadcrumb">
+          <ol
+            role="list"
+            className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8"
+          >
+            {product.breadcrumbs.map((breadcrumb) => (
+              <li key={breadcrumb.id}>
+                <div className="flex items-center">
+                  <a
+                    href={breadcrumb.href}
+                    className="mr-2 text-sm font-medium text-gray-900"
+                  >
+                    {breadcrumb.name}
+                  </a>
+                  <svg
+                    width={16}
+                    height={20}
+                    viewBox="0 0 16 20"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    className="w-4 h-5 text-gray-300"
+                  >
+                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                  </svg>
+                </div>
+              </li>
+            ))}
+            <li className="text-sm">
+              <a
+                href={product.href}
+                aria-current="page"
+                className="font-medium text-gray-500 hover:text-gray-600"
+              >
+                {product.name}
+              </a>
+            </li>
+          </ol>
+        </nav>
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
@@ -235,6 +225,44 @@ export default function Example() {
             </div>
           </div>
         </div>
+        <section aria-labelledby="related-heading" className="mt-16 sm:mt-24">
+          <h2
+            id="related-heading"
+            className="text-lg font-medium text-gray-900"
+          >
+            Customers also purchased
+          </h2>
+
+          <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {relatedProducts.map((relatedProduct) => (
+              <div key={relatedProduct.id} className="group relative">
+                <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                  <img
+                    src={relatedProduct.imageSrc}
+                    alt={relatedProduct.imageAlt}
+                    className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                  />
+                </div>
+                <div className="mt-4 flex justify-between">
+                  <div>
+                    <h3 className="text-sm text-gray-700">
+                      <a href={relatedProduct.href}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {relatedProduct.name}
+                      </a>
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {relatedProduct.color}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium text-gray-900">
+                    {relatedProduct.price}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
