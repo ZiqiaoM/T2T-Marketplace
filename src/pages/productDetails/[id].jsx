@@ -1,5 +1,6 @@
 import { getAllPoductsIds } from "../../lib/products";
 import { Fragment, useState } from "react";
+import prisma from "../lib/prisma";
 import {
   Dialog,
   Popover,

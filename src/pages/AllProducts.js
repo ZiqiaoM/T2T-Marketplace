@@ -3,6 +3,7 @@ import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import prisma from "../lib/prisma";
 
 const breadcrumbs = [{ id: 1, name: "Men", href: "#" }];
 const filters = [
