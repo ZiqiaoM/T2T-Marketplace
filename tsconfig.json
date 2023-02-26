@@ -22,7 +22,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "src/lib/products.js"
   ],
   "exclude": ["node_modules"]
 }

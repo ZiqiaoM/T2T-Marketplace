@@ -2,17 +2,15 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
 }
+
 
 
 model User{
@@ -24,17 +22,31 @@ model User{
 
 model Product {
    id   Int  @id @default(autoincrement())
-   category String
-   post_title String?
+   post_title String
    price Float
    condition String?
    location String?
    product_details String?
    reference_link String?
    contact_info String?
-   photo String?
-   if_sold Boolean
+   if_sold Boolean?
    update_time  DateTime  @default(now())
    seller User  @relation(fields: [seller_id], references: [id])
    seller_id Int 
+   category    Category? @relation(fields: [category_id], references: [id])
+   category_id Int
+   images Image[]
    }
+
+model Category {
+    id          Int       @id @default(autoincrement())
+    name        String
+    products    Product[]
+}
+
+model Image {
+  id Int @id @default(autoincrement())
+  src String
+  product Product @relation(fields: [product_id], references: [id])
+  product_id Int
+}

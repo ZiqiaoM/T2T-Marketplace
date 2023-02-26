@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./src/pages/ProductDetails.jsx",
+    "./src/pages/productDetails/[id].jsx",
     "./src/pages/post.jsx",
     "./src/pages/AllProducts.js",
   ],

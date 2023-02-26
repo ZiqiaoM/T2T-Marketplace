@@ -1,18 +1,8 @@
 import { Fragment, useState } from "react";
-import {
-  Dialog,
-  Disclosure,
-  Popover,
-  Tab,
-  Transition,
-} from "@headlessui/react";
-import {
-  MenuIcon,
-  SearchIcon,
-  ShoppingBagIcon,
-  XIcon,
-} from "@heroicons/react/24/outline";
-import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/20/solid";
+import { Dialog, Disclosure, Transition } from "@headlessui/react";
+import { XIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 const breadcrumbs = [{ id: 1, name: "Men", href: "#" }];
 const filters = [
@@ -48,74 +38,23 @@ const filters = [
     ],
   },
 ];
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee 8-Pack",
-    href: "#",
-    price: "$256",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg",
-    imageAlt:
-      "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg",
-    imageAlt: "Front of plain black t-shirt.",
-  },
-  {
-    id: 3,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 4,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 5,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 6,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  // More products...
-];
+export async function getServerSideProps(context) {
+  const products = await prisma.product.findMany({
+    select: {
+      post_title: true,
+      price: true,
+      images: true,
+    },
+  });
+  console.log(products[0].images[0].src);
+  return { props: { products } };
+}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function AllProducts({ products }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -332,7 +271,7 @@ export default function Example() {
                 </form>
               </div>
             </aside>
-
+            {/* all Products */}
             <section
               aria-labelledby="product-heading"
               className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3"
@@ -340,25 +279,41 @@ export default function Example() {
               <h2 id="product-heading" className="sr-only">
                 Products
               </h2>
-              <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                {products.map((product) => (
-                  <a key={product.id} href={product.href} className="group">
-                    <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                      <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
-                        className="w-full h-full object-center object-cover group-hover:opacity-75"
-                      />
-                    </div>
-                    <h3 className="mt-4 text-sm text-gray-700">
-                      {product.name}
-                    </h3>
-                    <p className="mt-1 text-lg font-medium text-gray-900">
-                      {product.price}
-                    </p>
-                  </a>
-                ))}
-              </div>
+              <ul>
+                <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                  {products.map((product) => (
+                    <li key={product.id}>
+                      <Link
+                        passHref
+                        legacyBehavior
+                        href={`/productDetails/${encodeURIComponent(
+                          product.id
+                        )}`}
+                      >
+                        <a
+                          key={product.id}
+                          href={product.href}
+                          className="group"
+                        >
+                          <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                            <img
+                              src={product.images[0].src}
+                              // alt={product.imageAlt}
+                              className="w-full h-full object-center object-cover group-hover:opacity-75"
+                            />
+                          </div>
+                          <h3 className="mt-4 text-sm text-gray-700">
+                            {product.post_title}
+                          </h3>
+                          <p className="mt-1 text-lg font-medium text-gray-900">
+                            {product.price}
+                          </p>
+                        </a>
+                      </Link>
+                    </li>
+                  ))}
+                </div>
+              </ul>
             </section>
             {/* Pagination */}
             <nav
