@@ -6,6 +6,7 @@ import Link from "next/link";
 import prisma from "../lib/prisma";
 
 const breadcrumbs = [{ id: 1, name: "Men", href: "#" }];
+
 const filters = [
   {
     id: "Location",
@@ -40,24 +41,37 @@ const filters = [
   },
 ];
 export async function getServerSideProps(context) {
-  const products = await prisma.product.findMany({
+  const products_init = await prisma.product.findMany({
     select: {
       post_title: true,
       price: true,
       images: true,
+      location:true,
     },
   });
-  console.log(products[0].images[0].src);
-  return { props: { products } };
+  console.log(products_init[0].images[0].src);
+  console.log("using function get server side props.");
+  return { props: { products_init } };
 }
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function AllProducts({ products }) {
+
+
+
+export default function AllProducts({ products_init }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [products,setProduct]  = useState(products_init);
+  
+  function handleOptions(e){
+    console.log(e.target.value);
+    // console.log(products)
+    setProduct( products_init.filter(p=>p.location==e.target.value));
+    console.log(products);
+  }
 
   return (
     <div className="bg-white, container mx-auto">
@@ -143,7 +157,8 @@ export default function AllProducts({ products }) {
                                       id={`${section.id}-${optionIdx}-mobile`}
                                       name={`${section.id}[]`}
                                       defaultValue={option.value}
-                                      type="checkbox"
+                                      onClick = {handleOptions}
+                                      type="radio"
                                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                     />
                                     <label
@@ -254,7 +269,9 @@ export default function AllProducts({ products }) {
                                 id={`${section.id}-${optionIdx}`}
                                 name={`${section.id}[]`}
                                 defaultValue={option.value}
-                                type="checkbox"
+                                onClick = {handleOptions}
+                                type="radio"
+                                value = {option.label}
                                 className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                               />
                               <label

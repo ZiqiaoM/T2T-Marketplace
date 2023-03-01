@@ -1,4 +1,6 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
+import React, { useState } from 'react';
+// import { data } from "autoprefixer";
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
   { id: "kitchenware", title: "Kitchenware" },
@@ -17,7 +19,44 @@ const Conditions = [
   { id: "used", title: "Used" },
 ];
 
+
 export default function Example() {
+
+  const [ condition, setCondition ] = useState(Conditions[0].title);
+  const [ location, setLocation ] = useState(Locations[0].title);
+  const [ category, setCategory ] = useState(Locations[0].title);
+
+  function handleCondition(e){
+    setCondition(e.target.value);
+  }
+  function handleLocation(e){
+    setLocation(e.target.value);
+  }
+  function handleCategory(e){
+    setCategory(e.target.value);
+  }
+  function test(){
+    let data = {
+      "post_title":document.querySelector("#product_title").value,
+      "condition":condition,
+      "location": location,
+      "category":
+      "product_details" :document.querySelector("#product_details").value,
+      "reference_link" :document.querySelector("#reference_link").value,
+      "contact_info" :document.querySelector("#email_address").value,
+      "if_sold":false, 
+
+  //  seller User  
+  //  seller_id  
+
+  // category
+   
+  //  images Image[]
+  }
+
+    console.log("test func");
+    console.log(data);
+  }
   return (
     <div className="space-y-6 container mx-auto px-4">
       <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
@@ -41,11 +80,11 @@ export default function Example() {
                 </label>
                 <div className="mt-1 flex rounded-md shadow-sm">
                   <input
-                    required
+                    // required
                     type="text"
                     name="product_title"
                     id="product_title"
-                    aria-invalid="true"
+                    // aria-invalid="true"
                     inputProps={{ maxLength: 30 }}
                     aria-describedby="product_title_error"
                     className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -105,6 +144,8 @@ export default function Example() {
                         id={ProductCategory.id}
                         name="product_category"
                         type="radio"
+                        value = {ProductCategory.title}
+                        onChange = {handleCategory}
                         defaultChecked={ProductCategory.id === "cloth"}
                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                       />
@@ -130,13 +171,15 @@ export default function Example() {
               <fieldset className="mt-4">
                 <legend className="sr-only">Condition</legend>
                 <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                  {Conditions.map((condition) => (
+                {Conditions.map((condition) => (
                     <div key={condition.id} className="flex items-center">
                       <input
                         id={condition.id}
                         name="notification-method"
                         type="radio"
+                        value = {condition.title}
                         defaultChecked={condition.id === "new"}
+                        onChange = {handleCondition}
                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                       />
                       <label
@@ -147,6 +190,7 @@ export default function Example() {
                       </label>
                     </div>
                   ))}
+                
                 </div>
               </fieldset>
             </div>
@@ -167,6 +211,8 @@ export default function Example() {
                         id={Location.id}
                         name="location_product"
                         type="radio"
+                        value = {Location.title}
+                        onChange = {handleLocation}
                         defaultChecked={Location.id === "email"}
                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                       />
@@ -338,12 +384,12 @@ export default function Example() {
               >
                 Save draft
               </button>
-              <button
-                type="submit"
+              <input type = "button" value="Sumbit"
+                onClick = {test}
+                
                 className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Submit
-              </button>
+              />
+                
             </div>
           </form>
         </div>

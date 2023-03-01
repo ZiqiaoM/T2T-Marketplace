@@ -11,8 +11,6 @@ datasource db {
   relationMode = "prisma"
 }
 
-
-
 model User{
     id   Int  @id @default(autoincrement())
     username String @unique
@@ -28,14 +26,15 @@ model Product {
    location String?
    product_details String?
    reference_link String?
-   contact_info String?
+   email String?
+   phone String?
    if_sold Boolean?
    update_time  DateTime  @default(now())
    seller User  @relation(fields: [seller_id], references: [id])
    seller_id Int 
    category    Category? @relation(fields: [category_id], references: [id])
    category_id Int
-   images Image[]
+   images Image?[]
    }
 
 model Category {
