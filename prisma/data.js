@@ -1,20 +1,5 @@
 const { Prisma } = require("@prisma/client");
 
-const categories = [
-  {
-    name: "Cloth",
-  },
-  {
-    name: "Electron",
-  },
-  {
-    name: "Kitchenware",
-  },
-  {
-    name: "Food",
-  },
-];
-
 const users = [
   {
     username: "hhdj",
@@ -38,7 +23,7 @@ const products = [
     location: "Off Campus",
     if_sold: true,
     seller_id: 3,
-    category_id: 1,
+    category_name: "Electronics",
   },
   {
     post_title: "Grey T-Shirt",
@@ -47,16 +32,7 @@ const products = [
     location: "Off Campus",
     if_sold: false,
     seller_id: 2,
-    category_id: 1,
-  },
-  {
-    post_title: "Grey T-Shirt",
-    price: 22.95,
-    condition: "New",
-    location: "Off Campus",
-    if_sold: false,
-    seller_id: 2,
-    category_id: 2,
+    category_name: "Clothing",
   },
   {
     post_title: "Grey socks",
@@ -65,7 +41,34 @@ const products = [
     location: "Off Campus",
     if_sold: false,
     seller_id: 1,
-    category_id: 1,
+    category_name: "Clothing",
+  },
+  {
+    post_title: "Pasta Maker",
+    price: 15.0,
+    condition: "New",
+    location: "Off Campus",
+    if_sold: false,
+    seller_id: 2,
+    category_name: "Kitchenwares",
+  },
+  {
+    post_title: "Coffee Grinder",
+    price: 20.32,
+    condition: "Used",
+    location: "On Campus",
+    if_sold: false,
+    seller_id: 4,
+    category_name: "Kitchenwares",
+  },
+  {
+    post_title: "KSNY Jumpsuit",
+    price: 91.6,
+    condition: "Used",
+    location: "On Campus",
+    if_sold: false,
+    seller_id: 3,
+    category_name: "Funitures",
   },
 ];
 
@@ -79,22 +82,43 @@ const images = [
     product_id: 2,
   },
   {
-    src: "https://tailwindui.com/img/ecommerce-images/category-page-07-image-card-01.jpg",
+    src: "https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-01.jpg",
     product_id: 4,
   },
   {
-    src: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+    src: "https://tailwindui.com/img/ecommerce-images/category-page-03-image-card-01.jpg",
     product_id: 1,
   },
   {
     src: "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
     product_id: 3,
   },
+  {
+    src: "/images/product_01_image_01.jpg",
+    product_id: 4,
+  },
+  {
+    src: "/images/product_01_image_02.jpg",
+    product_id: 4,
+  },
+  {
+    src: "/images/product_02_image_01.jpg",
+    product_id: 5,
+  },
+  {
+    src: "/images/product_02_image_02.jpg",
+    product_id: 5,
+  },
+  {
+    src: "/images/product_03_image_01.jpg",
+    product_id: 6,
+  },
+  { src: "/images/product_03_image_02.jpg", product_id: 6 },
 ];
 
 module.exports = {
   products,
-  categories,
+
   users,
   images,
 };
