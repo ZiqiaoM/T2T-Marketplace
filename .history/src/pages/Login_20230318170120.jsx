@@ -11,9 +11,10 @@
 
 
 import React from 'react'
+
 // 0318 update-zq
 import prisma from "../lib/prisma";
-import {compare} from 'bcrypt-nodejs';
+import {compare} from 'bcrypt';
 // import jwt from 'jsonwebtoken';
 
 export async function handler(req,res){
@@ -48,12 +49,12 @@ export async function handler(req,res){
   // res.status(200).json({token});
 }
 
-// function generateJwtToken(userId){
-//   const token = jwt.sign({userId}, process.env.JWT_SECRET,{
-//     expiresIn:'1d',
-//   });
-//   return token;
-// }
+function generateJwtToken(userId){
+  const token = jwt.sign({userId}, process.env.JWT_SECRET,{
+    expiresIn:'1d',
+  });
+  return token;
+}
 
 
 const Login = () => {

@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+const { Prisma } = require("@prisma/client");
 
 const users = [
   {
@@ -116,7 +116,7 @@ const images = [
   { src: "/images/product_03_image_02.jpg", product_id: 6 },
 ];
 
-export default {
+module.exports = {
   products,
 
   users,

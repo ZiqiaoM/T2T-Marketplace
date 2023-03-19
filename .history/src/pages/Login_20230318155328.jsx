@@ -1,20 +1,9 @@
-// import React from 'react';
-// import LoginForm from './components/LoginForm0318';
-
-// const Login = () => {
-//   return (
-//     <LoginForm />
-//   )
-// }
-
-// export default Login
-
-
 import React from 'react'
+
 // 0318 update-zq
 import prisma from "../lib/prisma";
-import {compare} from 'bcrypt-nodejs';
-// import jwt from 'jsonwebtoken';
+import {compare} from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export async function handler(req,res){
   if(req.method!=='POST'){
@@ -43,17 +32,17 @@ export async function handler(req,res){
   }
 
   //generate a JWT token and send it in the response
-  // const token = generateJwtToken(user.id);
+  const token = generateJwtToken(user.id);
 
-  // res.status(200).json({token});
+  res.status(200).json({token});
 }
 
-// function generateJwtToken(userId){
-//   const token = jwt.sign({userId}, process.env.JWT_SECRET,{
-//     expiresIn:'1d',
-//   });
-//   return token;
-// }
+function generateJwtToken(userId){
+  const token = jwt.sign({userId}, process.env.JWT_SECRET,{
+    expiresIn:'1d',
+  });
+  return token;
+}
 
 
 const Login = () => {

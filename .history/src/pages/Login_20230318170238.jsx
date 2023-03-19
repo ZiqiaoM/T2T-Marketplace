@@ -48,12 +48,12 @@ export async function handler(req,res){
   // res.status(200).json({token});
 }
 
-// function generateJwtToken(userId){
-//   const token = jwt.sign({userId}, process.env.JWT_SECRET,{
-//     expiresIn:'1d',
-//   });
-//   return token;
-// }
+function generateJwtToken(userId){
+  const token = jwt.sign({userId}, process.env.JWT_SECRET,{
+    expiresIn:'1d',
+  });
+  return token;
+}
 
 
 const Login = () => {
