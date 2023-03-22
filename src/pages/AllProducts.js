@@ -68,7 +68,6 @@ export default function AllProducts({ products_init }) {
   
   function handleOptions(e){
     console.log(e.target.value);
-    // console.log(products)
     setProduct( products_init.filter(p=>p.location==e.target.value));
     console.log(products);
   }

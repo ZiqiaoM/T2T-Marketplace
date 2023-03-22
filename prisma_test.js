@@ -1,6 +1,25 @@
-// const { PrismaClient } = require("@prisma/client");
-// const prisma = new PrismaClient();
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
+async function main() {
+
+tb = await prisma.product.create({
+    data: {
+      "post_title":"goos",
+      "price":100,
+      "seller_id":1,
+      "condition":"good",
+      "location": "On Campus",
+      "category_name":"Kitchen",
+      "product_details" :"?",
+      "reference_link" :"???",
+    //   "contact_info" :document.querySelector("#email_address").value,
+      "if_sold":false,
+    },
+  })
+
+
+}
 // async function main() {
 //     await prisma.$connect();
 
@@ -32,6 +51,6 @@
 //     console.log(userss)
 //   }
 
-//   main()
-//   .catch(console.error)
-//   .finally(() => prisma.$disconnect());
+  main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());

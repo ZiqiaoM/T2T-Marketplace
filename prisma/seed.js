@@ -57,7 +57,7 @@
 
 const { PrismaClient } = require("@prisma/client");
 const { products, categories, users, images } = require("./data.js");
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 const load = async () => {
   try {

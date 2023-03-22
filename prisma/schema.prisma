@@ -15,6 +15,7 @@ model User{
     id   Int  @id @default(autoincrement())
     username String @unique
     email String @unique
+    password String
     products Product[]
 }
 
@@ -32,16 +33,11 @@ model Product {
    update_time  DateTime  @default(now())
    seller User  @relation(fields: [seller_id], references: [id])
    seller_id Int 
-   category    Category? @relation(fields: [category_id], references: [id])
-   category_id Int
-   images Image?[]
+   category_name  String?
+   category Category[]
+   images Image[]
    }
 
-model Category {
-    id          Int       @id @default(autoincrement())
-    name        String
-    products    Product[]
-}
 
 model Image {
   id Int @id @default(autoincrement())
