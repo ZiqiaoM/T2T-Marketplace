@@ -1,5 +1,6 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import React, { useState } from 'react';
+import prisma from "../lib/prisma";
 // import { data } from "autoprefixer";
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
@@ -35,27 +36,38 @@ export default function Example() {
   function handleCategory(e){
     setCategory(e.target.value);
   }
-  function test(){
+  async function submitPost(){
     let data = {
       "post_title":document.querySelector("#product_title").value,
       "condition":condition,
       "location": location,
-      "category":
+      "category":category,
       "product_details" :document.querySelector("#product_details").value,
       "reference_link" :document.querySelector("#reference_link").value,
       "contact_info" :document.querySelector("#email_address").value,
       "if_sold":false, 
-
   //  seller User  
-  //  seller_id  
+  //  seller_id
 
-  // category
-   
   //  images Image[]
   }
 
     console.log("test func");
     console.log(data);
+    tb = await prisma.product.create({
+      data: {
+        "post_title":document.querySelector("#product_title").value,
+        "price":100,
+        "seller_id":1,
+        "condition":condition,
+        "location": location,
+        "category":category,
+        "product_details" :document.querySelector("#product_details").value,
+        "reference_link" :document.querySelector("#reference_link").value,
+        "contact_info" :document.querySelector("#email_address").value,
+        "if_sold":false, 
+      },
+    })
   }
   return (
     <div className="space-y-6 container mx-auto px-4">
@@ -385,7 +397,7 @@ export default function Example() {
                 Save draft
               </button>
               <input type = "button" value="Sumbit"
-                onClick = {test}
+                onClick = {submitPost}
                 
                 className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               />

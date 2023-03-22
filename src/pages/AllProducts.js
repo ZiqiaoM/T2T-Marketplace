@@ -62,6 +62,7 @@ function classNames(...classes) {
 }
 
 export default function AllProducts({ products_init }) {
+
   const [products, setProducts] = useState(products_init);
 
   // function handleLocations(e) {
