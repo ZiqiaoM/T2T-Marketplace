@@ -64,45 +64,26 @@ function classNames(...classes) {
 export default function AllProducts({ products_init }) {
   const [products, setProducts] = useState(products_init);
 
-  // function handleLocations(e) {
-  //   const location = e.target.value;
-  //   if (e.target.checked) {
-  //     const filteredProducts = products_init.filter(
-  //       (p) => p.location === location
-  //     );
-  //     setProducts(filteredProducts);
-  //   } else {
-  //     setProducts(products_init);
-  //   }
-  // }
   function handleLocations(e) {
-    const selectedValue = e.target.value;
-    const selectedOption = Locations.flatMap(
-      (location) => location.options
-    ).find((option) => option.value === selectedValue);
-    selectedOption.isSelected = e.target.checked;
-    const selectedLocations = Locations.flatMap((location) =>
-      location.options.filter((option) => option.isSelected)
-    ).map((option) => option.value);
-    if (selectedLocations.length === 0) {
-      setProducts(products_init);
-    } else {
-      const filteredProducts = products_init.filter((p) =>
-        selectedLocations.includes(p.location)
+    const location = e.target.value;
+    if (e.target.checked) {
+      const filteredProducts = products_init.filter(
+        (p) => p.location === location
       );
       setProducts(filteredProducts);
+    } else {
+      setProducts(products_init);
     }
   }
 
   function handleConditions(e) {
-    const selectedValue = e.target.value;
-    const selectedOption = Conditions.flatMap(
-      (condition) => condition.options
-    ).find((option) => option.value === selectedValue);
-    selectedOption.isSelected = e.target.checked;
-    const selectedConditions = Conditions.flatMap((condition) =>
-      condition.options.filter((option) => option.isSelected)
-    ).map((option) => option.value);
+    const selectedConditions = Conditions.filter((condition) =>
+      condition.options.some((option) => option.value === e.target.value)
+    ).map(
+      (condition) =>
+        condition.options.filter((option) => option.value === e.target.value)[0]
+          .value
+    );
     if (selectedConditions.length === 0) {
       setProducts(products_init);
     } else {
@@ -137,25 +118,6 @@ export default function AllProducts({ products_init }) {
     }
   }
 
-  function handleCategory(e) {
-    const selectedValue = e.target.value;
-    const selectedOption = ProductCategory.flatMap(
-      (category) => category.options
-    ).find((option) => option.value === selectedValue);
-    selectedOption.isSelected = e.target.checked;
-    const selectedCategories = ProductCategory.flatMap((category) =>
-      category.options.filter((option) => option.isSelected)
-    ).map((option) => option.value);
-    if (selectedCategories.length === 0) {
-      setProducts(products_init);
-    } else {
-      const filteredProducts = products_init.filter((p) =>
-        selectedCategories.includes(p.category)
-      );
-      setProducts(filteredProducts);
-    }
-  }
-
   return (
     <div className="bg-white, container mx-auto">
       <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
@@ -171,77 +133,49 @@ export default function AllProducts({ products_init }) {
           <aside>
             <div className="hidden lg:block">
               <form className="divide-y divide-gray-200 space-y-10">
-                {Locations.map((location) => (
-                  <fieldset>
-                    <legend className="block text-sm font-medium text-gray-900">
-                      {location.name}
-                    </legend>
-                    <div className="pt-6 space-y-3">
-                      <div key={location.id}>
-                        {location.options.map((option) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              type="checkbox"
-                              name={location.id}
-                              value={option.value}
-                              checked={option.isSelected}
-                              onChange={handleLocations}
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              key={option.value}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </fieldset>
-                ))}
-
-                {/* Condition filter */}
-
-                {Conditions.map((condition) => (
-                  <fieldset>
-                    <legend className="block text-sm font-medium text-gray-900">
-                      {condition.name}
-                    </legend>
-                    <div className="pt-6 space-y-3">
-                      <div key={condition.id}>
-                        {condition.options.map((option) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              type="checkbox"
-                              name={condition.id}
-                              value={option.value}
-                              checked={option.isSelected}
-                              onChange={handleConditions}
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              key={option.value}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </fieldset>
-                ))}
-
-                {/* {Conditions.map((section, sectionIdx) => (
+                {Locations.map((section, sectionIdx) => (
                   <div
                     key={section.name}
                     className={sectionIdx === 0 ? null : "pt-10"}
                   >
                     <fieldset>
                       <legend className="block text-sm font-medium text-gray-900">
-                        {section.name} */}
-                {/* </legend>
+                        {section.name}
+                      </legend>
+                      <div className="pt-6 space-y-3">
+                        {section.options.map((option, optionIdx) => (
+                          <div key={option.value} className="flex items-center">
+                            <input
+                              id={`${section.id}-${optionIdx}`}
+                              name={`${section.id}[]`}
+                              defaultValue={option.value}
+                              onClick={handleLocations}
+                              type="checkbox"
+                              value={option.label}
+                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                            />
+                            <label
+                              htmlFor={`${section.id}-${optionIdx}`}
+                              className="ml-3 text-sm text-gray-600"
+                            >
+                              {option.label}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </fieldset>
+                  </div>
+                ))}
+
+                {Conditions.map((section, sectionIdx) => (
+                  <div
+                    key={section.name}
+                    className={sectionIdx === 0 ? null : "pt-10"}
+                  >
+                    <fieldset>
+                      <legend className="block text-sm font-medium text-gray-900">
+                        {section.name}
+                      </legend>
                       <div className="pt-6 space-y-3">
                         {section.options.map((option, optionIdx) => (
                           <div key={option.value} className="flex items-center">
@@ -265,8 +199,8 @@ export default function AllProducts({ products_init }) {
                       </div>
                     </fieldset>
                   </div>
-                ))} */}
-                {/* {ProductCategory.map((section, sectionIdx) => (
+                ))}
+                {ProductCategory.map((section, sectionIdx) => (
                   <div
                     key={section.name}
                     className={sectionIdx === 0 ? null : "pt-10"}
@@ -298,35 +232,6 @@ export default function AllProducts({ products_init }) {
                       </div>
                     </fieldset>
                   </div>
-                ))} */}
-                {ProductCategory.map((category) => (
-                  <fieldset>
-                    <legend className="block text-sm font-medium text-gray-900">
-                      {category.name}
-                    </legend>
-                    <div className="pt-6 space-y-3">
-                      <div key={category.id}>
-                        {category.options.map((option) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              type="checkbox"
-                              name={category.id}
-                              value={option.value}
-                              checked={option.isSelected}
-                              onChange={handleCategory}
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              key={option.value}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </fieldset>
                 ))}
               </form>
             </div>

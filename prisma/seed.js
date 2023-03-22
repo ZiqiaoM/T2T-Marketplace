@@ -56,14 +56,11 @@
 //   })
 
 const { PrismaClient } = require("@prisma/client");
-const { products, categories, users, images } = require("./data.js");
+const { products, users, images } = require("./data.js");
 const prisma = new PrismaClient();
 
 const load = async () => {
   try {
-    await prisma.category.deleteMany();
-    console.log("Deleted records in category table");
-
     await prisma.image.deleteMany();
     console.log("Deleted records in image table");
 
@@ -76,9 +73,6 @@ const load = async () => {
     await prisma.$queryRaw`ALTER TABLE Product AUTO_INCREMENT = 1`;
     console.log("reset product auto increment to 1");
 
-    await prisma.$queryRaw`ALTER TABLE Category AUTO_INCREMENT = 1`;
-    console.log("reset category auto increment to 1");
-
     await prisma.$queryRaw`ALTER TABLE Image AUTO_INCREMENT = 1`;
     console.log("reset image auto increment to 1");
 
@@ -89,10 +83,6 @@ const load = async () => {
       data: users,
     });
     console.log("Added user data");
-    await prisma.category.createMany({
-      data: categories,
-    });
-    console.log("Added category data");
 
     await prisma.product.createMany({
       data: products,
