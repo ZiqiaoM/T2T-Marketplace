@@ -23,6 +23,7 @@ model Product {
    id   Int  @id @default(autoincrement())
    post_title String
    price Float
+   free String?
    condition String?
    location String?
    product_details String?
@@ -33,12 +34,19 @@ model Product {
    update_time  DateTime  @default(now())
    seller User  @relation(fields: [seller_id], references: [id])
    seller_id Int 
+<<<<<<< HEAD
    category_name  String?
    category Category[]
    images Image[]
    }
 
 
+=======
+   category_name String?
+   images Image[]
+   }
+
+>>>>>>> refs/remotes/origin/t3app2
 model Image {
   id Int @id @default(autoincrement())
   src String

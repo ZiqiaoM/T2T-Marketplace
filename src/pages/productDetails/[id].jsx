@@ -1,6 +1,7 @@
-import { getAllPoductsIds } from "../../lib/products";
+import { getAllPoductsIds, getProductData } from "../../lib/products";
 import { Fragment, useState } from "react";
-import prisma from "../lib/prisma";
+import prisma from "../../lib/prisma";
+import { useRouter } from "next/router";
 import {
   Dialog,
   Popover,
@@ -30,44 +31,35 @@ function classNames(...classes) {
 }
 
 export async function getStaticPaths() {
-  // const paths = getAllPoductsIds();
-  // console.log(paths);
+  const paths = getAllPoductsIds();
   return {
-    paths: [
-      { params: { id: "1" } },
-      { params: { id: "2" } },
-      { params: { id: "3" } },
-      { params: { id: "4" } },
-    ], // those pathes should come from getAllPoductsIds()
+    paths,
     fallback: false,
   };
 }
 
-export async function getStaticProps() {
-  // add input param as the id from frontend
-  // const prisma = new PrismaClient();
-  const product = await prisma.product.findUnique({
-    where: {
-      // id: String(product?.id),
-      id: 1, // this id should come from user input on the frontend
-    },
-    select: {
-      post_title: true,
-      category_id: true,
-      price: true,
-      condition: true,
-      location: true,
-      product_details: true,
-      reference_link: true,
-      contact_info: true,
-      images: true,
-    },
-  });
+export async function getStaticProps({ params }) {
+  const product = await getProductData(params.id);
   console.log(product.images[0].src);
   return {
     props: { product },
   };
 }
+
+// export async function getStaticPaths() {
+//   const paths = getAllPoductsIds();
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
+
+// export async function getStaticProps({ params }) {
+//   const product = await getProductData(params.id);
+//   return {
+//     props: { product },
+//   };
+// }
 
 export default function product_details({ product }) {
   return (

@@ -27,7 +27,7 @@ const nav_links=[
 },    
 {
     display:'About',
-    path:'/ProductDetails'
+    path:'/Signup0318'
 },
 {
     display:'Publish Post',
