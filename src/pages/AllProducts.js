@@ -5,23 +5,23 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import prisma from "../lib/prisma";
 
-const ProductCategory = [
+const Categories = [
   {
     id: "category",
     name: "Category",
     options: [
-      { value: "CLOTHING", label: "Clothing" },
-      { value: "ELECTRONICS", label: "Electronics" },
-      { value: "KITCHENWARES", label: "Kitchenwares" },
-      { value: "FURNITURES", label: "Funitures" },
-      { value: "OTHERS", label: "Other" },
+      { value: "Clothing", label: "Clothing" },
+      { value: "Electronics", label: "Electronics" },
+      { value: "Kitchenwares", label: "Kitchenwares" },
+      { value: "Funitures", label: "Funitures" },
+      { value: "Other", label: "Other" },
     ],
   },
 ];
 
 const Locations = [
   {
-    id: "Location",
+    id: "location",
     name: "Location",
     options: [
       { value: "On Campus", label: "On Campus" },
@@ -114,44 +114,20 @@ export default function AllProducts({ products_init }) {
     }
   }
 
-  // function handleConditions(e) {
-  //   const condition = e.target.value;
-  //   if (e.target.checked) {
-  //     const filteredProducts = products_init.filter(
-  //       (p) => p.condition === condition
-  //     );
-  //     setProducts(filteredProducts);
-  //   } else {
-  //     setProducts(products_init);
-  //   }
-  // }
-
-  function handleCategory(e) {
-    const category_name = e.target.value;
-    if (e.target.checked) {
-      const filteredProducts = products_init.filter(
-        (p) => p.category_name === category_name
-      );
-      setProducts(filteredProducts);
-    } else {
-      setProducts(products_init);
-    }
-  }
-
   function handleCategory(e) {
     const selectedValue = e.target.value;
-    const selectedOption = ProductCategory.flatMap(
-      (category) => category.options
+    const selectedOption = Categories.flatMap(
+      (category_name) => category_name.options
     ).find((option) => option.value === selectedValue);
     selectedOption.isSelected = e.target.checked;
-    const selectedCategories = ProductCategory.flatMap((category) =>
-      category.options.filter((option) => option.isSelected)
+    const selectedCategories = Categories.flatMap((category_name) =>
+      category_name.options.filter((option) => option.isSelected)
     ).map((option) => option.value);
     if (selectedCategories.length === 0) {
       setProducts(products_init);
     } else {
       const filteredProducts = products_init.filter((p) =>
-        selectedCategories.includes(p.category)
+        selectedCategories.includes(p.category_name)
       );
       setProducts(filteredProducts);
     }
@@ -233,85 +209,19 @@ export default function AllProducts({ products_init }) {
                     </div>
                   </fieldset>
                 ))}
-
-                {/* {Conditions.map((section, sectionIdx) => (
-                  <div
-                    key={section.name}
-                    className={sectionIdx === 0 ? null : "pt-10"}
-                  >
-                    <fieldset>
-                      <legend className="block text-sm font-medium text-gray-900">
-                        {section.name} */}
-                {/* </legend>
-                      <div className="pt-6 space-y-3">
-                        {section.options.map((option, optionIdx) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              id={`${section.id}-${optionIdx}`}
-                              name={`${section.id}[]`}
-                              defaultValue={option.value}
-                              onClick={handleConditions}
-                              type="checkbox"
-                              value={option.label}
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor={`${section.id}-${optionIdx}`}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </fieldset>
-                  </div>
-                ))} */}
-                {/* {ProductCategory.map((section, sectionIdx) => (
-                  <div
-                    key={section.name}
-                    className={sectionIdx === 0 ? null : "pt-10"}
-                  >
-                    <fieldset>
-                      <legend className="block text-sm font-medium text-gray-900">
-                        {section.name}
-                      </legend>
-                      <div className="pt-6 space-y-3">
-                        {section.options.map((option, optionIdx) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              id={`${section.id}-${optionIdx}`}
-                              name={`${section.id}[]`}
-                              defaultValue={option.value}
-                              onClick={handleCategory}
-                              type="checkbox"
-                              value={option.label}
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor={`${section.id}-${optionIdx}`}
-                              className="ml-3 text-sm text-gray-600"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </fieldset>
-                  </div>
-                ))} */}
-                {ProductCategory.map((category) => (
+                {/* Product category filter */}
+                {Categories.map((category_name) => (
                   <fieldset>
                     <legend className="block text-sm font-medium text-gray-900">
-                      {category.name}
+                      {category_name.name}
                     </legend>
                     <div className="pt-6 space-y-3">
-                      <div key={category.id}>
-                        {category.options.map((option) => (
+                      <div key={category_name.id}>
+                        {category_name.options.map((option) => (
                           <div key={option.value} className="flex items-center">
                             <input
                               type="checkbox"
-                              name={category.id}
+                              name={category_name.id}
                               value={option.value}
                               checked={option.isSelected}
                               onChange={handleCategory}

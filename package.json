@@ -11,6 +11,8 @@
     "seed": "node prisma/seed.js"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.9.2",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.10",
@@ -30,6 +32,9 @@
     "bcrypt-nodejs": "^0.0.3",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
+    "cloudinary": "^1.35.0",
+    "cloudinary-core": "^2.13.0",
+    "cloudinary-react": "^1.8.1",
     "headlessui": "^0.0.0",
     "heroicons": "^2.0.15",
     "mysql2": "^3.2.0",

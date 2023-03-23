@@ -10,8 +10,6 @@ import {
   Transition,
 } from "@headlessui/react";
 
-const breadcrumbs = [{ id: 1, name: "Men", href: "#" }];
-
 const relatedProducts = [
   {
     id: 1,
@@ -30,22 +28,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export async function getStaticPaths() {
-  const paths = getAllPoductsIds();
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const product = await getProductData(params.id);
-  console.log(product.images[0].src);
-  return {
-    props: { product },
-  };
-}
-
 // export async function getStaticPaths() {
 //   const paths = getAllPoductsIds();
 //   return {
@@ -56,10 +38,26 @@ export async function getStaticProps({ params }) {
 
 // export async function getStaticProps({ params }) {
 //   const product = await getProductData(params.id);
+//   console.log(product.images[0].src);
 //   return {
 //     props: { product },
 //   };
 // }
+
+export async function getStaticPaths() {
+  const paths = getAllPoductsIds();
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const product = await getProductData(params.id);
+  return {
+    props: { product },
+  };
+}
 
 export default function product_details({ product }) {
   return (
@@ -70,7 +68,7 @@ export default function product_details({ product }) {
             role="list"
             className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8"
           >
-            {breadcrumbs.map((breadcrumb) => (
+            {/* {breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a
@@ -92,7 +90,7 @@ export default function product_details({ product }) {
                   </svg>
                 </div>
               </li>
-            ))}
+            ))} */}
             <li className="text-sm">
               <a
                 href={product.href}

@@ -15,6 +15,11 @@ tb = await prisma.product.create({
       "reference_link" :"???",
     //   "contact_info" :document.querySelector("#email_address").value,
       "if_sold":false,
+      images: {
+        create: [
+            {"src":'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg'}
+        ]
+    }
     },
   })
 
