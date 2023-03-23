@@ -61,25 +61,26 @@ const Login = () => {
         <>
           <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8" >
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <img
+              {/* <img
                 className="mx-auto"
                 src="/images/T2T.png"
                 alt="logo"
                 width="130"
-              />
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+              /> */}
+              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in</h2>
               <p className="mt-2 text-center text-sm text-gray-600">
                 Or{' '}
                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                   sign up and start a trip with T2T
                 </a>
               </p>
+              <img className="lg_img flex" src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png" alt="ppdj1YT.png" width="500px" border="0" />
             </div>
     
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
               <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form className="space-y-6" action="#" method="POST">
-                  <div>
+                  <div className='email'>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                       Email address
                     </label>
@@ -199,6 +200,18 @@ const Login = () => {
                 </div>*/}
               </div>
             </div>
+            <style jsx>{`
+  .lg_img{
+    margin-left:100px;
+    margin-bottom:80px;
+  }
+  .email{
+    padding-top:50px;
+    background:red;
+  }
+}
+
+`}</style>
           </div> 
         </>
       )
