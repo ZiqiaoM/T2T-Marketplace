@@ -1,7 +1,9 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import React, { useState } from 'react';
-import prisma from "../lib/prisma";
-// import { data } from "autoprefixer";
+import ImageUploader from '../components/cloudinary/ImageUploader'
+import CldGallery from "../components/cloudinary/CldGallery";
+import { Cloudinary } from "@cloudinary/url-gen";
+
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
   { id: "kitchenware", title: "Kitchenware" },
@@ -22,6 +24,25 @@ const Conditions = [
 
 
 export default function Example() {
+
+  const [imagesUploadedList, setImagesUploadedList] = useState([]);
+  const [ImageUrl, setImageUrl] = useState([]);
+  
+  function handleImageUrl (url){
+    setImageUrl((prevState) => [...prevState, url]);
+    console.log(ImageUrl);
+  }
+
+  const onImageUploadHandler = (publicId) => {
+    setImagesUploadedList((prevState) => [...prevState, publicId]);
+  };
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloud_name: "djwgzmcwe", //Your cloud name
+      upload_preset: "products" //Create an unsigned upload preset and update this
+    }
+  });
 
   const [ condition, setCondition ] = useState(Conditions[0].title);
   const [ location, setLocation ] = useState(Locations[0].title);
@@ -46,7 +67,7 @@ export default function Example() {
       "reference_link" :document.querySelector("#reference_link").value,
       "contact_info" :document.querySelector("#email_address").value,
       "if_sold":false, 
-  //  seller User  
+  //  seller User
   //  seller_id
 
   //  images Image[]
@@ -54,23 +75,12 @@ export default function Example() {
 
     console.log("test func");
     console.log(data);
-    tb = await prisma.product.create({
-      data: {
-        "post_title":document.querySelector("#product_title").value,
-        "price":100,
-        "seller_id":1,
-        "condition":condition,
-        "location": location,
-        "category":category,
-        "product_details" :document.querySelector("#product_details").value,
-        "reference_link" :document.querySelector("#reference_link").value,
-        "contact_info" :document.querySelector("#email_address").value,
-        "if_sold":false, 
-      },
-    })
+    console.log(imageUrl);
+
   }
   return (
     <div className="space-y-6 container mx-auto px-4">
+
       <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
         <div className="md:col-span-1">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
@@ -313,25 +323,21 @@ export default function Example() {
                     />
                   </svg>
                   <div className="flex text-sm text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                    >
-                      <span>Upload a photo</span>
-                      <input
-                        id="file-upload"
-                        name="file-upload"
-                        type="file"
-                        className="sr-only"
-                      />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
+
+                  <ImageUploader
+                      cloud_name={cld.cloudinaryConfig.cloud.cloud_name}
+                      upload_preset={cld.cloudinaryConfig.cloud.upload_preset}
+                      onImageUpload={(publicId) => onImageUploadHandler(publicId)}
+                      recordUrl = {(url) => handleImageUrl(url)}
+                    />
                   </div>
-                  <p className="text-xs text-gray-500">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
                 </div>
               </div>
+              <CldGallery
+                      imagesUploaded={imagesUploadedList}
+                      {...cld}
+                      cloud_name={cld.cloudinaryConfig.cloud.cloud_name}
+                    />
             </div>
             {/* Contact information */}
             <div>
