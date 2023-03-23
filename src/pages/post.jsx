@@ -75,7 +75,7 @@ export default function Example() {
 
     console.log("test func");
     console.log(data);
-    console.log(imageUrl);
+    console.log(ImageUrl);
 
   }
   return (
