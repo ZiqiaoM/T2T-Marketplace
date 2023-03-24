@@ -1,4 +1,3 @@
-//This page is the wishlist cart page
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState ={

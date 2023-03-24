@@ -19,7 +19,7 @@ import products from '../sample-data/products';
 
 // ];
 
-// import {useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 
 

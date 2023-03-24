@@ -14,7 +14,6 @@ import Carts from "../UI/Cart/Carts";
 //import image 0130
 import Image from 'next/image'
 
-import { useRouter } from 'next/router';
 
 
 const nav_links=[

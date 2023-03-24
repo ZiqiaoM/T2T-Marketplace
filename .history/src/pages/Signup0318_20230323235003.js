@@ -111,7 +111,7 @@ export default function SignUp() {
     <div>
     <h4 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>Sign Up</h4>
     {/* <img className="sp_img" src="https://s1.ax1x.com/2023/03/23/ppdv22F.png" alt="Sign up" border="0" /> */}
-    <p className="mt-2 text-center text-sm text-gray-600">  Hey, there. Welcome to join us!</p>
+    <p className="mt-2 text-center text-sm text-gray-600">-----Hey, there. Welcome to join us!</p>
     <img className="sp_img" src="https://s1.ax1x.com/2023/03/23/ppdxAMQ.png" alt="Sign up" border="0" />
     </div>
 <style jsx>{`

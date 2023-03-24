@@ -14,7 +14,6 @@ import Carts from "../UI/Cart/Carts";
 //import image 0130
 import Image from 'next/image'
 
-import { useRouter } from 'next/router';
 
 
 const nav_links=[
@@ -41,10 +40,10 @@ const Header = () => {
   const menuRef = useRef(null)
   const totalQuantity = useSelector(state=> state.cart.totalQuantity)
   // for cart list
-  // const dispatch = useDispatch();
-  // const toggleCart = ()=>{
-  //   dispatch(cartUiActions.toggle())
-  // }
+  const dispatch = useDispatch();
+  const toggleCart = ()=>{
+    dispatch(cartUiActions.toggle())
+  }
 
   const showCart = useSelector(state=>state.cartUi.cartIsVisible);
   

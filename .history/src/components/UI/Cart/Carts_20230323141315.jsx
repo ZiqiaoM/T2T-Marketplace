@@ -22,7 +22,7 @@ const cartProducts = useSelector(state=>state.cart.cartItems)
 const totalAmount=useSelector(state=>state.cart.totalAmount)
 
 
-  return (<div className="cart_container">
+  return <div className="cart_container">
     <ListGroup className='cart'>
         <div className="cart_close">
             <span onClick={toggleCart}><CloseIcon /></span>
@@ -81,7 +81,7 @@ const totalAmount=useSelector(state=>state.cart.totalAmount)
 
 .cart_item-list{
     height: calc(100vh-700px);
-    /* exist bug */
+    /* 有bug */
     overflow-y: scroll;
 }
 
@@ -113,7 +113,7 @@ const totalAmount=useSelector(state=>state.cart.totalAmount)
     color: rgb(87, 135, 226);
     font-weight: 600;
 }`}</style>
-  </div>)
+  </div>
 }
 
 export default Carts

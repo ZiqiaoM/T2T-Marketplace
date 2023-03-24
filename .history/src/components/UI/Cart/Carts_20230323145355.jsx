@@ -81,7 +81,7 @@ const totalAmount=useSelector(state=>state.cart.totalAmount)
 
 .cart_item-list{
     height: calc(100vh-700px);
-    /* exist bug */
+    /* 有bug */
     overflow-y: scroll;
 }
 

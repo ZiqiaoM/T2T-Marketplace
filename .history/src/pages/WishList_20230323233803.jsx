@@ -1,6 +1,6 @@
 //zq: create-0323 
 import React from 'react';
-import WishlistItem from './WishListItem.jsx';
+import CartItem from './WishListItem.jsx';
 import { useSelector } from 'react-redux';
 import{ListGroup} from "reactstrap";
 
@@ -17,7 +17,7 @@ const WishList = () => {
     <div className="cart_item-list">
         {
               cartProducts.length === 0 ? <h6 className='text-center mt-5'>No item added to the wish list</h6>: cartProducts.map((item,index)=>(
-                <WishlistItem item={item} key={index}/>
+                <CartItem item={item} key={index}/>
               ))
         }           
         </div>

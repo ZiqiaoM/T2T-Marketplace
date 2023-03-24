@@ -19,15 +19,10 @@ import products from '../sample-data/products';
 
 // ];
 
-// import {useSelector} from 'react-redux';
-
-
-
 const Home: NextPage = () => {
 
   const [Category, setCategory] = useState('ALL')
   const [allProducts, setAllProducts] = useState(products)
-  // const showCart = useSelector(state=>state.cartUi.cartIsvisible);
 
   useEffect(()=>{
     if(Category==='ALL'){
@@ -60,7 +55,6 @@ const Home: NextPage = () => {
   return <Helmet title="Home">
     <section>
       <Container className='home_container'>
-        {/* <Carts /> */}
         <Hero />
       </Container>
     </section>

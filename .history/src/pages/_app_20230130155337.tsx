@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { Provider as StoreProvider } from 'react-redux';
 
 import { api } from "../utils/api";
-import store from "../store/store.js";  // ZQ：for wishlist
+import store from "../store/store";
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";

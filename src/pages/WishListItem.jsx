@@ -1,16 +1,16 @@
 import React from 'react';
 import {ListGroupItem} from 'reactstrap';
-// import productImg from '../../../images/product_01_image_01.jpg'
+
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import './CartItem.module.css';
+
 
 import { useDispatch } from 'react-redux';
-import { cartActions } from '../../../store/wish-list/cartSlice';
-// import {cartActions} from '../../../store/wish-list/cartSlice'
+import { cartActions } from '../store/wish-list/cartSlice';
 
-const CartItem = ({item}) => {
+
+const WishlistItem = ({item}) => {
 //add products
 const {id, title, price, image01, quantity, totalPrice} = item
 
@@ -95,4 +95,4 @@ const deleteItem = ()=>{
   </ListGroupItem>
 }
 
-export default CartItem
+export default WishlistItem
