@@ -6,44 +6,52 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
-    
 
-model User{
-    id   Int  @id @default(autoincrement())
-    username String @unique
-    email String @unique
-    password String
-    products Product[]
+model Wishlist {
+  id          Int       @id @default(autoincrement())
+  update_time DateTime  @default(now())
+  products    Product[]
+  users       User      @relation(fields: [user_id], references: [id])
+  user_id     Int
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  username String     @unique
+  email    String     @unique
+  password String
+  products Product[]
+  Wishlist Wishlist[]
 }
 
 model Product {
-   id   Int  @id @default(autoincrement())
-   post_title String
-   price Float
-   free String?
-   condition String?
-   location String?
-   product_details String?
-   reference_link String?
-   email String?
-   phone String?
-   if_sold Boolean?
-   update_time  DateTime  @default(now())
-   seller User  @relation(fields: [seller_id], references: [id])
-   seller_id Int 
-   category_name  String?
-   images Image[]
-   }
-
-
+  id              Int       @id @default(autoincrement())
+  post_title      String
+  price           Float
+  free            String?
+  condition       String?
+  location        String?
+  product_details String?
+  reference_link  String?
+  email           String?
+  phone           String?
+  if_sold         Boolean?
+  update_time     DateTime  @default(now())
+  seller          User      @relation(fields: [seller_id], references: [id])
+  seller_id       Int
+  category_name   String?
+  images          Image[]
+  Wishlist        Wishlist? @relation(fields: [wishlistId], references: [id])
+  wishlistId      Int?
+}
 
 model Image {
-  id Int @id @default(autoincrement())
-  src String
-  product Product @relation(fields: [product_id], references: [id])
+  id         Int     @id @default(autoincrement())
+  src        String
+  product    Product @relation(fields: [product_id], references: [id])
   product_id Int
 }
