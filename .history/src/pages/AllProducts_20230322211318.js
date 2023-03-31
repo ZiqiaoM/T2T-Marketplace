@@ -52,7 +52,7 @@ export async function getServerSideProps(context) {
       category_name: true,
     },
   });
-  // console.log(products_init[0].images[0].src);
+  console.log(products_init[0].images[0].src);
   console.log("using function get server side props.");
   return { props: { products_init } };
 }
