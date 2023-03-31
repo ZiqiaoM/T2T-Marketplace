@@ -1,4 +1,4 @@
-import { getAllProductsIds, getProductData } from "../../lib/products";
+import { getPostDetails, getPostIdList } from "../../lib/products";
 import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
 import { useRouter } from "next/router";
@@ -72,37 +72,45 @@ function classNames(...classes) {
 // }
 
 export async function getStaticPaths() {
-  const paths = getAllProductsIds();
+  const paths = await getPostIdList();
   return {
     paths,
     fallback: false,
   };
 }
-
 export async function getStaticProps({ params }) {
-  const { id } = params;
-  const product = await prisma.product.findUnique({
-    where: {
-      id: parseInt(id),
-    },
-    select: {
-      post_title: true,
-      category_name: true,
-      price: true,
-      condition: true,
-      location: true,
-      product_details: true,
-      reference_link: true,
-      phone: true,
-      images: true,
-    },
-  });
+  const product = await getPostDetails(params.id);
   return {
     props: {
       product,
     },
   };
 }
+
+// export async function getStaticProps({ params }) {
+//   const { id } = params;
+//   const product = await prisma.product.findUnique({
+//     where: {
+//       id: parseInt(id),
+//     },
+//     select: {
+//       post_title: true,
+//       category_name: true,
+//       price: true,
+//       condition: true,
+//       location: true,
+//       product_details: true,
+//       reference_link: true,
+//       phone: true,
+//       images: true,
+//     },
+//   });
+//   return {
+//     props: {
+//       product,
+//     },
+//   };
+// }
 
 export default function product_details({ product }) {
   return (
