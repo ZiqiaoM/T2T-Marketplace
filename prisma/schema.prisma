@@ -10,14 +10,7 @@ datasource db {
   url = env("DATABASE_URL")
   relationMode = "prisma"
 }
-
-model Wishlist{
-      id   Int  @id @default(autoincrement())
-      update_time  DateTime  @default(now())
-      products Product[]
-      users User  @relation(fields: [user_id], references: [id])
-      user_id Int 
-}
+    
 
 model User{
     id   Int  @id @default(autoincrement())
@@ -43,7 +36,6 @@ model Product {
    seller User  @relation(fields: [seller_id], references: [id])
    seller_id Int 
    category_name  String?
-   category Category[]
    images Image[]
    }
 

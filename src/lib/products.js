@@ -20,7 +20,7 @@
 // }
 import prisma from "../lib/prisma";
 
-export async function getAllPoductsIds() {
+export async function getAllProductsIdst() {
   const products = await prisma.product.findMany({ select: { id: true } });
   return products.map((product) => {
     return {
