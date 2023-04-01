@@ -44,48 +44,52 @@ function classNames(...classes) {
 //   };
 // }
 
-// export async function getStaticProps() {
-//   // add input param as the id from frontend
-//   // const prisma = new PrismaClient();
-//   const product = await prisma.product.findUnique({
-//     where: {
-//       // id: String(product?.id),
-//       id: 1, // this id should come from user input on the frontend
-//     },
-//     select: {
-//       post_title: true,
-//       category_name: true,
-//       price: true,
-//       condition: true,
-//       location: true,
-//       product_details: true,
-//       reference_link: true,
-//       phone: true,
-//       images: true,
-//     },
-//   });
-//   return {
-//     props: {
-//       product,
-//     },
-//   };
-// }
-
-export async function getStaticPaths() {
-  const paths = await getPostIdList();
-  return {
-    paths,
-    fallback: false,
-  };
-}
-export async function getStaticProps({ params }) {
-  const product = await getPostDetails(params.id);
+export async function getStaticProps() {
+  // add input param as the id from frontend
+  // const prisma = new PrismaClient();
+  const product = await prisma.product.findUnique({
+    where: {
+      // id: String(product?.id),
+      id: 1, // this id should come from user input on the frontend
+    },
+    select: {
+      post_title: true,
+      category_name: true,
+      price: true,
+      condition: true,
+      location: true,
+      product_details: true,
+      reference_link: true,
+      phone: true,
+      images: true,
+    },
+  });
   return {
     props: {
       product,
     },
   };
 }
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { id: "1" } },
+      { params: { id: "2" } },
+      { params: { id: "3" } },
+    ],
+    fallback: false,
+  };
+}
+
+// export async function getStaticProps({ params = {} }) {
+//   const product = products.find(({ id }) => `${id}` === `${params.id}`);
+//   return {
+//     props: {
+//       product,
+//     },
+//   };
+// }
 
 // export async function getStaticProps({ params }) {
 //   const { id } = params;
