@@ -1,6 +1,4 @@
 // import { Prisma } from "@prisma/client";
-const { Prisma } = require("@prisma/client");
-
 const users = [
   {
     username: "hhdj",

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import ImageUploader from '../components/cloudinary/ImageUploader'
 import CldGallery from "../components/cloudinary/CldGallery";
 import { Cloudinary } from "@cloudinary/url-gen";
+import Router from 'next/router';
+import { Category } from "@mui/icons-material";
 
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
@@ -13,8 +15,8 @@ const ProductCategory = [
 ];
 
 const Locations = [
-  { id: "on_campus", title: "On campus" },
-  { id: "off_campus", title: "Off campus" },
+  { id: "on_campus", title: "On Campus" },
+  { id: "off_campus", title: "Off Campus" },
 ];
 
 const Conditions = [
@@ -22,12 +24,14 @@ const Conditions = [
   { id: "used", title: "Used" },
 ];
 
+const defaultImg = "https://nato.cdnartwhere.eu/cdn/ff/oca4fwSi7ZMflFF5-LRcenPXoZTDpZSTkwLZEvZtQIw/1607780582/public/default_images/default-image.jpg"
+  
 
 export default function Example() {
 
   const [imagesUploadedList, setImagesUploadedList] = useState([]);
   const [ImageUrl, setImageUrl] = useState([]);
-  
+
   function handleImageUrl (url){
     setImageUrl((prevState) => [...prevState, url]);
     console.log(ImageUrl);
@@ -46,7 +50,7 @@ export default function Example() {
 
   const [ condition, setCondition ] = useState(Conditions[0].title);
   const [ location, setLocation ] = useState(Locations[0].title);
-  const [ category, setCategory ] = useState(Locations[0].title);
+  const [ category, setCategory ] = useState(ProductCategory[0].title);
 
   function handleCondition(e){
     setCondition(e.target.value);
@@ -58,24 +62,37 @@ export default function Example() {
     setCategory(e.target.value);
   }
   async function submitPost(){
+    // let image = ImageUrl;
     let data = {
       "post_title":document.querySelector("#product_title").value,
       "condition":condition,
       "location": location,
-      "category":category,
+      "category_name":category,
+      "price": parseFloat(document.querySelector("#price").value),
       "product_details" :document.querySelector("#product_details").value,
       "reference_link" :document.querySelector("#reference_link").value,
-      "contact_info" :document.querySelector("#email_address").value,
-      "if_sold":false, 
-  //  seller User
-  //  seller_id
-
-  //  images Image[]
+      "email" :document.querySelector("#email_address").value,
+      "if_sold":false,
+       "seller_id":1,
+      //  images Image[]
   }
-
-    console.log("test func");
+    if (ImageUrl.length == 0){
+      setImageUrl((prevState) => [...prevState, defaultImg]);
+    }
+    console.log("submit posts.");
     console.log(data);
     console.log(ImageUrl);
+    try {
+      const body = {data,ImageUrl};
+      await fetch('/api/post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      // await Router.push('/drafts');
+    } catch (error) {
+      console.error(error);
+    }
 
   }
   return (
