@@ -28,89 +28,50 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// export async function getStaticPaths() {
-//   // const paths = getAllPoductsIds();
-//   // console.log(paths);
-//   // const paths = getAllPoductsIds();
-//   return {
-//     paths: [
-//       { params: { id: "1" } },
-//       { params: { id: "2" } },
-//       { params: { id: "3" } },
-//       { params: { id: "4" } },
-//     ], // those pathes should come from getAllPoductsIds()
-//     paths,
-//     fallback: false,
-//   };
-// }
-
-// export async function getStaticProps() {
-//   // add input param as the id from frontend
-//   // const prisma = new PrismaClient();
-//   const product = await prisma.product.findUnique({
-//     where: {
-//       // id: String(product?.id),
-//       id: 1, // this id should come from user input on the frontend
-//     },
-//     select: {
-//       post_title: true,
-//       category_name: true,
-//       price: true,
-//       condition: true,
-//       location: true,
-//       product_details: true,
-//       reference_link: true,
-//       phone: true,
-//       images: true,
-//     },
-//   });
-//   return {
-//     props: {
-//       product,
-//     },
-//   };
-// }
-
 export async function getStaticPaths() {
-  const paths = await getPostIdList();
+
+  const paths = await prisma.product.findMany({
+    select: {
+    id: true,
+    // name: true,
+  },}
+); 
+  paths.forEach((p)=>{p.id=p.id.toString()});
+  console.log(paths);
   return {
-    paths,
+    paths: paths.map((id) => (
+      {params:  id}
+     )),
     fallback: false,
   };
 }
 export async function getStaticProps({ params }) {
-  const product = await getPostDetails(params.id);
+
+  const product = {
+          "post_title":"goos",
+          "price":100,
+          "seller_id":1,
+          "condition":"good",
+          "location": "On Campus",
+          "category_name":"Kitchen",
+          "product_details" :"?",
+          "reference_link" :"???",
+          "email": "test@gmail.com",
+          "if_sold":false,
+          "images": [   
+                {"id" : 1,
+                "src":'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+              }
+            ]
+        };
+
+  console.log(product);
   return {
     props: {
       product,
     },
   };
 }
-
-// export async function getStaticProps({ params }) {
-//   const { id } = params;
-//   const product = await prisma.product.findUnique({
-//     where: {
-//       id: parseInt(id),
-//     },
-//     select: {
-//       post_title: true,
-//       category_name: true,
-//       price: true,
-//       condition: true,
-//       location: true,
-//       product_details: true,
-//       reference_link: true,
-//       phone: true,
-//       images: true,
-//     },
-//   });
-//   return {
-//     props: {
-//       product,
-//     },
-//   };
-// }
 
 export default function product_details({ product }) {
   return (
