@@ -1,4 +1,4 @@
-import { getAllPoductsIds, getProductData } from "../../lib/products";
+import { getPostDetails, getPostIdList } from "../../lib/products";
 import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
 import { useRouter } from "next/router";
@@ -29,35 +29,88 @@ function classNames(...classes) {
 }
 
 // export async function getStaticPaths() {
-//   const paths = getAllPoductsIds();
+//   // const paths = getAllPoductsIds();
+//   // console.log(paths);
+//   // const paths = getAllPoductsIds();
 //   return {
+//     paths: [
+//       { params: { id: "1" } },
+//       { params: { id: "2" } },
+//       { params: { id: "3" } },
+//       { params: { id: "4" } },
+//     ], // those pathes should come from getAllPoductsIds()
 //     paths,
 //     fallback: false,
 //   };
 // }
 
-// export async function getStaticProps({ params }) {
-//   const product = await getProductData(params.id);
-//   console.log(product.images[0].src);
+// export async function getStaticProps() {
+//   // add input param as the id from frontend
+//   // const prisma = new PrismaClient();
+//   const product = await prisma.product.findUnique({
+//     where: {
+//       // id: String(product?.id),
+//       id: 1, // this id should come from user input on the frontend
+//     },
+//     select: {
+//       post_title: true,
+//       category_name: true,
+//       price: true,
+//       condition: true,
+//       location: true,
+//       product_details: true,
+//       reference_link: true,
+//       phone: true,
+//       images: true,
+//     },
+//   });
 //   return {
-//     props: { product },
+//     props: {
+//       product,
+//     },
 //   };
 // }
 
 export async function getStaticPaths() {
-  const paths = getAllPoductsIds();
+  const paths = await getPostIdList();
   return {
     paths,
     fallback: false,
   };
 }
-
 export async function getStaticProps({ params }) {
-  const product = await getProductData(params.id);
+  const product = await getPostDetails(params.id);
   return {
-    props: { product },
+    props: {
+      product,
+    },
   };
 }
+
+// export async function getStaticProps({ params }) {
+//   const { id } = params;
+//   const product = await prisma.product.findUnique({
+//     where: {
+//       id: parseInt(id),
+//     },
+//     select: {
+//       post_title: true,
+//       category_name: true,
+//       price: true,
+//       condition: true,
+//       location: true,
+//       product_details: true,
+//       reference_link: true,
+//       phone: true,
+//       images: true,
+//     },
+//   });
+//   return {
+//     props: {
+//       product,
+//     },
+//   };
+// }
 
 export default function product_details({ product }) {
   return (
@@ -97,7 +150,7 @@ export default function product_details({ product }) {
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {product.name}
+                {product.post_title}
               </a>
             </li>
           </ol>
@@ -210,7 +263,7 @@ export default function product_details({ product }) {
                 </h2>
                 <div
                   className="mt-4 prose prose-sm text-gray-500"
-                  dangerouslySetInnerHTML={{ __html: product.contact }}
+                  dangerouslySetInnerHTML={{ __html: product.phone }}
                 />
               </div>
             </div>

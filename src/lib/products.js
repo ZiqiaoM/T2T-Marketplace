@@ -20,18 +20,18 @@
 // }
 import prisma from "../lib/prisma";
 
-export async function getAllPoductsIds() {
-  const products = await prisma.product.findMany({ select: { id: true } });
-  return products.map((product) => {
-    return {
-      params: {
-        id: product.id.toString(),
-      },
-    };
-  });
-}
+// export async function getAllProductsIdst() {
+//   const products = await prisma.product.findMany({ select: { id: true } });
+//   return products.map((product) => {
+//     return {
+//       params: {
+//         id: product.id.toString(),
+//       },
+//     };
+//   });
+// }
 
-export async function getProductData(id) {
+export async function getPostDetails(id) {
   const product = await prisma.product.findUnique({
     where: { id: parseInt(id, 10) },
     select: {
@@ -42,9 +42,20 @@ export async function getProductData(id) {
       location: true,
       product_details: true,
       reference_link: true,
-      contact_info: true,
       images: true,
     },
   });
-  return product;
+  return product[id];
+}
+
+// lib/posts.js
+
+export async function getPostIdList() {
+  return [
+    {
+      params: {
+        id: product.id.toString(),
+      },
+    },
+  ];
 }
