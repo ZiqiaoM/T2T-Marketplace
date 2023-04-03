@@ -50,7 +50,7 @@ export async function getPostDetails(id) {
 
 // lib/posts.js
 
-export async function getPostIdList() {
+export async function getPostIdList(product) {
   return [
     {
       params: {
