@@ -1,7 +1,11 @@
-import { getPostDetails, getPostIdList } from "../../lib/products";
+// import { getPostDetails, getPostIdList } from "../../lib/products";
 import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
 import { useRouter } from "next/router";
+
+import absoluteUrl from 'next-absolute-url'
+
+
 import {
   Dialog,
   Popover,
@@ -28,16 +32,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export async function getStaticPaths() {
-
+export async function getStaticPaths(req) {
+  
   const paths = await prisma.product.findMany({
     select: {
     id: true,
     // name: true,
-  },}
-); 
+  },});
+
   paths.forEach((p)=>{p.id=p.id.toString()});
-  console.log(paths);
+  // console.log(paths);
   return {
     paths: paths.map((id) => (
       {params:  id}
@@ -47,25 +51,25 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps({ params }) {
 
-  const product = {
-          "post_title":"goos",
-          "price":100,
-          "seller_id":1,
-          "condition":"good",
-          "location": "On Campus",
-          "category_name":"Kitchen",
-          "product_details" :"?",
-          "reference_link" :"???",
-          "email": "test@gmail.com",
-          "if_sold":false,
-          "images": [   
-                {"id" : 1,
-                "src":'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-              }
-            ]
-        };
-
-  console.log(product);
+  const product = await prisma.product.findUnique({
+    where:{
+      id:parseInt(params.id),
+    },
+    select:{
+      id:true,
+      post_title: true,
+      category_name: true,
+      price: true,
+      condition: true,
+      location: true,
+      product_details: true,
+      reference_link: true,
+      phone: true,
+      images: true,
+    }
+  }
+); 
+       
   return {
     props: {
       product,
