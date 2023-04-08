@@ -44,7 +44,7 @@ const Conditions = [
 export async function getServerSideProps(context) {
   const products_init = await prisma.product.findMany({
     select: {
-      id:true,
+      id: true,
       post_title: true,
       price: true,
       images: true,
@@ -142,7 +142,7 @@ export default function AllProducts({ products_init }) {
             Welcome to T2T marketplace!
           </h1>
           <p className="mt-4 max-w-3xl mx-auto text-base text-gray-500">
-            Thoughtfully designed objects for the workspace, home, and travel.
+            Buy and sell pre-loved treasures with ease
           </p>
         </div>
         <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
@@ -275,8 +275,7 @@ export default function AllProducts({ products_init }) {
                             {post_title}
                           </h3>
                           <p className="mt-1 text-lg font-medium text-gray-900">
-                            {price}
-                      
+                            ${price}
                           </p>
                         </a>
                       </Link>
