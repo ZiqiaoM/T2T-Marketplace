@@ -9,11 +9,16 @@ import CategorySect from '../components/UI/Category/Category';
 import ProductCard from '../components/UI/Product-card/ProductCard';
 
 import products from '../sample-data/products';
+// import proCategoryImg1 from '../images/product_01_image_01.jpg';
+// import proCategoryImg2 from '../images/product_02_image_01.jpg';
+// import proCategoryImg3 from '../images/product_03_image_01.jpg';
+// import proCategoryImg4 from '../images/product_04_image_01.jpg';
+// import proCategoryImg5 from '../images/product_05_image_01.jpg';
 
 
 
 
-
+// import {useSelector} from 'react-redux';
 
 
 

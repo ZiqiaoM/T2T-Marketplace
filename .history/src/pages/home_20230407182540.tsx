@@ -9,11 +9,16 @@ import CategorySect from '../components/UI/Category/Category';
 import ProductCard from '../components/UI/Product-card/ProductCard';
 
 import products from '../sample-data/products';
+// import proCategoryImg1 from '../images/product_01_image_01.jpg';
+// import proCategoryImg2 from '../images/product_02_image_01.jpg';
+// import proCategoryImg3 from '../images/product_03_image_01.jpg';
+// import proCategoryImg4 from '../images/product_04_image_01.jpg';
+// import proCategoryImg5 from '../images/product_05_image_01.jpg';
 
 
 
 
-
+// import {useSelector} from 'react-redux';
 
 
 
@@ -22,7 +27,7 @@ import products from '../sample-data/products';
 const Home: NextPage = () => {
 
 //0407 update products display
-const [productsDisp, setProducts] = useState([]);
+const [products, setProducts] = useState([]);
 useEffect(() => {
   const fetchProducts = async () => {
     try {
@@ -136,7 +141,7 @@ useEffect(() => {
           }
           <h2>---Testing---</h2>
           {
-            productsDisp.map(item=>(
+            allProducts.map(item=>(
               <Col lg='3' md='4' key={item.id} className="mt-5">
               <ProductCard item={item}/>
             </Col>

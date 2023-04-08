@@ -30,7 +30,7 @@ const Login = () => {
     // Redirect to home page or dashboard
     //0331 update
   // Save user information to local storage
-    localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
+    localStorage.setItem('userInfo', JSON.stringify({ email: data.email }));
     router.push('/home');
   };
 

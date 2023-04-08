@@ -11,9 +11,7 @@ import Image from 'next/image'
 const ProductCard = (props) => {
     // const {id, title, image01, price} = props.item;
     const {id, images, post_title, price} = props.item;
-    // console.log(Array.isArray(images));
-
-
+    
     const dispatch = useDispatch()
 
     const addToCart =() =>{
@@ -29,7 +27,7 @@ const ProductCard = (props) => {
   return (
     <div className='product_item'>
         <div className='product_img'>
-            <img src={images} alt='product-img' className='w-95' height='180px'/>
+            <img src={images[0]} alt='product-img' className='w-95' height='180px'/>
         </div>
         <div className="product_content">
             {/* <h5><Link>Pasta Maker</Link></h5> */}
