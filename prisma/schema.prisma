@@ -15,7 +15,8 @@ datasource db {
 model Wishlist {
   id          Int       @id @default(autoincrement())
   update_time DateTime  @default(now())
-  products    Product[]
+  products    Product   @relation(fields: [product_id], references: [id])
+  product_id  Int
   users       User      @relation(fields: [user_id], references: [id])
   user_id     Int
 }
@@ -46,8 +47,7 @@ model Product {
   seller_id       Int
   category_name   String?
   images          Image[]
-  Wishlist        Wishlist? @relation(fields: [wishlistId], references: [id])
-  wishlistId      Int?
+  wishlists       Wishlist[]
 }
 
 model Image {

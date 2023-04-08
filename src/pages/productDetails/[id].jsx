@@ -2,9 +2,7 @@
 import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
 import { useRouter } from "next/router";
-
-import absoluteUrl from 'next-absolute-url'
-
+import absoluteUrl from "next-absolute-url";
 
 import {
   Dialog,
@@ -33,30 +31,29 @@ function classNames(...classes) {
 }
 
 export async function getStaticPaths(req) {
-  
   const paths = await prisma.product.findMany({
     select: {
-    id: true,
-    // name: true,
-  },});
+      id: true,
+      // name: true,
+    },
+  });
 
-  paths.forEach((p)=>{p.id=p.id.toString()});
+  paths.forEach((p) => {
+    p.id = p.id.toString();
+  });
   // console.log(paths);
   return {
-    paths: paths.map((id) => (
-      {params:  id}
-     )),
+    paths: paths.map((id) => ({ params: id })),
     fallback: false,
   };
 }
 export async function getStaticProps({ params }) {
-
   const product = await prisma.product.findUnique({
-    where:{
-      id:parseInt(params.id),
+    where: {
+      id: parseInt(params.id),
     },
-    select:{
-      id:true,
+    select: {
+      id: true,
       post_title: true,
       category_name: true,
       price: true,
@@ -66,10 +63,9 @@ export async function getStaticProps({ params }) {
       reference_link: true,
       phone: true,
       images: true,
-    }
-  }
-); 
-       
+    },
+  });
+
   return {
     props: {
       product,
