@@ -29,7 +29,7 @@ const ProductCard = (props) => {
   return (
     <div className='product_item'>
         <div className='product_img'>
-            <img src={images} alt='product-img' className='w-95' height='180px'/>
+            <img src={images.url} alt='product-img' className='w-95' height='180px'/>
         </div>
         <div className="product_content">
             {/* <h5><Link>Pasta Maker</Link></h5> */}

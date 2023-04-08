@@ -1,48 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import { type NextPage } from "next";
-import Helmet from "../components/Helmet/Helmet";
-import { Container, Row, Col } from "reactstrap";
-import Hero from "./Hero/Hero";
-import "./home.module.css";
-import CategorySect from "../components/UI/Category/Category";
+import Helmet from '../components/Helmet/Helmet';
+import {Container, Row, Col} from "reactstrap";
+import Hero from './Hero/Hero';
+import './home.module.css';
+import CategorySect from '../components/UI/Category/Category';
 
-import ProductCard from "../components/UI/Product-card/ProductCard";
+import ProductCard from '../components/UI/Product-card/ProductCard';
 
 import products from '../sample-data/products';
+// import proCategoryImg1 from '../images/product_01_image_01.jpg';
+// import proCategoryImg2 from '../images/product_02_image_01.jpg';
+// import proCategoryImg3 from '../images/product_03_image_01.jpg';
+// import proCategoryImg4 from '../images/product_04_image_01.jpg';
+// import proCategoryImg5 from '../images/product_05_image_01.jpg';
 
+// const featureData= [
 
+// ];
 
-
-
-
+// import {useSelector} from 'react-redux';
 
 
 
 
 const Home: NextPage = () => {
 
-//0407 update products display
-const [productsDisp, setProducts] = useState([]);
-useEffect(() => {
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch('/api/products');
-      const data = await res.json();
-      setProducts(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  fetchProducts();
-}, []);
-
-
 
   const [Category, setCategory] = useState('ALL')
   const [allProducts, setAllProducts] = useState(products)
   // const showCart = useSelector(state=>state.cartUi.cartIsvisible);
   const [user, setUser] = useState(null);
-
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -54,37 +42,26 @@ useEffect(() => {
     if(Category==='ALL'){
       setAllProducts(products)
     }
-    if (Category === "KITCHENWARES") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Kitchenwares"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='KITCHENWARES'){
+      const filteredProducts = products.filter(item=> item.category==='Kitchenwares')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "CLOTHING") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Clothing"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='CLOTHING'){
+      const filteredProducts = products.filter(item=> item.category==='Clothing')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "ELECTRONICS") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Electronics"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='ELECTRONICS'){
+      const filteredProducts = products.filter(item=> item.category==='Electronics')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "FURNITURES") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Furnitures"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='FURNITURES'){
+      const filteredProducts = products.filter(item=> item.category==='Furnitures')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "OTHERS") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Others"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='OTHERS'){
+      const filteredProducts = products.filter(item=> item.category==='Others')
+      setAllProducts(filteredProducts)
     }
-  }, [Category]);
 
 
   },[Category])
@@ -103,8 +80,7 @@ useEffect(() => {
       <Container>
         <Row>
           <Col lg='12' className='text-center'>
-          <h5 className='feature_subtitle mb-4'>Welcome, {user ? user.email : ''}!</h5> 
-          {/* test */}
+          <h5 className='feature_subtitle mb-4'>Welcome, {user ? user.email : ''}!</h5>
 
             <h5 className='feature_subtitle mb-4'>At here,</h5>
             <h3 className='feature_title'>you will find an alternate sort of market.</h3>
@@ -140,14 +116,6 @@ useEffect(() => {
           </Col>
           {
             allProducts.map(item=>(
-              <Col lg='3' md='4' key={item.id} className="mt-5">
-              <ProductCard item={item}/>
-            </Col>
-            ))
-          }
-          <h2>---Testing---</h2>
-          {
-            productsDisp.map(item=>(
               <Col lg='3' md='4' key={item.id} className="mt-5">
               <ProductCard item={item}/>
             </Col>
@@ -198,4 +166,4 @@ useEffect(() => {
   </Helmet>
 };
 
-export default Home;
+export default Home

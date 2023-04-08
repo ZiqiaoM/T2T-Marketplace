@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import { type NextPage } from "next";
-import Helmet from "../components/Helmet/Helmet";
-import { Container, Row, Col } from "reactstrap";
-import Hero from "./Hero/Hero";
-import "./home.module.css";
-import CategorySect from "../components/UI/Category/Category";
+import Helmet from '../components/Helmet/Helmet';
+import {Container, Row, Col} from "reactstrap";
+import Hero from './Hero/Hero';
+import './home.module.css';
+import CategorySect from '../components/UI/Category/Category';
 
-import ProductCard from "../components/UI/Product-card/ProductCard";
+import ProductCard from '../components/UI/Product-card/ProductCard';
 
 import products from '../sample-data/products';
+// import proCategoryImg1 from '../images/product_01_image_01.jpg';
+// import proCategoryImg2 from '../images/product_02_image_01.jpg';
+// import proCategoryImg3 from '../images/product_03_image_01.jpg';
+// import proCategoryImg4 from '../images/product_04_image_01.jpg';
+// import proCategoryImg5 from '../images/product_05_image_01.jpg';
 
 
 
 
-
+// import {useSelector} from 'react-redux';
 
 
 
@@ -54,37 +59,26 @@ useEffect(() => {
     if(Category==='ALL'){
       setAllProducts(products)
     }
-    if (Category === "KITCHENWARES") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Kitchenwares"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='KITCHENWARES'){
+      const filteredProducts = products.filter(item=> item.category==='Kitchenwares')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "CLOTHING") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Clothing"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='CLOTHING'){
+      const filteredProducts = products.filter(item=> item.category==='Clothing')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "ELECTRONICS") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Electronics"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='ELECTRONICS'){
+      const filteredProducts = products.filter(item=> item.category==='Electronics')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "FURNITURES") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Furnitures"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='FURNITURES'){
+      const filteredProducts = products.filter(item=> item.category==='Furnitures')
+      setAllProducts(filteredProducts)
     }
-    if (Category === "OTHERS") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Others"
-      );
-      setAllProducts(filteredProducts);
+    if(Category==='OTHERS'){
+      const filteredProducts = products.filter(item=> item.category==='Others')
+      setAllProducts(filteredProducts)
     }
-  }, [Category]);
 
 
   },[Category])
@@ -198,4 +192,4 @@ useEffect(() => {
   </Helmet>
 };
 
-export default Home;
+export default Home
