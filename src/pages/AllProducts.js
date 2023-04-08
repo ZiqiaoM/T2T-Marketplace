@@ -44,6 +44,7 @@ const Conditions = [
 export async function getServerSideProps(context) {
   const products_init = await prisma.product.findMany({
     select: {
+      id:true,
       post_title: true,
       price: true,
       images: true,
@@ -62,8 +63,8 @@ function classNames(...classes) {
 }
 
 export default function AllProducts({ products_init }) {
-
   const [products, setProducts] = useState(products_init);
+  console.log(products);
 
   // function handleLocations(e) {
   //   const location = e.target.value;
@@ -261,7 +262,7 @@ export default function AllProducts({ products_init }) {
                       <Link
                         passHref
                         legacyBehavior
-                        href={`/productDetails/${encodeURIComponent(id)}`}
+                        href={`/productDetails/${id}`}
                       >
                         <a key={id} href={product.href} className="group">
                           <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
@@ -275,6 +276,7 @@ export default function AllProducts({ products_init }) {
                           </h3>
                           <p className="mt-1 text-lg font-medium text-gray-900">
                             {price}
+                      
                           </p>
                         </a>
                       </Link>

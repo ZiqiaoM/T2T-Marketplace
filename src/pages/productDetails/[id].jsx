@@ -1,7 +1,9 @@
-import { getAllPoductsIds, getProductData } from "../../lib/products";
+// import { getPostDetails, getPostIdList } from "../../lib/products";
 import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
 import { useRouter } from "next/router";
+import absoluteUrl from "next-absolute-url";
+
 import {
   Dialog,
   Popover,
@@ -28,34 +30,46 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// export async function getStaticPaths() {
-//   const paths = getAllPoductsIds();
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+export async function getStaticPaths(req) {
+  const paths = await prisma.product.findMany({
+    select: {
+      id: true,
+      // name: true,
+    },
+  });
 
-// export async function getStaticProps({ params }) {
-//   const product = await getProductData(params.id);
-//   console.log(product.images[0].src);
-//   return {
-//     props: { product },
-//   };
-// }
-
-export async function getStaticPaths() {
-  const paths = getAllPoductsIds();
+  paths.forEach((p) => {
+    p.id = p.id.toString();
+  });
+  // console.log(paths);
   return {
-    paths,
+    paths: paths.map((id) => ({ params: id })),
     fallback: false,
   };
 }
-
 export async function getStaticProps({ params }) {
-  const product = await getProductData(params.id);
+  const product = await prisma.product.findUnique({
+    where: {
+      id: parseInt(params.id),
+    },
+    select: {
+      id: true,
+      post_title: true,
+      category_name: true,
+      price: true,
+      condition: true,
+      location: true,
+      product_details: true,
+      reference_link: true,
+      phone: true,
+      images: true,
+    },
+  });
+
   return {
-    props: { product },
+    props: {
+      product,
+    },
   };
 }
 
@@ -97,7 +111,7 @@ export default function product_details({ product }) {
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {product.name}
+                {product.post_title}
               </a>
             </li>
           </ol>
@@ -210,7 +224,7 @@ export default function product_details({ product }) {
                 </h2>
                 <div
                   className="mt-4 prose prose-sm text-gray-500"
-                  dangerouslySetInnerHTML={{ __html: product.contact }}
+                  dangerouslySetInnerHTML={{ __html: product.phone }}
                 />
               </div>
             </div>

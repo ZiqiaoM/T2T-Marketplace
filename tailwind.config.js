@@ -3,6 +3,7 @@ module.exports = {
     "./src/pages/productDetails/[id].jsx",
     "./src/pages/post.jsx",
     "./src/pages/AllProducts.js",
+    "./src/pages/New_wishlist.js",
   ],
   theme: {
     // ...

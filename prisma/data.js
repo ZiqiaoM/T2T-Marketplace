@@ -1,5 +1,4 @@
-import { Prisma } from "@prisma/client";
-
+// import { Prisma } from "@prisma/client";
 const users = [
   {
     username: "hhdj",
@@ -116,7 +115,7 @@ const images = [
   { src: "/images/product_03_image_02.jpg", product_id: 6 },
 ];
 
-export default {
+module.exports = {
   products,
 
   users,
