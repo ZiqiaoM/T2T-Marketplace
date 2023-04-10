@@ -29,16 +29,16 @@ const products = [
   // More products...
 ];
 
-export const getServerSideProps = async ({ req }) => {
-  const token = req.headers.AUTHORIZATION;
-  const userId = await getUserId(token);
-  const posts = await prisma.post.findMany({
-    where: {
-      author: { id: userId },
-    },
-  });
-  return { props: { posts } };
-};
+// export const getServerSideProps = async ({ req }) => {
+//   const token = req.headers.AUTHORIZATION;
+//   const userId = await getUserId(token);
+//   const posts = await prisma.post.findMany({
+//     where: {
+//       author: { id: userId },
+//     },
+//   });
+//   return { props: { posts } };
+// };
 
 export default function Example() {
   return (
@@ -75,15 +75,16 @@ export default function Example() {
                             {product.name}
                           </a>
                         </h4>
+
                         <p className="ml-4 text-sm font-medium text-gray-900">
-                          {product.price}
+                          Total: {product.price}
                         </p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
-                        {product.color}
+                        Qty {product.quantity}
                       </p>
                       <p className="mt-1 text-sm text-gray-500">
-                        {product.size}
+                        Price {product.price}
                       </p>
                     </div>
 

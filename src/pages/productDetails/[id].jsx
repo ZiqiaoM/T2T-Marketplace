@@ -1,16 +1,10 @@
 // import { getPostDetails, getPostIdList } from "../../lib/products";
 import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
-import { useRouter } from "next/router";
-import absoluteUrl from "next-absolute-url";
 
-import {
-  Dialog,
-  Popover,
-  RadioGroup,
-  Tab,
-  Transition,
-} from "@headlessui/react";
+import { Tab } from "@headlessui/react";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/wish-list/cartSlice";
 
 // const relatedProducts = [
 //   {
@@ -41,7 +35,7 @@ export async function getStaticPaths(req) {
   paths.forEach((p) => {
     p.id = p.id.toString();
   });
-  // console.log(paths);
+  console.log(paths);
   return {
     paths: paths.map((id) => ({ params: id })),
     fallback: false,
@@ -73,26 +67,42 @@ export async function getStaticProps({ params }) {
     },
   };
 }
+// console.log(product[1]);
 
 export default function product_details({ product }) {
-  const [isAddingToWishlist, setIsAddingToWishlist] = useState(false);
-
-  const handleAddToWishlist = async () => {
-    setIsAddingToWishlist(true);
-    const response = await fetch("/api/wishlist", {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      alert("Product added to wishlist!");
-    } else {
-      alert("Error adding product to wishlist.");
-    }
-    setIsAddingToWishlist(false);
+  const { id, images, post_title, price } = product;
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    event.preventDefault();
+    dispatch(
+      cartActions.addItem({
+        id,
+        //title,
+        post_title,
+        // image01,
+        images,
+        price,
+      })
+    );
   };
+  // const [isAddingToWishlist, setIsAddingToWishlist] = useState(false);
+
+  // const handleAddToWishlist = async () => {
+  //   setIsAddingToWishlist(true);
+  //   const response = await fetch("/api/wishlist", {
+  //     method: "POST",
+  //     body: JSON.stringify(product),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   if (response.ok) {
+  //     alert("Product added to wishlist!");
+  //   } else {
+  //     alert("Error adding product to wishlist.");
+  //   }
+  //   setIsAddingToWishlist(false);
+  // };
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -168,21 +178,11 @@ export default function product_details({ product }) {
               <form className="mt-6">
                 <div className="mt-10 flex sm:flex-col1">
                   <button
-                    type="submit"
                     className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
-                    onClick={handleAddToWishlist}
-                    disabled={isAddingToWishlist}
+                    onClick={addToCart}
                   >
-                    {isAddingToWishlist
-                      ? "Adding to Wishlist..."
-                      : "Add to Wishlist"}
+                    Add to Wishlist
                   </button>
-                  {/* <button
-                    type="submit"
-                    className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
-                  >
-                    Add to wishlist
-                  </button> */}
                 </div>
               </form>
 

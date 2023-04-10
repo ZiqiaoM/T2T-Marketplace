@@ -99,7 +99,8 @@ const Header = () => {
                 <span className="wishlt_badge">{totalQuantity}</span>
               </span>
               <span className="user">
-                <Link href="/Personal/myaccount">
+                {/* <Link href="/Personal/myaccount"> */}
+                <Link href="/Login">
                   <PersonOutlineIcon />
                 </Link>
                 {/* <Link to='/userpages'><PersonOutlineIcon /></Link> */}
