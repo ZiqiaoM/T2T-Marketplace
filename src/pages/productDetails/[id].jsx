@@ -69,8 +69,11 @@ export async function getStaticProps({ params }) {
 }
 // console.log(product[1]);
 
+
+
 export default function product_details({ product }) {
-  const { id, images, post_title, price } = product;
+  const { id, images1, post_title, price } = product;
+  const images= images1[0].src
   const dispatch = useDispatch();
   const addToCart = () => {
     event.preventDefault();
