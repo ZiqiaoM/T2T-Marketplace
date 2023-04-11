@@ -18,6 +18,7 @@ const Home: NextPage = () => {
       try {
         const res = await fetch("/api/products");
         const data = await res.json();
+        data.forEach((x)=>{x.images = x.images[0].src});
         setProducts(data);
       } catch (error) {
         console.error(error);

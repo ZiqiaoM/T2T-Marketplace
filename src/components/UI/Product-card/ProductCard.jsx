@@ -10,6 +10,7 @@ import Image from 'next/image'
 
 const ProductCard = (props) => {
     // const {id, title, image01, price} = props.item;
+    console.log(props.item);
     const {id, images, post_title, price} = props.item;
     // console.log(Array.isArray(images));
 

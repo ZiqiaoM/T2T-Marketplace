@@ -17,19 +17,26 @@ data = {
 
 async function main() {
 
-const paths = await prisma.product.findMany({
-    select: {
-    id: true,
-    // name: true,
-  },
+const paths = await prisma.product.findMany({    
+  select: {
+  id: true,
+  post_title: true,
+  price: true,
+  images: true,
+  location: true,
+  condition: true,
+  category_name: true,
+},
 }
 ); 
   // console.log(paths);
-  paths.forEach((p)=>{p.id=p.id.toString()});
+  console.log(paths[0].images)
+  paths.forEach((x)=>{x.img = x.images[0].src});
+  // paths.forEach((p)=>{p.id=p.id.toString()});
   console.log(paths);
-  console.log(paths.map((id) => (
-    {params:  id }
-   )),);
+  // console.log(paths.map((id) => (
+  //   {params:  id }
+  //  )),);
 // tb = await prisma.product.create({
 //     data: {
 //       "post_title":"goos",
