@@ -12,12 +12,17 @@ import products from "../sample-data/products";
 
 const Home: NextPage = () => {
   //0407 update products display
+
   const [productsDisp, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch("/api/products");
         const data = await res.json();
+
+        data.forEach((x) => {
+          x.images = x.images[0].src;
+        });
         setProducts(data);
       } catch (error) {
         console.error(error);

@@ -58,12 +58,12 @@ const WishlistItem = ({ item }) => {
                       {title}Water
                     </a>
                   </h4> */}
-                  {/* <p className="mt-1 text-sm text-gray-500">
-                  Total: ${totalPrice.toFixed(2)}
-                </p> */}
                 </div>
-                <p className="mt-1 text-sm text-gray-500">Qty: {quantity}</p>
-                <p className="mt-4 text-sm text-gray-500">Price: {price}</p>
+                <p className="mt-4 text-sm text-gray-500">Qty: {quantity}</p>
+                <p className="mt-1 text-sm text-gray-500">Price: ${price}</p>
+                <p className="mt-1 text-sm text-gray-500">
+                  Total: ${totalPrice.toFixed(2)}
+                </p>
               </div>
               <div>
                 <div className="d-flex align-items-center gap-3 justify-content-between increase_decrease-btn">
