@@ -50,13 +50,16 @@ const ProductCard = (props) => {
             <b>${price}</b>
           </span> */}
               <p className="mt-1 text-lg font-medium text-gray-900">${price}</p>
-              <button className="addToWl_btn" onClick={addToCart}>
+              {/* <button className="addToWl_btn" onClick={addToCart}>
                 Add to Wishlist
-              </button>
+              </button> */}
               {/* </div> */}
             </div>
           </a>
         </Link>
+        <button className="addToWl_btn" onClick={addToCart}>
+          Add to Wishlist
+        </button>
       </li>
       <style jsx>{`
         li {

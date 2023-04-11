@@ -10,7 +10,7 @@ import { cartActions } from "../store/wish-list/cartSlice";
 
 const WishlistItem = ({ item }) => {
   //add products
-  const { id, title, price, image01, quantity, totalPrice } = item;
+  const { id, product_title, price, images, quantity, totalPrice } = item;
 
   const dispatch = useDispatch();
 
@@ -19,9 +19,9 @@ const WishlistItem = ({ item }) => {
     dispatch(
       cartActions.addItem({
         id,
-        title,
+        product_title,
         price,
-        image01,
+        images,
       })
     );
   };
@@ -43,7 +43,7 @@ const WishlistItem = ({ item }) => {
           <li key={id} className="flex py-6">
             <div className="flex-shrink-0">
               <img
-                src={image01}
+                src={images}
                 className="w-24 h-24 rounded-md object-center object-cover sm:w-32 sm:h-32"
               />
             </div>
@@ -59,6 +59,7 @@ const WishlistItem = ({ item }) => {
                     </a>
                   </h4> */}
                 </div>
+                <p className="mt-4 text-sm text-gray-500">{product_title}</p>
                 <p className="mt-4 text-sm text-gray-500">Qty: {quantity}</p>
                 <p className="mt-1 text-sm text-gray-500">Price: ${price}</p>
                 <p className="mt-1 text-sm text-gray-500">
