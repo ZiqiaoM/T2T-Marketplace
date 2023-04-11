@@ -24,12 +24,20 @@ const paths = await prisma.product.findMany({
   },
 }
 ); 
+
+const result = await prisma.wishlist.create({
+  data: {
+      "product_id":2,
+      "user_id":1,
+      }
+  },
+)
   // console.log(paths);
-  paths.forEach((p)=>{p.id=p.id.toString()});
-  console.log(paths);
-  console.log(paths.map((id) => (
-    {params:  id }
-   )),);
+  // paths.forEach((p)=>{p.id=p.id.toString()});
+  // console.log(paths);
+  // console.log(paths.map((id) => (
+  //   {params:  id }
+  //  )),);
 // tb = await prisma.product.create({
 //     data: {
 //       "post_title":"goos",

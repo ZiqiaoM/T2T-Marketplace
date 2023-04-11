@@ -12,7 +12,7 @@ const cartSlice = createSlice({
     initialState: initialState,
 
     reducers:{
-        addItem(state, action){
+        async addItem(state, action){
             const newItem = action.payload
             const existingItem = state.cartItems.find(item=> item.id===newItem.id)
             state.totalQuantity++
@@ -26,6 +26,22 @@ const cartSlice = createSlice({
                     quantity:1,
                     totalPrice:newItem.price
                 })
+            
+                let data = {
+                    product_id: newItem.id,
+                    user_id: 1,
+                  };
+                // try{
+                // const body = { data };
+                // await fetch("/api/addWishlist", {
+                //       method: "POST",
+                //       headers: { "Content-Type": "application/json" },
+                //       body: JSON.stringify(body),
+                //     });
+                //     // await Router.push('/drafts');
+                //   } catch (error) {
+                //     console.error(error);
+                //   }
             }
             else{
                 existingItem.quantity++
@@ -39,7 +55,7 @@ const cartSlice = createSlice({
 
 
         //remove items
-        removeItem(state, action){
+        async removeItem(state, action){
             const id=action.payload
             const existingItem = state.cartItems.find(item=>item.id===id)
             state.totalQuantity--
