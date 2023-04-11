@@ -9,7 +9,8 @@ export default async function handler(req, res) {
   try {
     const products = await prisma.product.findMany({
         select: {
-            post_title: true,
+            id:true,
+            post_title:true,
             price: true,
             images: true,
             location: false,

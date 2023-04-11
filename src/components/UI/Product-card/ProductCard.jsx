@@ -12,7 +12,8 @@ const ProductCard = (props) => {
   // const {id, title, image01, price} = props.item;
   const { id, images, post_title, price } = props.item;
   // console.log(Array.isArray(images));
-
+  // console.log(id,images,post_title,price);
+  // console.log(`/productDetails/${id}`);
   const dispatch = useDispatch();
 
   const addToCart = () => {
