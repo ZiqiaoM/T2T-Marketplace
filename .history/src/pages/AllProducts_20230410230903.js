@@ -42,13 +42,8 @@ const Conditions = [
 ];
 
 export async function getServerSideProps(context) {
-
- const search = context.query.search
- let searchKeyword=null
- if(search){
-  searchKeyword=search.toLowerCase()
- } 
 // for InputSearchTerm
+  const searchKeyword = context.query.search
   let products_init=[]
   const options={
     select:{
@@ -68,7 +63,7 @@ export async function getServerSideProps(context) {
       ...options,
       where:{
         OR:[
-          {post_title:{contains:searchKeyword, mode: 'insensitive'}},
+          {post_title:{contains:searchKeyword}},
         ],
       },
     })

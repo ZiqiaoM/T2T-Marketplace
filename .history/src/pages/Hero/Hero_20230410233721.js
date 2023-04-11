@@ -33,13 +33,13 @@ const Hero = () => {
                 </div>
                 </form>
                 <div className='mt-6 d-flex align-items-center gap-5'>
-                  <p className='mt-7 d-flex align-items-center gap-2'>
+                  <p className='mt-6 d-flex align-items-center gap-2'>
                     <span className='hero_icon'>
                       <PaidIcon />
                     </span>{"  "}
                     On-Campus Transactions
                   </p>
-                  <p className='mt-7 d-flex align-items-center gap-2'>
+                  <p className='d-flex align-items-center gap-2'>
                     <span className='hero_icon'>
                       <SecurityIcon />
                     </span>{"  "}
@@ -104,7 +104,7 @@ const Hero = () => {
               font-size: clamp(1.1rem, 6vw, 4rem);
               margin-top: 6%;
               margin-bottom: 1rem;
-              margin-left: 50px;
+              margin-left: 10px;
               margin-right: 10px;
               letter-spacing: 3px;
               color: #fff;

@@ -42,33 +42,14 @@ const Conditions = [
 ];
 
 export async function getServerSideProps(context) {
-
- const search = context.query.search
- let searchKeyword=null
- if(search){
-  searchKeyword=search.toLowerCase()
- } 
 // for InputSearchTerm
+  const searchKeyword = contxt.query.search
   let products_init=[]
-  const options={
-    select:{
-      id: true,
-      post_title: true,
-      price: true,
-      images: true,
-      location: true,
-      condition: true,
-      category_name: true,
-
-    }
-  }
-
   if(searchKeyword){
     products_init = await prisma.product.findMany({
-      ...options,
       where:{
         OR:[
-          {post_title:{contains:searchKeyword, mode: 'insensitive'}},
+          {post_title:{contains:searchKeyword}},
         ],
       },
     })

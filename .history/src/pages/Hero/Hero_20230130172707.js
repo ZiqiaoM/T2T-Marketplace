@@ -1,21 +1,10 @@
-import React , { useState }from 'react';
+import React from 'react';
 import './Hero.module.css';
 import SearchIcon from '@mui/icons-material/Search';
 import SecurityIcon from '@mui/icons-material/Security';
 import PaidIcon from '@mui/icons-material/Paid';
-import { useRouter } from 'next/router'
-
-
 
 const Hero = () => {
-  const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    router.push(`/AllProducts?search=${searchTerm}`);
-  };
-
   return (
       <div className='HeroContainer'>
             <div className='HeroBg'>
@@ -24,22 +13,21 @@ const Hero = () => {
             <div className='HeroContent'>
               <div className='HeroItems'>
                 <h1 className='HeroH1'><b>Your money will be worth more than you think @T2T</b></h1>
-                <form onSubmit={handleSubmit}>
                 <div className='header_search'>
-                    <input className='header_searchInput' value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} type="text" placeholder="   Explore what you want. (examples: kitchen utensils, furniture, book...)" />
-                    <button className='header_searchIcon' type="submit">
+                    <input className='header_searchInput' type="text" placeholder="   Explore what you want. (examples: kitchen utensils, furniture, book...)" />
+                    <div className='header_searchIcon'>
                     <SearchIcon />
-                    </button>
+                    </div>
+                    
                 </div>
-                </form>
-                <div className='mt-6 d-flex align-items-center gap-5'>
-                  <p className='mt-7 d-flex align-items-center gap-2'>
+                <div className='d-flex align-items-center gap-5'>
+                  <p className='d-flex align-items-center gap-2'>
                     <span className='hero_icon'>
                       <PaidIcon />
                     </span>{"  "}
                     On-Campus Transactions
                   </p>
-                  <p className='mt-7 d-flex align-items-center gap-2'>
+                  <p className='d-flex align-items-center gap-2'>
                     <span className='hero_icon'>
                       <SecurityIcon />
                     </span>{"  "}
@@ -102,9 +90,9 @@ const Hero = () => {
           
           .HeroH1{
               font-size: clamp(1.1rem, 6vw, 4rem);
-              margin-top: 6%;
+              margin-top: 15%;
               margin-bottom: 1rem;
-              margin-left: 50px;
+              margin-left: 10px;
               margin-right: 10px;
               letter-spacing: 3px;
               color: #fff;
@@ -120,18 +108,15 @@ const Hero = () => {
               display:flex;
               flex: 1;
               align-items: center;
-              justify-content:center;
-              margin-top: 30px;
-              margin-left:20%;
+              margin-top: -50px;
               width: 60%;
-              // background-color:red;
           }
           
           .header_searchInput{
               height: 40px;
               padding: 10px;
               border: none;
-              width: 1100px;
+              width: 100%;
               border-radius: 20px;
               color: grey;
           }

@@ -104,7 +104,7 @@ const Hero = () => {
               font-size: clamp(1.1rem, 6vw, 4rem);
               margin-top: 6%;
               margin-bottom: 1rem;
-              margin-left: 50px;
+              margin-left: 10px;
               margin-right: 10px;
               letter-spacing: 3px;
               color: #fff;

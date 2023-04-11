@@ -93,7 +93,7 @@ const Home: NextPage = () => {
           <Row>
             <Col lg="12" className="text-center">
               <h5 className="feature_subtitle mb-4">
-                Welcome, {user ? user.email : "newcomer"}!
+                Welcome, {user ? user.email : ""}!
               </h5>
               {/* test */}
 
