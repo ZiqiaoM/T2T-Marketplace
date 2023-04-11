@@ -27,10 +27,10 @@ const ProductCard = (props) => {
         }))
     }
   return (
-    <div className='product_item'>
+    <div className='product_item w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8'>
         <div className='product_img'>
             {/* <img src={images} alt='product-img' className='w-full h-full object-center object-cover group-hover:opacity-75' height='180px'/> */}
-            <img src={productImg} alt='product-img'  height='180px'/>
+            <img src={productImg} alt='product-img' className='w-full h-full object-center object-cover group-hover:opacity-75' height='180px'/>
         </div>
         <div className="product_content">
             {/* <h5><Link>Pasta Maker</Link></h5> */}

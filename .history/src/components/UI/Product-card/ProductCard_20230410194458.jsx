@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import productImg from '../../../../public/images/product_01_image_01.jpg';
+// import productImg from '../../../images/product_01_image_01.jpg';
 import './ProductCard.module.css';
 import { useDispatch } from 'react-redux';
 import {cartActions} from '../../../store/wish-list/cartSlice';
@@ -27,15 +27,14 @@ const ProductCard = (props) => {
         }))
     }
   return (
-    <div className='product_item'>
+    <div className='product_item w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8'>
         <div className='product_img'>
-            {/* <img src={images} alt='product-img' className='w-full h-full object-center object-cover group-hover:opacity-75' height='180px'/> */}
-            <img src={productImg} alt='product-img'  height='180px'/>
+            <img src={images} alt='product-img' className='w-95' height='180px'/>
         </div>
         <div className="product_content">
             {/* <h5><Link>Pasta Maker</Link></h5> */}
-            <h5><Link href={`/products/${id}`} className='mt-4'>{post_title}</Link></h5>
-            <div>
+            <h5><Link href={`/products/${id}`}>{post_title}</Link></h5>
+            <div className='d-flex align-items-center justify-content-between'>
                 {/* <span className='product_price'>$15.00</span> */}
                 <span className='product_price'><b>${price}</b></span>
                 <button className='addToWl_btn' onClick={addToCart}>Add to Wishlist</button>
