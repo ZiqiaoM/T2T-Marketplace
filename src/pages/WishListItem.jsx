@@ -10,7 +10,7 @@ import { cartActions } from "../store/wish-list/cartSlice";
 
 const WishlistItem = ({ item }) => {
   //add products
-  const { id, product_title, price, images, quantity, totalPrice } = item;
+  const { id, post_title, price, images, quantity, totalPrice } = item;
 
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const WishlistItem = ({ item }) => {
     dispatch(
       cartActions.addItem({
         id,
-        product_title,
+        post_title,
         price,
         images,
       })
@@ -50,16 +50,15 @@ const WishlistItem = ({ item }) => {
             <div className="ml-4 flex-1 flex flex-col sm:ml-6">
               <div>
                 <div className="flex justify-between">
-                  {/* <h4 className="text-sm">
+                  <h4 className="text-sm">
                     <a
                       href="#"
                       className="font-medium text-gray-700 hover:text-gray-800"
                     >
-                      {title}Water
+                      {post_title}
                     </a>
-                  </h4> */}
+                  </h4>
                 </div>
-                <p className="mt-4 text-sm text-gray-500">{product_title}</p>
                 <p className="mt-4 text-sm text-gray-500">Qty: {quantity}</p>
                 <p className="mt-1 text-sm text-gray-500">Price: ${price}</p>
                 <p className="mt-1 text-sm text-gray-500">
