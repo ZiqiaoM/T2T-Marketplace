@@ -12,7 +12,7 @@ const cartSlice = createSlice({
     initialState: initialState,
 
     reducers:{
-        async addItem(state, action){
+        addItem(state, action){
             const newItem = action.payload
             const existingItem = state.cartItems.find(item=> item.id===newItem.id)
             state.totalQuantity++
@@ -55,7 +55,7 @@ const cartSlice = createSlice({
 
 
         //remove items
-        async removeItem(state, action){
+        removeItem(state, action){
             const id=action.payload
             const existingItem = state.cartItems.find(item=>item.id===id)
             state.totalQuantity--
