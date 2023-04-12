@@ -7,6 +7,30 @@ const initialState ={
     totalAmount:0
 }
 
+const addWishlist = createAsyncThunk(
+    'cartSlice/addWishlist',
+    async () => {
+            try{
+                let data = {
+                    product_id: 5,
+                    user_id: 1,
+                  };
+                const body = { data };
+                await fetch("/api/addWishlist", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(body),
+                    });
+                    // await Router.push('/drafts');
+            } catch (error) {
+                console.error(error);
+        }
+    }
+  )
+  
+
+
+
 const cartSlice = createSlice({
     name:'cart',
     initialState: initialState,
@@ -29,10 +53,6 @@ const cartSlice = createSlice({
                     totalPrice:newItem.price
                 })
             
-                let data = {
-                    product_id: newItem.id,
-                    user_id: 1,
-                  };
                 // try{
                 // const body = { data };
                 // await fetch("/api/addWishlist", {
