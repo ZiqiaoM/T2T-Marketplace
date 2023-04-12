@@ -49,12 +49,13 @@ const Login = () => {
                 </a>
               </p>
               </Link>
-              <img className="lg_img flex" src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png" alt="ppdj1YT.png" width="500px" border="0" />
+              {/* <img className="lg_img flex" src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png" alt="ppdj1YT.png" width="500px" border="0" /> */}
             </div>
 
     
-            <div className="container mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-              <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <div className="container1 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+              <div className='con_img'><img className="lg_img flex" src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png" alt="ppdj1YT.png" width="500px" border="0" /></div>
+              <div className="con_input bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form onSubmit={handleSubmit} className="space-y-6" action="#" method="POST">
                   <div className='email'>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -127,9 +128,19 @@ const Login = () => {
               </div>
             </div>
             <style jsx>{`
-  .container{
+
+  .container1{
+    display:flex;
     // background:red;
     padding-top:7%;
+    // height:100%;
+  }
+  .con_img{
+    margin-left:-30px;
+  }
+  .con_input{
+    width:600px;
+    height:325px;
   }
   .lg_img{
     margin-left:100px;
