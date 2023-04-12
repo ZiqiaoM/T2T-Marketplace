@@ -27,7 +27,7 @@ const nav_links = [
   },
   {
     display: "About",
-    path: "/New_wishlist",
+    path: "/homeAbout",
   },
   {
     display: "Publish Post",

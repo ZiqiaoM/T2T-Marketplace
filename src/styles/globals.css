@@ -13,6 +13,7 @@
 }
 
 /* base style */
+
 body {
   background-color: #fcfcfc;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -22,10 +23,10 @@ body {
   -moz-osx-font-smoothing: grayscale; */
   font-family: "Istok Web", sans-serif;
 }
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-} */
+}
 
 /* h1, */
 /* h2, */

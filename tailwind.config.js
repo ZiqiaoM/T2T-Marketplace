@@ -5,6 +5,7 @@ module.exports = {
     "./src/pages/AllProducts.js",
     "./src/pages/New_wishlist.js",
     "./src/pages/WishListItem.jsx",
+    "./src/pages/account.jsx",
   ],
   theme: {
     // ...
