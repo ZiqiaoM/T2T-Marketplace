@@ -136,39 +136,43 @@ export default function Example() {
                   Your title must be less than 30 characters.
                 </p>
               </div>
-
-<<<<<<< HEAD
-              <input
-                type="radio"
-                id="huey"
-                name="drone"
-                value="huey"
-                checked
-              ></input>
-              <label for="huey">Cloth</label>
-              <br></br>
-              <input type="radio" id="dewey" name="drone" value="dewey"></input>
-              <label for="dewey">Kitchenware</label>
-              <br></br>
-              <input type="radio" id="louie" name="drone" value="louie"></input>
-              <label for="louie">Funiture</label>
-              <br></br>
-              <input type="radio" id="louie" name="drone" value="louie"></input>
-              <label for="louie">Other</label>
-            </form>
-
-            <form class="inToCenter">
-              <div class="tabs d-flex align-items-center gap-5 py-3">
-                <h6 class="tab_active">Post Title</h6>
+            </div>
+            {/* Price */}
+            <div className="grid grid-cols-5 gap-6">
+              <div className="col-span-3 sm:col-span-2">
+                <label
+                  htmlFor="price"
+                  className="text-base font-medium text-gray-900"
+                >
+                  Price
+                </label>
+                <div className="relative mt-1 rounded-md shadow-sm">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="0.00"
+                  />
+                </div>
+                <p className="text-sm leading-5 text-gray-500">
+                  Enter 0.00 if this product is free.
+                </p>
               </div>
-              <div>
-                <input
-                  type="text"
-                  minlength="1"
-                  maxlength="20"
-                  class="input-title"
-                  placeholder="Input: Title"
-=======
+            </div>
+            {/* Product category */}
+            <div>
+              <fieldset className="mt-6">
+                <label className="text-base font-medium text-gray-900">
+                  Product category
+                </label>
+                <p className="text-sm leading-5 text-gray-500">
+                  What is the category of your product?
+                </p>
+
                 <div className="space-y-4">
                   {ProductCategory.map((ProductCategory) => (
                     <div key={ProductCategory.id} className="flex items-center">
@@ -277,77 +281,33 @@ export default function Example() {
                   cols="80"
                   className="border-gray-300 rounded-md sm:text-sm shadow-sm"
                   aria-describedby="detail-optional"
->>>>>>> acdee7dca3676ab53026de44b6743102483c9959
                 />
               </div>
-
-              <div class="tabs d-flex align-items-center gap-5 py-3">
-                <h6 class="tab_active">Upload Picture</h6>
-              </div>
-              <div>
-                <button class="addToWl_btn">Upload from local</button>
-              </div>
-
-              <div class="tabs d-flex align-items-center gap-5 py-3">
-                <h6 class="tab_active">Product details</h6>
-              </div>
-
-              <div>
-                <label for="Name">Price:</label>
-                <input
-                  type="text"
-                  class="input-price"
-                  placeholder="Price"
-                  required
+              <p className="mt-2 text-sm text-gray-500">
+                Brief description for your Product.
+              </p>
+            </div>
+            {/* Product reference */}
+            <div>
+              <label
+                htmlFor="reference_link"
+                className="text-base font-medium text-gray-900"
+              >
+                Reference link
+              </label>
+              <span className="text-sm text-gray-500" id="link-optional">
+                (Optional)
+              </span>
+              <div className="mt-1">
+                <textarea
+                  id="reference_link"
+                  name="reference_link"
+                  rows="4"
+                  cols="80"
+                  className="border-gray-300 rounded-md sm:text-sm shadow-sm"
+                  aria-describedby="link-optional"
                 />
-                <p>Free item should enter 0</p>
               </div>
-<<<<<<< HEAD
-            </form>
-            <form class="inToCenter">
-              <div>
-                <label for="Name">Condition:</label>
-                <input
-                  type="radio"
-                  id="huey"
-                  name="drone"
-                  value="huey"
-                  checked
-                ></input>
-                <label for="huey">New</label>
-                <input
-                  type="radio"
-                  id="huey"
-                  name="drone"
-                  value="huey"
-                  checked
-                ></input>
-                <label for="huey">Used</label>
-              </div>
-            </form>
-
-            <form class="inToCenter">
-              <div>
-                <label for="Name">Location:</label>
-                <input
-                  type="radio"
-                  id="huey"
-                  name="drone"
-                  value="huey"
-                  checked
-                ></input>
-                <label for="huey">On Campus</label>
-                <input
-                  type="radio"
-                  id="huey"
-                  name="drone"
-                  value="huey"
-                  checked
-                ></input>
-                <label for="huey">Off Campus</label>
-              </div>
-            </form>
-=======
               <p className="mt-2 text-sm text-gray-500">
                 Give some reference links for your product. URLs are
                 hyperlinked.
@@ -434,60 +394,19 @@ export default function Example() {
                   >
                     Email address
                   </label>
->>>>>>> acdee7dca3676ab53026de44b6743102483c9959
 
-            <form class="inToCenter">
-              <div>
-                <label for="Name">Original Link:</label>
-
-                <div>
-                  <textarea
-                    class="textBorder"
-                    id="freeform"
-                    name="freeform"
-                    rows="3"
-                    cols="70"
-                    placeholder="Original Link"
-                  ></textarea>
+                  <div className="mt-1 relative rounded-md shadow-sm">
+                    <input
+                      type="text"
+                      name="email_address"
+                      id="email_address"
+                      className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-16 sm:text-sm border-gray-300 rounded-md"
+                      placeholder="your@email.com"
+                      aria-describedby="email-optional"
+                    />
+                  </div>
                 </div>
               </div>
-<<<<<<< HEAD
-
-              <div>
-                <label for="freeform">Brief Description:</label>
-              </div>
-              <div>
-                <textarea
-                  class="textBorder"
-                  id="freeform"
-                  name="freeform"
-                  rows="6"
-                  cols="70"
-                  placeholder="Enter text here..."
-                ></textarea>
-              </div>
-              <div>
-                <label for="Name">Contact:</label>
-                <div>
-                  <textarea
-                    class="textBorder"
-                    id="freeform"
-                    name="freeform"
-                    rows="3"
-                    cols="70"
-                    placeholder="Phone/Email..."
-                  ></textarea>
-                </div>
-              </div>
-              <div>
-                <button class="addToWl_btn">Publish</button>
-              </div>
-            </form>
-          </body>
-        </Container>
-      </section>
-    </Helmet>
-=======
             </div>
             {/* Submit botton */}
             <div className="flex justify-end">
@@ -509,8 +428,5 @@ export default function Example() {
       </div>
     </div>
     // </div>
->>>>>>> acdee7dca3676ab53026de44b6743102483c9959
   );
-};
-
-export default Post;
+}
