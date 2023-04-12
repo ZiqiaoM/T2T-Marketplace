@@ -7,16 +7,17 @@ import { cartActions } from "../../../store/wish-list/cartSlice";
 
 //import image 0130
 import Image from "next/image";
+const user_id = 1;
 
-const ProductCard = (props) => {
+const ProductCard =  (props) => {
   // const {id, title, image01, price} = props.item;
   const { id, images, post_title, price } = props.item;
   // console.log(Array.isArray(images));
   // console.log(id,images,post_title,price);
   // console.log(`/productDetails/${id}`);
   const dispatch = useDispatch();
-
-  const addToCart = () => {
+  
+  const addToCart = async() => {
     dispatch(
       cartActions.addItem({
         id,
@@ -27,6 +28,21 @@ const ProductCard = (props) => {
         price,
       })
     );
+    try{
+      let data = {
+          product_id: id,
+          user_id: user_id,
+        };
+      const body = { data };
+      await fetch("/api/addWishlist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          // await Router.push('/drafts');
+  } catch (error) {
+      console.error(error);
+  }
   };
   return (
     <div>

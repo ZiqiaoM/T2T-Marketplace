@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Row, Col} from "reactstrap";
-
+import Image from 'next/image';
 
 
 const CategoryData =[
@@ -40,7 +40,8 @@ const Category = () => {
                 <Col lg='2' md='4'>
                     <div className="category_item d-flex align-items-center gap-2">
                         <div className="category_img">
-                            <img src={item.imgUrl} alt='category_item' width='60px' height='60px'/>
+                            {/* <img src={item.imgUrl} alt='category_item' width='60px' height='60px'/> */}
+                            <Image src={item.imgUrl} alt='category_item' width={45} height={45} />
                         </div>
                         <h6>{item.display}</h6>
                     </div>
@@ -58,8 +59,9 @@ const Category = () => {
         border-radius: 5px;
         cursor:pointer;
         transition: 0.4s;
+        height:75px;
     }
-    
+
     .category_item:hover{
         transform:translateY(-15px);
     }`}</style>

@@ -1,11 +1,35 @@
 //This page is the wishlist cart page
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState ={
     cartItems:[],
     totalQuantity:0,
     totalAmount:0
 }
+
+const addWishlist = createAsyncThunk(
+    'cartSlice/addWishlist',
+    async () => {
+            try{
+                let data = {
+                    product_id: 5,
+                    user_id: 1,
+                  };
+                const body = { data };
+                await fetch("/api/addWishlist", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(body),
+                    });
+                    // await Router.push('/drafts');
+            } catch (error) {
+                console.error(error);
+        }
+    }
+  )
+  
+
+
 
 const cartSlice = createSlice({
     name:'cart',
@@ -29,10 +53,6 @@ const cartSlice = createSlice({
                     totalPrice:newItem.price
                 })
             
-                let data = {
-                    product_id: newItem.id,
-                    user_id: 1,
-                  };
                 // try{
                 // const body = { data };
                 // await fetch("/api/addWishlist", {
@@ -88,10 +108,14 @@ const cartSlice = createSlice({
                 total +Number(item.price)*Number(item.quantity)),0
             )
         }
+    },
 
-
-
-    }
+    extraReducers: {
+        [addWishlist.fulfilled]: (state, { payload }) => {
+          state.loading = false
+          state.entities = payload
+        },
+      },
 })
 
 export const cartActions = cartSlice.actions

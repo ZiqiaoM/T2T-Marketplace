@@ -6,19 +6,19 @@ import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/wish-list/cartSlice";
 
-const relatedProducts = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg",
-    imageAlt: "Front of men's Basic Tee in white.",
-    price: "$35",
-    color: "Aspen White",
-  },
-  // More products...
-];
+// const relatedProducts = [
+//   {
+//     id: 1,
+//     name: "Basic Tee",
+//     href: "#",
+//     imageSrc:
+//       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg",
+//     imageAlt: "Front of men's Basic Tee in white.",
+//     price: "$35",
+//     color: "Aspen White",
+//   },
+//   // More products...
+// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -72,8 +72,7 @@ export async function getStaticProps({ params }) {
 
 
 export default function product_details({ product }) {
-  const { id, images1, post_title, price } = product;
-  const images= images1[0].src
+  const { id, images, post_title, price } = product;
   const dispatch = useDispatch();
   const addToCart = () => {
     event.preventDefault();
@@ -88,7 +87,24 @@ export default function product_details({ product }) {
       })
     );
   };
+  // const [isAddingToWishlist, setIsAddingToWishlist] = useState(false);
 
+  // const handleAddToWishlist = async () => {
+  //   setIsAddingToWishlist(true);
+  //   const response = await fetch("/api/wishlist", {
+  //     method: "POST",
+  //     body: JSON.stringify(product),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   if (response.ok) {
+  //     alert("Product added to wishlist!");
+  //   } else {
+  //     alert("Error adding product to wishlist.");
+  //   }
+  //   setIsAddingToWishlist(false);
+  // };
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

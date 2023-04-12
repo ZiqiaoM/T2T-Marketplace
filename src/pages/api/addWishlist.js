@@ -7,10 +7,10 @@ export default async function handle(req, res) {
   let {data} = req.body;
 
 //   const session = await getSession({ req });
-  const result = await prisma.product.create({
+  const result = await prisma.wishlist.create({
     data: {
-        "product_id":id,
-        "user_id":user_id,
+        "product_id":data["product_id"],
+        "user_id":data["user_id"],
         }
     },
   )

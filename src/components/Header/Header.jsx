@@ -27,7 +27,8 @@ const nav_links = [
   },
   {
     display: "About",
-    path: "/homeAbout",
+    path: "/homeAbount",
+    // path: "/Login",
   },
   {
     display: "Publish Post",
