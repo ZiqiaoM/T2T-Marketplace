@@ -8,7 +8,7 @@ import CategorySect from "../components/UI/Category/Category";
 
 import ProductCard from "../components/UI/Product-card/ProductCard";
 
-import products from "../sample-data/products";
+// import products from "../sample-data/products";
 
 const Home: NextPage = () => {
   //0407 update products display
@@ -31,9 +31,6 @@ const Home: NextPage = () => {
     fetchProducts();
   }, []);
 
-  const [Category, setCategory] = useState("ALL");
-  const [allProducts, setAllProducts] = useState(products);
-  // const showCart = useSelector(state=>state.cartUi.cartIsvisible);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -41,41 +38,44 @@ const Home: NextPage = () => {
     setUser(userInfo);
   }, []);
 
+  const [Category, setCategory] = useState("ALL");
+  const [allProducts, setAllProducts] = useState(productsDisp);
+
   useEffect(() => {
     if (Category === "ALL") {
-      setAllProducts(products);
+      setAllProducts(productsDisp);
     }
     if (Category === "KITCHENWARES") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Kitchenwares"
+      const filteredProducts = productsDisp.filter(
+        (item) => item.category_name === "Kitchenwares"
       );
       setAllProducts(filteredProducts);
     }
     if (Category === "CLOTHING") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Clothing"
+      const filteredProducts = productsDisp.filter(
+        (item) => item.category_name === "Clothing"
       );
       setAllProducts(filteredProducts);
     }
     if (Category === "ELECTRONICS") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Electronics"
+      const filteredProducts = productsDisp.filter(
+        (item) => item.category_name === "Electronics"
       );
       setAllProducts(filteredProducts);
     }
     if (Category === "FURNITURES") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Furnitures"
+      const filteredProducts = productsDisp.filter(
+        (item) => item.category_name === "Furnitures"
       );
       setAllProducts(filteredProducts);
     }
     if (Category === "OTHERS") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Others"
+      const filteredProducts = productsDisp.filter(
+        (item) => item.category_name === "Others"
       );
       setAllProducts(filteredProducts);
     }
-  }, [Category]);
+  }, [Category,productsDisp]);
 
   return (
     <Helmet title="Home">
@@ -168,11 +168,6 @@ const Home: NextPage = () => {
                 >
                   Others
                 </button>
-                {/* <button><img src={proCategoryImg1} alt='Pasta Maker' width='130px' height='140px' />Pasta Maker</button>
-              <button><img src={proCategoryImg2} alt='Coffee Grinder' width='130px' height='140px'/>Pasta Maker</button>
-              <button><img src={proCategoryImg3} alt='Kate Spade New York Jumpsuit' width='130px' height='140px' />KSNY Jumpsuit</button>
-              <button><img src={proCategoryImg4} alt='Mini Fridge' width='130px' height='140px'/>Mini Fridge</button>
-              <button><img src={proCategoryImg5} alt='Office Chair' width='130px' height='140px' />Office Chair</button> */}
               </div>
             </Col>
             {allProducts.map((item) => (
@@ -180,12 +175,12 @@ const Home: NextPage = () => {
                 <ProductCard item={item} />
               </Col>
             ))}
-            <h2>---Testing---</h2>
+            {/* <h2>---Testing---</h2>
             {productsDisp.map((item) => (
               <Col lg="3" md="4" key={item.id} className="mt-5">
                 <ProductCard item={item} />
               </Col>
-            ))}
+            ))} */}
           </Row>
         </Container>
       </section>
