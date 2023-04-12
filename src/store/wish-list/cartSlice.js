@@ -1,5 +1,5 @@
 //This page is the wishlist cart page
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState ={
     cartItems:[],
@@ -108,10 +108,14 @@ const cartSlice = createSlice({
                 total +Number(item.price)*Number(item.quantity)),0
             )
         }
+    },
 
-
-
-    }
+    extraReducers: {
+        [addWishlist.fulfilled]: (state, { payload }) => {
+          state.loading = false
+          state.entities = payload
+        },
+      },
 })
 
 export const cartActions = cartSlice.actions
