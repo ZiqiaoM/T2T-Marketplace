@@ -27,7 +27,7 @@ const nav_links = [
   },
   {
     display: "About",
-    path: "/homeAbount",
+    path: "/personalCenter",
     // path: "/Login",
   },
   {

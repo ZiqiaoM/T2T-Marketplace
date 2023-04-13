@@ -1,7 +1,5 @@
-import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
+
 import Link from "next/link";
 import prisma from "../lib/prisma";
 
@@ -42,40 +40,14 @@ const Conditions = [
 ];
 
 export async function getServerSideProps(context) {
-
- const search = context.query.search
- let searchKeyword=null
- if(search){
-  searchKeyword=search.toLowerCase()
- } 
-// for InputSearchTerm
-  let products_init=[]
-  const options={
-    select:{
-      id: true,
-      post_title: true,
-      price: true,
-      images: true,
-      location: true,
-      condition: true,
-      category_name: true,
-
-    }
+  const search = context.query.search;
+  let searchKeyword = null;
+  if (search) {
+    searchKeyword = search.toLowerCase();
   }
-
-  if(searchKeyword){
-    products_init = await prisma.product.findMany({
-      ...options,
-      where:{
-        OR:[
-          {post_title:{contains:searchKeyword, mode: 'insensitive'}},
-        ],
-      },
-    })
-  }else{
-
-  // const products_init = await prisma.product.findMany({
-    products_init = await prisma.product.findMany({
+  // for InputSearchTerm
+  let products_init = [];
+  const options = {
     select: {
       id: true,
       post_title: true,
@@ -85,8 +57,29 @@ export async function getServerSideProps(context) {
       condition: true,
       category_name: true,
     },
-  });
-}
+  };
+
+  if (searchKeyword) {
+    products_init = await prisma.product.findMany({
+      ...options,
+      where: {
+        OR: [{ post_title: { contains: searchKeyword, mode: "insensitive" } }],
+      },
+    });
+  } else {
+    // const products_init = await prisma.product.findMany({
+    products_init = await prisma.product.findMany({
+      select: {
+        id: true,
+        post_title: true,
+        price: true,
+        images: true,
+        location: true,
+        condition: true,
+        category_name: true,
+      },
+    });
+  }
   // console.log(products_init[0].images[0].src);
   console.log("using function get server side props.");
   return { props: { products_init } };
