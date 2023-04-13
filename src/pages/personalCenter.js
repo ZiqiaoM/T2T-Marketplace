@@ -1,5 +1,4 @@
 import {
-  HomeOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
   ShoppingOutlined,
@@ -7,9 +6,9 @@ import {
 import { Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import PersonalInfo from "./Personal/myaccount";
+// import PersonalInfo from "./Personal/myaccount";
 import UserProduct from "./UserProduct";
-import Wishlist from "./Wishlist";
+import UserWishlist from "./UserWishlist";
 const { Header, Content, Sider } = Layout;
 
 const PersonalCenter = () => {
@@ -18,28 +17,28 @@ const PersonalCenter = () => {
   } = theme.useToken();
 
   const [showWishlistContent, setShowWishlistContent] = useState(false);
-  const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
+  //   const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
   const [showMyProduct, setShowMyProduct] = useState(false); // Add state for showing account content
 
   const handleWishlistClick = () => {
     setShowWishlistContent(true);
-    setShowAccountContent(false);
+    // setShowAccountContent(false);
     setShowMyProduct(false); // Hide account content when wishlist is clicked
   };
   const handleMyProductClick = () => {
     setShowMyProduct(true);
-    setShowAccountContent(false); // Hide account content when wishlist is clicked
+    // setShowAccountContent(false); // Hide account content when wishlist is clicked
     setShowWishlistContent(false);
   };
-  const handleAccountClick = () => {
-    setShowAccountContent(true);
-    setShowWishlistContent(false);
-    setShowMyProduct(false); // Hide wishlist content when account is clicked
-  };
+  //   const handleAccountClick = () => {
+  //     setShowAccountContent(true);
+  //     setShowWishlistContent(false);
+  //     setShowMyProduct(false); // Hide wishlist content when account is clicked
+  //   };
 
   // Set the default page to display as Account page
   useEffect(() => {
-    setShowAccountContent(true);
+    setShowWishlistContent(true);
   }, []);
 
   return (
@@ -63,15 +62,15 @@ const PersonalCenter = () => {
           </div>
           {/* Add user name information */}
           <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark">
-            <Menu.Item key="1" onClick={handleAccountClick}>
+            {/* <Menu.Item key="1" onClick={handleAccountClick}>
               <HomeOutlined />
               <span> Account </span>
-            </Menu.Item>
-            <Menu.Item key="2" onClick={handleWishlistClick}>
+            </Menu.Item> */}
+            <Menu.Item key="1" onClick={handleWishlistClick}>
               <ShoppingCartOutlined />
               <span> My Wishlist </span>
             </Menu.Item>
-            <Menu.Item key="3" onClick={handleMyProductClick}>
+            <Menu.Item key="2" onClick={handleMyProductClick}>
               <ShoppingOutlined />
               <span> My Product </span>
             </Menu.Item>
@@ -110,8 +109,8 @@ const PersonalCenter = () => {
                 background: colorBgContainer,
               }}
             >
-              {showWishlistContent && <Wishlist />}{" "}
-              {showAccountContent && <PersonalInfo />}{" "}
+              {showWishlistContent && <UserWishlist />}{" "}
+              {/* {showAccountContent && <PersonalInfo />}{" "} */}
               {showMyProduct && <UserProduct />}{" "}
             </div>
           </Content>
