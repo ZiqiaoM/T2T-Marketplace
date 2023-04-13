@@ -1,11 +1,10 @@
 // import { getPostDetails, getPostIdList } from "../../lib/products";
-import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
 
 import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 import { cartActions } from "../../store/wish-list/cartSlice";
-
 // const relatedProducts = [
 //   {
 //     id: 1,
@@ -67,9 +66,6 @@ export async function getStaticProps({ params }) {
     },
   };
 }
-// console.log(product[1]);
-
-
 
 export default function product_details({ product }) {
   const { id, images, post_title, price } = product;
@@ -86,25 +82,9 @@ export default function product_details({ product }) {
         price,
       })
     );
+    swal("Successfully added to wishlist!");
   };
-  // const [isAddingToWishlist, setIsAddingToWishlist] = useState(false);
 
-  // const handleAddToWishlist = async () => {
-  //   setIsAddingToWishlist(true);
-  //   const response = await fetch("/api/wishlist", {
-  //     method: "POST",
-  //     body: JSON.stringify(product),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   if (response.ok) {
-  //     alert("Product added to wishlist!");
-  //   } else {
-  //     alert("Error adding product to wishlist.");
-  //   }
-  //   setIsAddingToWishlist(false);
-  // };
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
