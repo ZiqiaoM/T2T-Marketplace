@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/wish-list/cartSlice";
 
-const WishlistItem = ({ item }) => {
+const UserProductItem = ({ item }) => {
   //add products
   const { id, post_title, price, images, quantity, totalPrice } = item;
 
@@ -75,4 +75,4 @@ const WishlistItem = ({ item }) => {
   );
 };
 
-export default WishlistItem;
+export default UserProductItem;

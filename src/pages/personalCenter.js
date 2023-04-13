@@ -1,9 +1,15 @@
-import { HomeOutlined, LogoutOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  LogoutOutlined,
+  ShoppingCartOutlined,
+  ShoppingOutlined,
+} from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import PersonalInfo from "./Personal/myaccount";
+import UserProduct from "./UserProduct";
 import Wishlist from "./Wishlist";
-
 const { Header, Content, Sider } = Layout;
 
 const PersonalCenter = () => {
@@ -13,16 +19,28 @@ const PersonalCenter = () => {
 
   const [showWishlistContent, setShowWishlistContent] = useState(false);
   const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
+  const [showMyProduct, setShowMyProduct] = useState(false); // Add state for showing account content
 
   const handleWishlistClick = () => {
     setShowWishlistContent(true);
-    setShowAccountContent(false); // Hide account content when wishlist is clicked
+    setShowAccountContent(false);
+    setShowMyProduct(false); // Hide account content when wishlist is clicked
   };
-
+  const handleMyProductClick = () => {
+    setShowMyProduct(true);
+    setShowAccountContent(false); // Hide account content when wishlist is clicked
+    setShowWishlistContent(false);
+  };
   const handleAccountClick = () => {
     setShowAccountContent(true);
-    setShowWishlistContent(false); // Hide wishlist content when account is clicked
+    setShowWishlistContent(false);
+    setShowMyProduct(false); // Hide wishlist content when account is clicked
   };
+
+  // Set the default page to display as Account page
+  useEffect(() => {
+    setShowAccountContent(true);
+  }, []);
 
   return (
     <div style={{ padding: "0 80px" }}>
@@ -37,47 +55,64 @@ const PersonalCenter = () => {
             console.log(collapsed, type);
           }}
         >
-          <div className="logo" />
+          {/* <div className="logo" /> */}
           <div
             style={{ color: "white", textAlign: "center", margin: "24px 0" }}
           >
-            User Name
-          </div>{" "}
+            Hello, User Name
+          </div>
           {/* Add user name information */}
-          <Menu defaultSelectedKeys={["2"]} mode="inline" theme="dark">
+          <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark">
             <Menu.Item key="1" onClick={handleAccountClick}>
               <HomeOutlined />
               <span> Account </span>
             </Menu.Item>
             <Menu.Item key="2" onClick={handleWishlistClick}>
-              <HomeOutlined />
-              <span> Wishlist </span>
+              <ShoppingCartOutlined />
+              <span> My Wishlist </span>
             </Menu.Item>
-            <Menu.Item key="3" style={{ position: "absolute", bottom: 0 }}>
-              {" "}
-              {/* Add logout button */}
-              <LogoutOutlined />
-              <span> Logout </span>
+            <Menu.Item key="3" onClick={handleMyProductClick}>
+              <ShoppingOutlined />
+              <span> My Product </span>
+            </Menu.Item>
+
+            <Menu.Item
+              key="4"
+              style={{ color: "white", position: "absolute", bottom: 0 }}
+            >
+              <Link href="/Login">
+                <LogoutOutlined style={{ color: "white" }} />
+
+                <span style={{ color: "white" }}> Logout </span>
+              </Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
+          <Header
+            style={{
+              background: "#fff",
+              textAlign: "center",
+              padding: 0,
+            }}
+          >
+            Welcome to this website, Header!
+          </Header>
           <Content
             style={{
-              margin: "24px 16px 0",
+              margin: "0 16px 0",
             }}
           >
             <div
               style={{
                 padding: 24,
-                minHeight: 360,
+                minHeight: 560,
                 background: colorBgContainer,
               }}
             >
-              {/* {showWishlistContent ? "wishlist content" : null}{" "} */}
               {showWishlistContent && <Wishlist />}{" "}
               {showAccountContent && <PersonalInfo />}{" "}
-              {/* Render AccountContent component */}
+              {showMyProduct && <UserProduct />}{" "}
             </div>
           </Content>
         </Layout>

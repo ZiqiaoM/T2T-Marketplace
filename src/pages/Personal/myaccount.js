@@ -1,69 +1,65 @@
-import React from 'react';
 // import 'antd/dist/antd.css';
-import { Descriptions } from 'antd';
-import { Col, Row } from 'antd';
-import { Card } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
-import { Typography } from 'antd';
-import { Button } from 'antd';
+import { Button, Card, Col, Descriptions, Layout, Row, Typography } from "antd";
 
 const { Title } = Typography;
 const { Meta } = Card;
 
-
-const GridPersonalInfo = () =>{
-
+const GridPersonalInfo = () => {
   return (
-    <Layout style={{
-      padding: 20,
-      minHeight: 360,
-    }}>
-      <Row justify="space-around" align="bottom" >
-      <Col flex="200px">
+    <Layout
+      style={{
+        padding: 20,
+        minHeight: 360,
+      }}
+    >
+      <Row justify="space-around" align="bottom">
+        {/* <Col flex="200px">
         <PersonalCard />
-      </Col>
-      <Col flex="auto">
-        <Title      style={{
-        textAlign:"center",
-        verticalAlign: "middle",
-      }}>
-        WELCOME TO YOUR ACCOUNT, HAO
-        </Title>
-      
-        <PersonalDesp />
-      </Col>
-    </Row>
-  </Layout>
-    )
-}
+      </Col> */}
+        <Col flex="auto">
+          <Title
+            style={{
+              textAlign: "center",
+              verticalAlign: "middle",
+            }}
+          >
+            WELCOME TO YOUR ACCOUNT, HAO
+          </Title>
 
-const PersonalCard = () => {
-return(
-  <Card
-  hoverable
-  style={{
-    // width: 240,
-  }}
-  cover={<img alt="example" src="https://s1.ax1x.com/2022/07/30/viO6zV.jpg" />}
->
-  <Meta title="Alvin Hao" description="重庆" />
-</Card>
-    )
-}
+          <PersonalDesp />
+        </Col>
+      </Row>
+    </Layout>
+  );
+};
 
+// const PersonalCard = () => {
+// return(
+//   <Card
+//   hoverable
+//   style={{
+//     // width: 240,
+//   }}
+//   cover={<img alt="example" src="https://s1.ax1x.com/2022/07/30/viO6zV.jpg" />}
+// >
+//   <Meta title="Alvin Hao" description="重庆" />
+// </Card>
+//     )
+// }
 
 const PersonalDesp = () => {
   return (
-    
     <Descriptions
       // title="Responsive Descriptions"
       bordered
-      size= "default"
-      style={{
-        // height:"fit-content",
-        // margin: "0 auto",
-        // width:"fit-content",
-      }}
+      size="default"
+      style={
+        {
+          // height:"fit-content",
+          // margin: "0 auto",
+          // width:"fit-content",
+        }
+      }
       extra={<Button type="primary">Edit</Button>}
       column={{
         xxl: 4,
@@ -84,13 +80,13 @@ const PersonalDesp = () => {
         Charlie Brown, You're a good man.
       </Descriptions.Item>
     </Descriptions>
-);
-}
+  );
+};
 
 function PersonalInfo() {
   return (
     <div className="PersonalInfo">
-      <GridPersonalInfo/>
+      <GridPersonalInfo />
     </div>
   );
 }
