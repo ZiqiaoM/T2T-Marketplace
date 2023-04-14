@@ -13,7 +13,6 @@ const UserWishList = () => {
           <h1 className="text-3xl font-extrabold text-center tracking-tight text-gray-900 sm:text-4xl">
             Wishlist
           </h1>
-
           <form className="mt-12">
             <section aria-labelledby="cart-heading">
               <ul
@@ -64,18 +63,6 @@ const UserWishList = () => {
           </form>
         </div>
       </div>
-
-      {/* <ListGroup className="cart">
-        <div className="cart_item-list">
-          {cartProducts.length === 0 ? (
-            <h6 className="text-center mt-5">No item added to the wish list</h6>
-          ) : (
-            cartProducts.map((item, index) => (
-              <WishlistItem item={item} key={index} />
-            ))
-          )}
-        </div>
-      </ListGroup> */}
     </div>
   );
 };

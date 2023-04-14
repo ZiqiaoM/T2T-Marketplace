@@ -106,7 +106,7 @@ export default function AllProducts({ products_init }) {
         price,
       })
     );
-    swal("Successfully added to wishlist!");
+    swal("Successfully added to wishlist!", "", "success");
   };
   const [products, setProducts] = useState(products_init);
   console.log(products);

@@ -82,7 +82,7 @@ export default function product_details({ product }) {
         price,
       })
     );
-    swal("Successfully added to wishlist!");
+    swal("Successfully added to wishlist!", "", "success");
   };
 
   return (

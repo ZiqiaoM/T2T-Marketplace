@@ -6,9 +6,9 @@ import {
 import { Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import PersonalInfo from "./Personal/myaccount";
 import UserProduct from "./UserProduct";
 import UserWishlist from "./UserWishlist";
+// import PersonalInfo from "./Personal/myaccount";
 const { Header, Content, Sider } = Layout;
 
 const PersonalCenter = () => {
@@ -43,10 +43,10 @@ const PersonalCenter = () => {
 
   return (
     <div style={{ padding: "0 80px" }}>
-      <Layout>
+      <Layout style={{ backgroundColor: "white" }}>
         <Sider
           breakpoint="lg"
-          collapsedWidth="0"
+          // collapsedWidth="0"
           onBreakpoint={(broken) => {
             console.log(broken);
           }}
@@ -87,19 +87,25 @@ const PersonalCenter = () => {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout>
+        <Layout style={{ backgroundColor: "white" }}>
           <Header
             style={{
               background: "#fff",
               textAlign: "center",
               padding: 0,
+              margin: "0 0 0",
+              position: "absolute",
+              top: "150px",
+              right: "300px",
+              fontSize: 30,
+              fontFamily: "Futura",
             }}
           >
             Welcome to this website, Header!
           </Header>
           <Content
             style={{
-              margin: "0 16px 0",
+              margin: "0 0 0",
             }}
           >
             <div
