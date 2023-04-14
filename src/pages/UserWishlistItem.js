@@ -4,29 +4,71 @@ import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/wish-list/cartSlice";
+export async function getStaticPaths(req) {
+  const user = req.user;
+  const paths = await prisma.wishlist.findMany({
+    where: {
+      user_id: user.id,
+    },
+    select: {
+      wishlist_id: true,
+    },
+  });
 
-const UserWishlistItem = ({ item }) => {
+  paths.forEach((p) => {
+    p.wishlist_id = p.wishlist_id.toString();
+  });
+  console.log(paths);
+  return {
+    paths: paths.map((id) => ({ params: id })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params, req }) {
+  const user = req.user;
+  const wishlistItems = await prisma.wishlistItem.findMany({
+    where: {
+      wishlist: {
+        user_id: user.id,
+        wishlist_id: parseInt(params.wishlist_id),
+      },
+    },
+    select: {
+      wishlist_id: true,
+      product_id: true,
+      product: {
+        select: {
+          post_title: true,
+          images: {
+            select: {
+              src: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return {
+    props: {
+      wishlistItems,
+    },
+  };
+}
+
+const UserWishlistItem = ({ wishlistItems }) => {
   //add products
-  const { id, post_title, price, images, quantity, totalPrice } = item;
+  if (!wishlistItems) {
+    return (
+      <h6 className="text-center mt-5">
+        You haven't uploaded any products yet.
+      </h6>
+    );
+  }
+  const { id, post_title, price, images } = wishlistItems;
 
   const dispatch = useDispatch();
-
-  // const increase_item
-  const increaseItem = () => {
-    dispatch(
-      cartActions.addItem({
-        id,
-        post_title,
-        price,
-        images,
-      })
-    );
-  };
-
-  //remove items
-  const decreaseItem = () => {
-    dispatch(cartActions.removeItem(id));
-  };
 
   //delete item
   const deleteItem = () => {

@@ -5,28 +5,64 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/wish-list/cartSlice";
 
-const UserProductItem = ({ item }) => {
-  //add products
-  const { id, post_title, price, images, quantity, totalPrice } = item;
+export async function getStaticPaths(req) {
+  const user = req.user;
+  const paths = await prisma.product.findMany({
+    where: {
+      seller_id: user.id,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  paths.forEach((p) => {
+    p.id = p.id.toString();
+  });
+  console.log(paths);
+  return {
+    paths: paths.map((id) => ({ params: id })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params, req }) {
+  const user = req.user;
+  const product = await prisma.product.findUnique({
+    where: {
+      id: parseInt(params.id),
+      seller_id: user.id,
+    },
+    select: {
+      id: true,
+      post_title: true,
+      images: {
+        select: {
+          src: true,
+        },
+      },
+    },
+  });
+
+  return {
+    props: {
+      product,
+    },
+  };
+}
+
+const UserProductItem = ({ product }) => {
+  if (!product) {
+    return (
+      <h6 className="text-center mt-5">
+        You haven't uploaded any products yet.
+      </h6>
+    );
+  }
+
+  const { id, post_title, price, images } = product;
 
   const dispatch = useDispatch();
-
-  // const increase_item
-  const increaseItem = () => {
-    dispatch(
-      cartActions.addItem({
-        id,
-        post_title,
-        price,
-        images,
-      })
-    );
-  };
-
-  //remove items
-  const decreaseItem = () => {
-    dispatch(cartActions.removeItem(id));
-  };
 
   //delete item
   const deleteItem = () => {
