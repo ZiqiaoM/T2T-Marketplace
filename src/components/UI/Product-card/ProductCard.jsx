@@ -5,10 +5,11 @@ import swal from "sweetalert";
 import { cartActions } from "../../../store/wish-list/cartSlice";
 import "./ProductCard.module.css";
 //import image 0130
-const user_id = 1;
+// const user_id = 1;
 
 const ProductCard = (props) => {
   const { id, images, post_title, price } = props.item;
+  const user_id = props.user_id;
 
   const dispatch = useDispatch();
 

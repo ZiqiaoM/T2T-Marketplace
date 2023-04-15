@@ -56,3 +56,4 @@ model Image {
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int
 }
+
