@@ -5,6 +5,7 @@ import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import { cartActions } from "../../store/wish-list/cartSlice";
+import useUser from '../../lib/userUser'
 // const relatedProducts = [
 //   {
 //     id: 1,
@@ -40,6 +41,7 @@ export async function getStaticPaths(req) {
     fallback: false,
   };
 }
+
 export async function getStaticProps({ params }) {
   const product = await prisma.product.findUnique({
     where: {
@@ -69,8 +71,13 @@ export async function getStaticProps({ params }) {
 
 export default function product_details({ product }) {
   const { id, images, post_title, price } = product;
+  const { user } = useUser({
+    redirectTo: '/login',
+  })
+  // console.log(user);
+
   const dispatch = useDispatch();
-  const addToCart = () => {
+  const addToCart = async () => {
     event.preventDefault();
     dispatch(
       cartActions.addItem({
@@ -82,7 +89,27 @@ export default function product_details({ product }) {
         price,
       })
     );
+
+    try {
+      let data = {
+        product_id: id,
+        user_id: user.id,
+      };
+      const body = { data };
+      await fetch("/api/addWishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      swal("Successfully added to wishlist!", "", "success");
+      // await Router.push('/drafts');
+    } catch (error) {
+      console.error(error);
+    }
+
     swal("Successfully added to wishlist!", "", "success");
+
+
   };
 
   return (

@@ -17,14 +17,13 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   res,
 }) {
   const user = req.session.user
-
   if (user === undefined) {
     res.setHeader('location', '/login')
     res.statusCode = 302
     res.end()
     return {
       props: {
-        user: { isLoggedIn: false, login: '', avatarUrl: '',email:"NOTLOGIN",username:"NOTLOGIN" },
+        user: { isLoggedIn: false, login: '', avatarUrl: '',id:-1,email:"NOTLOGIN",username:"NOTLOGIN" },
       },
     }
   }
@@ -198,7 +197,7 @@ const Home: NextPage = ( {user} ) => {
             </Col>
             {allProducts.map((item) => (
               <Col lg="3" md="4" key={item.id} className="mt-5">
-                <ProductCard item={item} />
+                <ProductCard item={item} user_id = {user.id} />
               </Col>
             ))}
             {/* <h2>---Testing---</h2>

@@ -1,6 +1,10 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
+import { AppProps } from 'next/app'
+import { SWRConfig } from 'swr'
+import fetchJson from '../lib/fetchJson'
+
 import { Provider as StoreProvider } from "react-redux";
 
 import { api } from "../utils/api";
@@ -14,20 +18,24 @@ import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/reset.css";
 
-const MyApp: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => {
+function MyApp({Component ,pageProps}: AppProps ){
   return (
-    <SessionProvider session={session}>
+    <SWRConfig
+      value={{
+        fetcher: fetchJson,
+        onError: (err) => {
+          console.error(err)
+        },
+      }}
+    >
             <StoreProvider store={store}>
         
             <Header />
             <Component {...pageProps} />
             <Footer />
         </StoreProvider>
-    </SessionProvider>
+    </SWRConfig>
   );
 };
 
-export default api.withTRPC(MyApp);
+export default MyApp;

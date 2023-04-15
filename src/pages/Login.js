@@ -4,17 +4,22 @@ import Router from 'next/router'
 import Link from 'next/link';
 import useUser from '../lib/userUser';
 
+
+
+
 export default function Login () {
 
-  const { usersss } = useUser();
-  console.log(usersss);
+  // const { usersss } = useUser();
+  // console.log(usersss);
+
+  // const { user } = useUser({
+  //   redirectTo: '/home',
+  // })
 
   const { mutateUser } = useUser({
     redirectTo: '/home',
     redirectIfFound: true,
   })
-
-  // console.log(mutateUser.user)
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -53,7 +58,7 @@ export default function Login () {
     mutateUser(data);
     // Redirect to home page or dashboard
     //0331 update
-  // Save user information to local storage
+    // Save user information to local storage
     localStorage.setItem('userInfo', JSON.stringify(data));
     Router.push('/test');
   };
