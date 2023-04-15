@@ -59,8 +59,9 @@ export default function Login () {
     // Redirect to home page or dashboard
     //0331 update
     // Save user information to local storage
-    localStorage.setItem('userInfo', JSON.stringify(data));
-    Router.push('/test');
+    // localStorage.setItem('userInfo', JSON.stringify(data));
+    // Router.push('/test');
+    Router.push('/home');
   };
 
 
