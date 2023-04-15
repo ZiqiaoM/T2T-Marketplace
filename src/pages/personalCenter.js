@@ -95,13 +95,13 @@ const PersonalCenter = () => {
               padding: 0,
               margin: "0 0 0",
               position: "absolute",
-              top: "150px",
-              right: "300px",
-              fontSize: 30,
-              fontFamily: "Futura",
+              top: "250px",
+              right: "400px",
             }}
           >
-            Welcome to this website, Header!
+            <h1 className="text-3xl font-extrabold text-center tracking-tight text-gray-900 sm:text-4xl">
+              Welcome to your posted product
+            </h1>
           </Header>
           <Content
             style={{

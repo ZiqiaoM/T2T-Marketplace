@@ -1,6 +1,5 @@
 //zq: create-0323
 import { useSelector } from "react-redux";
-import { ListGroup } from "reactstrap";
 import UserProductItem from "./UserProductItem.js";
 
 const UserProduct = () => {
@@ -19,7 +18,8 @@ const UserProduct = () => {
                 role="list"
                 className="border-t border-b border-gray-200 divide-y divide-gray-200"
               >
-                <ListGroup className="cart">
+                <UserProductItem />
+                {/* <ListGroup className="cart">
                   <div className="cart_item-list">
                     {cartProducts.length === 0 ? (
                       <h6 className="text-center mt-5">
@@ -31,7 +31,7 @@ const UserProduct = () => {
                       ))
                     )}
                   </div>
-                </ListGroup>
+                </ListGroup> */}
               </ul>
             </section>
 

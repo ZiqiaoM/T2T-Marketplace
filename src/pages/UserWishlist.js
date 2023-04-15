@@ -1,10 +1,8 @@
 //zq: create-0323
-import { useSelector } from "react-redux";
-import { ListGroup } from "reactstrap";
 import WishlistItem from "./WishListItem.jsx";
 
 const UserWishList = () => {
-  const cartProducts = useSelector((state) => state.cart.cartItems);
+  // const cartProducts = useSelector((state) => state.cart.cartItems);
 
   return (
     <div className="Container">
@@ -19,7 +17,8 @@ const UserWishList = () => {
                 role="list"
                 className="border-t border-b border-gray-200 divide-y divide-gray-200"
               >
-                <ListGroup className="cart">
+                <WishlistItem />
+                {/* <ListGroup className="cart">
                   <div className="cart_item-list">
                     {cartProducts.length === 0 ? (
                       <h6 className="text-center mt-5">
@@ -31,7 +30,7 @@ const UserWishList = () => {
                       ))
                     )}
                   </div>
-                </ListGroup>
+                </ListGroup> */}
               </ul>
             </section>
 
