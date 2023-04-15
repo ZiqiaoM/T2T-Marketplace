@@ -1,24 +1,45 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Router from 'next/router'
 import Link from 'next/link';
+import useUser from '../lib/userUser';
 
-const Login = () => {
+export default function Login () {
+
+  const { usersss } = useUser();
+  console.log(usersss);
+
+  const { mutateUser } = useUser({
+    redirectTo: '/home',
+    redirectIfFound: true,
+  })
+
+  // console.log(mutateUser.user)
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('/api/Login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    // const response = await fetch('/api/LoginSession', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ email, password }),
+    // });
+
+    const response = await fetch('/api/LoginSessionNoUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      })
 
     const data = await response.json();
 
@@ -27,11 +48,14 @@ const Login = () => {
       return;
     }
 
+    console.log(data);
+
+    mutateUser(data);
     // Redirect to home page or dashboard
     //0331 update
   // Save user information to local storage
-    localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
-    router.push('/home');
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    Router.push('/test');
   };
 
 
@@ -170,7 +194,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+
 
 
 

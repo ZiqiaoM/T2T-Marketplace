@@ -5,12 +5,38 @@ import { Container, Row, Col } from "reactstrap";
 import Hero from "./Hero/Hero";
 import "./home.module.css";
 import CategorySect from "../components/UI/Category/Category";
-
 import ProductCard from "../components/UI/Product-card/ProductCard";
 
 // import products from "../sample-data/products";
 
-const Home: NextPage = () => {
+import { withIronSessionSsr } from 'iron-session/next'
+import { sessionOptions } from '../lib/session'
+
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  const user = req.session.user
+
+  if (user === undefined) {
+    res.setHeader('location', '/login')
+    res.statusCode = 302
+    res.end()
+    return {
+      props: {
+        user: { isLoggedIn: false, login: '', avatarUrl: '',email:"NOTLOGIN",username:"NOTLOGIN" },
+      },
+    }
+  }
+
+  return {
+    props: { user: req.session.user},
+  }
+},
+sessionOptions)
+
+
+const Home: NextPage = ( {user} ) => {
   //0407 update products display
 
   const [productsDisp, setProducts] = useState([]);
@@ -31,12 +57,12 @@ const Home: NextPage = () => {
     fetchProducts();
   }, []);
 
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    setUser(userInfo);
-  }, []);
+  // const [user, setUser] = useState(null);
+  // useEffect(() => {
+  //   // const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  //   const userInfo = {email:"frontpage@gmail.com"}
+  //   setUser(userInfo);
+  // }, []);
 
   const [Category, setCategory] = useState("ALL");
   const [allProducts, setAllProducts] = useState(productsDisp);
@@ -93,7 +119,7 @@ const Home: NextPage = () => {
           <Row>
             <Col lg="12" className="text-center">
               <h5 className="feature_subtitle mb-4">
-                Welcome, {user ? user.email : "newcomer"}!
+                Welcome, {user.username}!
               </h5>
               {/* test */}
 
