@@ -1,10 +1,8 @@
-import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
-import ImageUploader from "../components/cloudinary/ImageUploader";
-import CldGallery from "../components/cloudinary/CldGallery";
 import { Cloudinary } from "@cloudinary/url-gen";
-import Router from "next/router";
-import { Category } from "@mui/icons-material";
+import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
+import CldGallery from "../components/cloudinary/CldGallery";
+import ImageUploader from "../components/cloudinary/ImageUploader";
 
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
@@ -27,7 +25,7 @@ const Conditions = [
 const defaultImg =
   "https://nato.cdnartwhere.eu/cdn/ff/oca4fwSi7ZMflFF5-LRcenPXoZTDpZSTkwLZEvZtQIw/1607780582/public/default_images/default-image.jpg";
 
-export default function Example() {
+export default function post() {
   const [imagesUploadedList, setImagesUploadedList] = useState([]);
   const [ImageUrl, setImageUrl] = useState([]);
 

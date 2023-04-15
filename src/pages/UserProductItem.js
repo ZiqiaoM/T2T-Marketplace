@@ -1,8 +1,7 @@
-import { ListGroupItem } from "reactstrap";
-
 import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import { ListGroupItem } from "reactstrap";
 import { cartActions } from "../store/wish-list/cartSlice";
 
 export async function getStaticPaths(req) {

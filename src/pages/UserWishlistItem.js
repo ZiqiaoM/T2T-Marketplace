@@ -1,29 +1,8 @@
-import { ListGroupItem } from "reactstrap";
-
-import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
+import ImageGallery from "react-image-gallery";
 import { useDispatch } from "react-redux";
+import prisma from "../lib/prisma";
 import { cartActions } from "../store/wish-list/cartSlice";
-export async function getStaticPaths(req) {
-  const user = req.user;
-  const paths = await prisma.wishlist.findMany({
-    where: {
-      user_id: user.id,
-    },
-    select: {
-      wishlist_id: true,
-    },
-  });
-
-  paths.forEach((p) => {
-    p.wishlist_id = p.wishlist_id.toString();
-  });
-  console.log(paths);
-  return {
-    paths: paths.map((id) => ({ params: id })),
-    fallback: false,
-  };
-}
 
 export async function getStaticProps({ params, req }) {
   const user = req.user;
@@ -50,6 +29,8 @@ export async function getStaticProps({ params, req }) {
     },
   });
 
+  console.log(wishlistItems[0]);
+
   return {
     props: {
       wishlistItems,
@@ -58,63 +39,99 @@ export async function getStaticProps({ params, req }) {
 }
 
 const UserWishlistItem = ({ wishlistItems }) => {
-  //add products
-  if (!wishlistItems) {
-    return (
-      <h6 className="text-center mt-5">
-        You haven't uploaded any products yet.
-      </h6>
-    );
-  }
-  const { id, post_title, price, images } = wishlistItems;
-
   const dispatch = useDispatch();
 
-  //delete item
-  const deleteItem = () => {
+  // delete item
+  const deleteItem = (id) => {
     dispatch(cartActions.deleteItem(id));
   };
 
+  if (!wishlistItems || wishlistItems.length === 0) {
+    return (
+      <h6 className="text-center mt-5">
+        You haven't added any products to your wishlist yet.
+      </h6>
+    );
+  }
+
   return (
-    <ListGroupItem className="border-0 cart_item">
-      <div className="ml-4 flex-1 flex flex-col sm:ml-6">
-        <div className="cart_item-info d-flex gap-2">
+    <ul>
+      {wishlistItems.map((item) => {
+        const { id, post_title, price, images } = item;
+        const imageList = images.map((image) => ({
+          original: image.src,
+          thumbnail: image.src,
+        }));
+
+        return (
           <li key={id} className="flex py-6">
-            <Link passHref legacyBehavior href={`/productDetails/${id}`}>
+            <Link passHref href={`/productDetails/${id}`}>
               <div className="flex-shrink-0">
-                <img
-                  src={images}
-                  className="w-24 h-24 rounded-md object-center object-cover sm:w-32 sm:h-32"
-                />
+                <ImageGallery items={imageList} showThumbnails={false} />
               </div>
             </Link>
             <div className="ml-4 flex-1 flex flex-col sm:ml-6">
               <div className="flex justify-between">
                 <h4 className="text-sm">
-                  <a
-                    passHref
-                    legacyBehavior
-                    href={`/productDetails/${id}`}
-                    className="font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    {post_title}
-                  </a>
+                  <Link passHref href={`/productDetails/${id}`}>
+                    <a className="font-medium text-gray-700 hover:text-gray-800">
+                      {post_title}
+                    </a>
+                  </Link>
                 </h4>
               </div>
               <p className="mt-1 text-sm text-gray-500">Price: ${price}</p>
               <span
                 className="delete_btn text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                onClick={deleteItem}
+                onClick={() => deleteItem(id)}
               >
-                <CloseIcon />
                 remove
               </span>
             </div>
           </li>
-        </div>
-      </div>
-    </ListGroupItem>
+        );
+      })}
+    </ul>
   );
 };
-
 export default UserWishlistItem;
+// return (
+//   <ListGroupItem className="border-0 cart_item">
+//     <div className="ml-4 flex-1 flex flex-col sm:ml-6">
+//       <div className="cart_item-info d-flex gap-2">
+//         <li key={id} className="flex py-6">
+//           <Link passHref legacyBehavior href={`/productDetails/${id}`}>
+//             <div className="flex-shrink-0">
+//               <img
+//                 src={images}
+//                 className="w-24 h-24 rounded-md object-center object-cover sm:w-32 sm:h-32"
+//               />
+//             </div>
+//           </Link>
+//           <div className="ml-4 flex-1 flex flex-col sm:ml-6">
+//             <div className="flex justify-between">
+//               <h4 className="text-sm">
+//                 <a
+//                   passHref
+//                   legacyBehavior
+//                   href={`/productDetails/${id}`}
+//                   className="font-medium text-gray-700 hover:text-gray-800"
+//                 >
+//                   {post_title}
+//                 </a>
+//               </h4>
+//             </div>
+//             <p className="mt-1 text-sm text-gray-500">Price: ${price}</p>
+//             <span
+//               className="delete_btn text-sm font-medium text-indigo-600 hover:text-indigo-500"
+//               onClick={deleteItem}
+//             >
+//               <CloseIcon />
+//               remove
+//             </span>
+//           </div>
+//         </li>
+//       </div>
+//     </div>
+//   </ListGroupItem>
+// );

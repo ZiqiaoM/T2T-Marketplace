@@ -1,6 +1,8 @@
 //zq: create-0323
 import { useSelector } from "react-redux";
 import UserProductItem from "./UserProductItem.js";
+import Link from "next/link";
+
 
 const UserProduct = () => {
   const cartProducts = useSelector((state) => state.cart.cartItems);
@@ -38,13 +40,15 @@ const UserProduct = () => {
             {/* Order summary */}
             <section aria-labelledby="summary-heading" className="mt-10">
               <div className="mt-10">
-                <button
-                  type="submit"
-                  href="#"
-                  className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                >
-                  Post Product
-                </button>
+                <Link href="/post">
+                  <button
+                    type="submit"
+                    href="#"
+                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  >
+                    Post Product
+                  </button>
+                </Link>
               </div>
             </section>
           </form>

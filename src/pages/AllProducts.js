@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { HeartOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -315,7 +315,7 @@ export default function AllProducts({ products_init }) {
                           ${price}
                         </p>
                         <button onClick={addToCart}>
-                          <ShoppingCartOutlined
+                          <HeartOutlined
                             style={{ fontSize: "24px", color: "grey" }}
                           />
                         </button>

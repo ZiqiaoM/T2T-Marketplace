@@ -1,6 +1,5 @@
-//zq: create-0323
-import WishlistItem from "./WishListItem.jsx";
-
+import Link from "next/link";
+import UserWishlistItem from "./UserWishListItem.js";
 const UserWishList = () => {
   // const cartProducts = useSelector((state) => state.cart.cartItems);
 
@@ -17,7 +16,8 @@ const UserWishList = () => {
                 role="list"
                 className="border-t border-b border-gray-200 divide-y divide-gray-200"
               >
-                <WishlistItem />
+                <UserWishlistItem />
+
                 {/* <ListGroup className="cart">
                   <div className="cart_item-list">
                     {cartProducts.length === 0 ? (
@@ -50,13 +50,15 @@ const UserWishList = () => {
               </div>
 
               <div className="mt-10">
-                <button
-                  type="submit"
-                  href="#"
-                  className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                >
-                  Continue Shopping
-                </button>
+                <Link href="/AllProducts">
+                  <button
+                    type="submit"
+                    href="#"
+                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  >
+                    Continue Shopping
+                  </button>
+                </Link>
               </div>
             </section>
           </form>

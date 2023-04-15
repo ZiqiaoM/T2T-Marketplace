@@ -1,6 +1,6 @@
 import {
+  HeartOutlined,
   LogoutOutlined,
-  ShoppingCartOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
@@ -67,7 +67,7 @@ const PersonalCenter = () => {
               <span> Account </span>
             </Menu.Item> */}
             <Menu.Item key="1" onClick={handleWishlistClick}>
-              <ShoppingCartOutlined />
+              <HeartOutlined />
               <span> My Wishlist </span>
             </Menu.Item>
             <Menu.Item key="2" onClick={handleMyProductClick}>
