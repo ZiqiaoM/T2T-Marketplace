@@ -5,18 +5,13 @@ import prisma from "../lib/prisma";
 import { cartActions } from "../store/wish-list/cartSlice";
 
 export async function getStaticProps({ params, req }) {
-  const user = req.user;
-  const wishlistItems = await prisma.wishlistItem.findMany({
-    where: {
-      wishlist: {
-        user_id: user.id,
-        wishlist_id: parseInt(params.wishlist_id),
-      },
-    },
+  // const user = {};
+  console.log("333");
+  const wishlistItems = await prisma.wishlist.findMany({
     select: {
-      wishlist_id: true,
+      id: true,
       product_id: true,
-      product: {
+      products: {
         select: {
           post_title: true,
           images: {
@@ -29,14 +24,13 @@ export async function getStaticProps({ params, req }) {
     },
   });
 
-  console.log(wishlistItems[0]);
-
   return {
     props: {
       wishlistItems,
     },
   };
 }
+console.log(wishlistItems[0]);
 
 const UserWishlistItem = ({ wishlistItems }) => {
   const dispatch = useDispatch();
