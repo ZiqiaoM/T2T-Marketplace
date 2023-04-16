@@ -44,8 +44,10 @@ const PersonalCenter = () => {
 
   return (
     <div style={{ padding: "0 80px" }}>
-      <Layout>
-        <Sider
+      {/* <Layout> */}
+      <div className="pMain">
+        <div className="m1">
+        <Sider 
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={(broken) => {
@@ -55,17 +57,18 @@ const PersonalCenter = () => {
             console.log(collapsed, type);
           }}
         >
-          {/* <div className="logo" /> */}
-          <div
-            style={{ color: "white", textAlign: "center", margin: "24px 0" }}
-          >
+
+
+          {/* <div style={{ color: "white", textAlign: "center", margin: "24px 0" }}>
             Hello, User Name
-          </div>
+          </div> */}
+
           {/* Add user name information */}
-          <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark">
+          {/* <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark"> */}
+          <Menu defaultSelectedKeys={["1"]} mode="inline">
             <Menu.Item key="1" onClick={handleAccountClick}>
               <HomeOutlined />
-              <span> Account </span>
+              <span> Change password </span>
             </Menu.Item>
             <Menu.Item key="2" onClick={handleWishlistClick}>
               <ShoppingCartOutlined />
@@ -78,18 +81,22 @@ const PersonalCenter = () => {
 
             <Menu.Item
               key="4"
-              style={{ color: "white", position: "absolute", bottom: 0 }}
+              style={{ color: "white", position: "absolute", bottom: -70 }}
             >
               <Link href="/Login">
-                <LogoutOutlined style={{ color: "white" }} />
+                <LogoutOutlined style={{ color: "#4B9CD3" }} />
 
-                <span style={{ color: "white" }}> Logout </span>
+                <span style={{ color: "#4B9CD3" }}> Logout </span>
               </Link>
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout>
-          <Header
+        </div>
+
+
+        {/* <Layout> */}
+        <div className="m2">
+          {/* <Header
             style={{
               background: "#fff",
               textAlign: "center",
@@ -97,17 +104,19 @@ const PersonalCenter = () => {
             }}
           >
             Welcome to this website, Header!
-          </Header>
+          </Header> */}
           <Content
-            style={{
-              margin: "0 16px 0",
-            }}
+            // style={{
+            //   margin: "0 16px 0",
+            // }}
           >
             <div
               style={{
                 padding: 24,
                 minHeight: 560,
-                background: colorBgContainer,
+                // background: colorBgContainer,
+                // background: "#f0f0f0",
+                
               }}
             >
               {showWishlistContent && <Wishlist />}{" "}
@@ -115,8 +124,24 @@ const PersonalCenter = () => {
               {showMyProduct && <UserProduct />}{" "}
             </div>
           </Content>
-        </Layout>
-      </Layout>
+          </div>
+        {/* </Layout> */}
+
+      </div>
+      {/* </Layout> */}
+      <style jsx>{`
+      .pMain{
+        // background:red !important;
+        display:flex;
+      }
+      .m1{
+        // background:yellow;
+        margin-top:60px;
+      }
+      .m2{
+        // background:pink;
+      }
+      `}</style>
     </div>
   );
 };
