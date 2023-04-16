@@ -70,7 +70,7 @@ const UserWishlistItem = (props) => {
           <li key={id} className="flex py-6">
             <Link passHref href={`/productDetails/${id}`}>
               <div className="flex-shrink-0">
-                <ImageGallery items={imageList} showThumbnails={false} />
+                <ImageGallery items={imageList} showThumbnails={true} />
               </div>
             </Link>
             <div className="ml-4 flex-1 flex flex-col sm:ml-6">
