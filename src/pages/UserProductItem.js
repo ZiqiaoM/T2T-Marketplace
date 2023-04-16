@@ -5,53 +5,54 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/wish-list/cartSlice";
 
-export async function getStaticPaths(req) {
-  const user = req.user;
-  const paths = await prisma.product.findMany({
-    where: {
-      seller_id: user.id,
-    },
-    select: {
-      id: true,
-    },
-  });
+// export async function getStaticPaths(req) {
+//   const user = req.user;
+//   const paths = await prisma.product.findMany({
+//     where: {
+//       seller_id: user.id,
+//     },
+//     select: {
+//       id: true,
+//     },
+//   });
 
-  paths.forEach((p) => {
-    p.id = p.id.toString();
-  });
-  console.log(paths);
-  return {
-    paths: paths.map((id) => ({ params: id })),
-    fallback: false,
-  };
-}
+//   paths.forEach((p) => {
+//     p.id = p.id.toString();
+//   });
+//   console.log(paths);
+//   return {
+//     paths: paths.map((id) => ({ params: id })),
+//     fallback: false,
+//   };
+// }
 
-export async function getStaticProps({ params, req }) {
-  const user = req.user;
-  const product = await prisma.product.findUnique({
-    where: {
-      id: parseInt(params.id),
-      seller_id: user.id,
-    },
-    select: {
-      id: true,
-      post_title: true,
-      images: {
-        select: {
-          src: true,
-        },
-      },
-    },
-  });
+// export async function getStaticProps({ params, req }) {
+//   const user = req.user;
+//   const product = await prisma.product.findUnique({
+//     where: {
+//       id: parseInt(params.id),
+//       seller_id: user.id,
+//     },
+//     select: {
+//       id: true,
+//       post_title: true,
+//       images: {
+//         select: {
+//           src: true,
+//         },
+//       },
+//     },
+//   });
 
-  return {
-    props: {
-      product,
-    },
-  };
-}
+//   return {
+//     props: {
+//       product,
+//     },
+//   };
+// }
 
-const UserProductItem = ({ product }) => {
+const UserProductItem = (props) => {
+  const  product  = props.product;
   if (!product) {
     return (
       <div>
@@ -62,7 +63,9 @@ const UserProductItem = ({ product }) => {
     );
   }
 
-  const { id, post_title, price, images } = product;
+  const { id, price,post_title, images } = product;
+
+  console.log(product);
 
   const dispatch = useDispatch();
 

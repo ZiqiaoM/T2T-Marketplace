@@ -4,7 +4,7 @@ import UserProductItem from "./UserProductItem.js";
 import Link from "next/link";
 
 
-const UserProduct = () => {
+const UserProduct = ({product}) => {
   const cartProducts = useSelector((state) => state.cart.cartItems);
 
   return (
@@ -20,7 +20,7 @@ const UserProduct = () => {
                 role="list"
                 className="border-t border-b border-gray-200 divide-y divide-gray-200"
               >
-                <UserProductItem />
+                <UserProductItem product={product} />
                 {/* <ListGroup className="cart">
                   <div className="cart_item-list">
                     {cartProducts.length === 0 ? (

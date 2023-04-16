@@ -1,6 +1,7 @@
 import Link from "next/link";
-import UserWishlistItem from "./UserWishListItem.js";
-const UserWishList = () => {
+import UserWishlistItem from "./UserWishlistItem";
+
+const UserWishList = ({wishlistItems}) => {
   // const cartProducts = useSelector((state) => state.cart.cartItems);
 
   return (
@@ -16,7 +17,7 @@ const UserWishList = () => {
                 role="list"
                 className="border-t border-b border-gray-200 divide-y divide-gray-200"
               >
-                <UserWishlistItem />
+                <UserWishlistItem wishlistItems={wishlistItems}/>
 
                 {/* <ListGroup className="cart">
                   <div className="cart_item-list">

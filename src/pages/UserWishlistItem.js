@@ -1,7 +1,6 @@
 import Link from "next/link";
 import ImageGallery from "react-image-gallery";
 import { useDispatch } from "react-redux";
-import prisma from "../lib/prisma";
 import { cartActions } from "../store/wish-list/cartSlice";
 
 export async function getStaticProps({ params, req }) {
@@ -32,9 +31,11 @@ export async function getStaticProps({ params, req }) {
 }
 console.log(wishlistItems[0]);
 
-const UserWishlistItem = ({ wishlistItems }) => {
-  const dispatch = useDispatch();
+const UserWishlistItem = (props) => {
+  const wishlistItems = props.wishlistItems;
+  console.log("From UserWishlistItem: ", wishlistItems);
 
+  const dispatch = useDispatch();
   // delete item
   const deleteItem = (id) => {
     dispatch(cartActions.deleteItem(id));
@@ -51,7 +52,8 @@ const UserWishlistItem = ({ wishlistItems }) => {
   return (
     <ul>
       {wishlistItems.map((item) => {
-        const { id, post_title, price, images } = item;
+        const { id, products } = item;
+        const { post_title, price, images } = products;
         const imageList = images.map((image) => ({
           original: image.src,
           thumbnail: image.src,
@@ -68,9 +70,9 @@ const UserWishlistItem = ({ wishlistItems }) => {
               <div className="flex justify-between">
                 <h4 className="text-sm">
                   <Link passHref href={`/productDetails/${id}`}>
-                    <a className="font-medium text-gray-700 hover:text-gray-800">
+                    <div className="font-medium text-gray-700 hover:text-gray-800">
                       {post_title}
-                    </a>
+                    </div>
                   </Link>
                 </h4>
               </div>
