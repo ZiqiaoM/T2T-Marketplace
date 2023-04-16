@@ -1,5 +1,6 @@
 import {
   HeartOutlined,
+  HomeOutlined,
   LogoutOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
@@ -92,7 +93,7 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
   } = theme.useToken();
 
   const [showWishlistContent, setShowWishlistContent] = useState(false);
-  //   const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
+    // const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
   const [showMyProduct, setShowMyProduct] = useState(false); // Add state for showing account content
 
   const handleWishlistClick = () => {
@@ -105,11 +106,11 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
     // setShowAccountContent(false); // Hide account content when wishlist is clicked
     setShowWishlistContent(false);
   };
-  //   const handleAccountClick = () => {
-  //     setShowAccountContent(true);
-  //     setShowWishlistContent(false);
-  //     setShowMyProduct(false); // Hide wishlist content when account is clicked
-  //   };
+    // const handleAccountClick = () => {
+    //   setShowAccountContent(true);
+    //   setShowWishlistContent(false);
+    //   setShowMyProduct(false); // Hide wishlist content when account is clicked
+    // };
 
   // Set the default page to display as Account page
   useEffect(() => {
@@ -118,8 +119,10 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
 
   return (
     <div style={{ padding: "0 80px" }}>
-      <Layout style={{ backgroundColor: "white" }}>
-        <Sider
+      {/* <Layout> */}
+      <div className="pMain">
+        <div className="m1">
+        <Sider 
           breakpoint="lg"
           // collapsedWidth="0"
           onBreakpoint={(broken) => {
@@ -129,17 +132,18 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
             console.log(collapsed, type);
           }}
         >
-          {/* <div className="logo" /> */}
-          <div
-            style={{ color: "white", textAlign: "center", margin: "24px 0" }}
-          >
-            Hello, {user.username}
-          </div>
+
+
+          {/* <div style={{ color: "white", textAlign: "center", margin: "24px 0" }}>
+            Hello, User Name
+          </div> */}
+
           {/* Add user name information */}
-          <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark">
+          {/* <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark"> */}
+          <Menu defaultSelectedKeys={["1"]} mode="inline">
             {/* <Menu.Item key="1" onClick={handleAccountClick}>
               <HomeOutlined />
-              <span> Account </span>
+              <span> Change password </span>
             </Menu.Item> */}
             <Menu.Item key="1" onClick={handleWishlistClick}>
               <HeartOutlined />
@@ -152,18 +156,22 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
 
             <Menu.Item
               key="4"
-              style={{ color: "white", position: "absolute", bottom: 0 }}
+              style={{ color: "white", position: "absolute", bottom: -70 }}
             >
               <Link href="/Login">
-                <LogoutOutlined style={{ color: "white" }} />
+                <LogoutOutlined style={{ color: "#4B9CD3" }} />
 
-                <span style={{ color: "white" }}> Logout </span>
+                <span style={{ color: "#4B9CD3" }}> Logout </span>
               </Link>
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout style={{ backgroundColor: "white" }}>
-          <Header
+        </div>
+
+
+        {/* <Layout> */}
+        <div className="m2">
+          {/* <Header
             style={{
               background: "#fff",
               textAlign: "center",
@@ -174,20 +182,20 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
               right: "400px",
             }}
           >
-            <h1 className="text-3xl font-extrabold text-center tracking-tight text-gray-900 sm:text-4xl">
-              Welcome to your posted product
-            </h1>
-          </Header>
+            Welcome to this website, Header!
+          </Header> */}
           <Content
-            style={{
-              margin: "0 0 0",
-            }}
+            // style={{
+            //   margin: "0 16px 0",
+            // }}
           >
             <div
               style={{
                 padding: 24,
                 minHeight: 560,
-                background: colorBgContainer,
+                // background: colorBgContainer,
+                // background: "#f0f0f0",
+                
               }}
             >
               {showWishlistContent && <UserWishlist wishlistItems={wishlistItems} />}{" "}
@@ -195,8 +203,26 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
               {showMyProduct && <UserProduct  product={product}/>}{" "}
             </div>
           </Content>
-        </Layout>
-      </Layout>
+          </div>
+        {/* </Layout> */}
+
+      </div>
+      {/* </Layout> */}
+      <style jsx>{`
+      .pMain{
+        // background:red !important;
+        display:flex;
+      }
+      .m1{
+        // background:yellow;
+        margin-top:60px;
+      }
+      .m2{
+        // background:pink;
+        width:80%;
+        margin-top:-60px;
+      }
+      `}</style>
     </div>
   );
 };
