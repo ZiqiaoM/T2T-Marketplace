@@ -25,13 +25,51 @@ const paths = await prisma.product.findMany({
 }
 ); 
 
-const result = await prisma.wishlist.create({
-  data: {
-      "product_id":2,
-      "user_id":1,
-      }
+const wishlistItems = await prisma.wishlist.findMany({
+  // where: {
+  //   wishlist: {
+  //     user_id: 2,
+  //   },
+  // },
+  select: {
+    product_id: true,
+    products: {
+      select: {
+        post_title: true,
+        images: {
+          select: {
+            src: true,
+          },
+        },
+      },
+    },
   },
-)
+});
+
+const product = await prisma.product.findMany({
+  where: {
+    seller_id: 2,
+  },
+  select: {
+    id: true,
+    post_title: true,
+    images: {
+      select: {
+        src: true,
+      },
+    },
+  },
+});
+
+console.log(product);s
+
+// const result = await prisma.wishlist.create({
+//   data: {
+//       "product_id":2,
+//       "user_id":1,
+//       }
+//   },
+// )
   // console.log(paths);
   // paths.forEach((p)=>{p.id=p.id.toString()});
   // console.log(paths);

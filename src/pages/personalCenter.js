@@ -8,10 +8,85 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import UserProduct from "./UserProduct";
 import UserWishlist from "./UserWishlist";
+
 // import PersonalInfo from "./Personal/myaccount";
 const { Header, Content, Sider } = Layout;
 
-const PersonalCenter = () => {
+import prisma from "../lib/prisma"
+import { withIronSessionSsr } from 'iron-session/next'
+import { sessionOptions } from '../lib/session'
+
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  const user = req.session.user
+  if (user === undefined) {
+    res.setHeader('location', '/Login')
+    res.statusCode = 302
+    res.end()
+    return {
+      props: {
+        user: { isLoggedIn: false, login: '', avatarUrl: '',id:-1,email:"NOTLOGIN",username:"NOTLOGIN" },
+      },
+    }
+  }
+
+  const product = await prisma.product.findMany({
+          where: {
+            seller_id: user.id,
+          },
+          select: {
+            id: true,
+            price:true,
+            post_title: true,
+
+            images: {
+              select: {
+                src: true,
+              },
+            },
+          },
+        });
+
+
+  const wishlistItems = await prisma.wishlist.findMany({
+    where: {
+      user_id: user.id,
+    },
+    select: {
+      product_id: true,
+      products: {
+        select: {
+          price:true,
+          post_title: true,
+          images: {
+            select: {
+              src: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+
+  // const wishlistItems = await fetch("/api/fetchWishlistFromUser", {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  
+  return {
+    props: { user: req.session.user, wishlistItems:wishlistItems, product:product},
+  }
+},
+sessionOptions)
+
+
+const PersonalCenter = ({user,wishlistItems,product}) => {
+
+  console.log(product);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -58,7 +133,7 @@ const PersonalCenter = () => {
           <div
             style={{ color: "white", textAlign: "center", margin: "24px 0" }}
           >
-            Hello, User Name
+            Hello, {user.username}
           </div>
           {/* Add user name information */}
           <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark">
@@ -115,9 +190,9 @@ const PersonalCenter = () => {
                 background: colorBgContainer,
               }}
             >
-              {showWishlistContent && <UserWishlist />}{" "}
+              {showWishlistContent && <UserWishlist wishlistItems={wishlistItems} />}{" "}
               {/* {showAccountContent && <PersonalInfo />}{" "} */}
-              {showMyProduct && <UserProduct />}{" "}
+              {showMyProduct && <UserProduct  product={product}/>}{" "}
             </div>
           </Content>
         </Layout>

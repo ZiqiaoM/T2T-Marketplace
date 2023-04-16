@@ -58,20 +58,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const users = [
-  {
-    username: "hhdj",
-    email: "hhdj@gmail.com",
-  },
-  {
-    username: "sssd",
-    email: "sssd@gmail.com",
-  },
-  {
-    username: "qqww",
-    email: "qqww@gmail.com",
-  },
-];
 
 const products = [
   {
