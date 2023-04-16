@@ -1,10 +1,8 @@
-import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
-import ImageUploader from "../components/cloudinary/ImageUploader";
-import CldGallery from "../components/cloudinary/CldGallery";
 import { Cloudinary } from "@cloudinary/url-gen";
-import Router from "next/router";
-import { Category } from "@mui/icons-material";
+import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
+import CldGallery from "../components/cloudinary/CldGallery";
+import ImageUploader from "../components/cloudinary/ImageUploader";
 
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
@@ -27,7 +25,39 @@ const Conditions = [
 const defaultImg =
   "https://nato.cdnartwhere.eu/cdn/ff/oca4fwSi7ZMflFF5-LRcenPXoZTDpZSTkwLZEvZtQIw/1607780582/public/default_images/default-image.jpg";
 
-export default function Example() {
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "../lib/session";
+
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  const user = req.session.user;
+  if (user === undefined) {
+    res.setHeader("location", "/Login");
+    res.statusCode = 302;
+    res.end();
+    return {
+      props: {
+        user: {
+          isLoggedIn: false,
+          login: "",
+          avatarUrl: "",
+          id: -1,
+          email: "NOTLOGIN",
+          username: "NOTLOGIN",
+        },
+      },
+    };
+  }
+
+  return {
+    props: { user: req.session.user },
+  };
+},
+sessionOptions);
+
+export default function Example({ user }) {
   const [imagesUploadedList, setImagesUploadedList] = useState([]);
   const [ImageUrl, setImageUrl] = useState([]);
 
@@ -72,7 +102,7 @@ export default function Example() {
       reference_link: document.querySelector("#reference_link").value,
       email: document.querySelector("#email_address").value,
       if_sold: false,
-      seller_id: 1,
+      seller_id: user.id,
       //  images Image[]
     };
     if (ImageUrl.length == 0) {

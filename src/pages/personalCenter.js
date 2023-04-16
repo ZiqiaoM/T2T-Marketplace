@@ -1,45 +1,120 @@
 import {
+  HeartOutlined,
   HomeOutlined,
   LogoutOutlined,
-  ShoppingCartOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import PersonalInfo from "./Personal/myaccount";
 import UserProduct from "./UserProduct";
-import Wishlist from "./Wishlist";
+import UserWishlist from "./UserWishlist";
+
+// import PersonalInfo from "./Personal/myaccount";
 const { Header, Content, Sider } = Layout;
 
-const PersonalCenter = () => {
+import prisma from "../lib/prisma"
+import { withIronSessionSsr } from 'iron-session/next'
+import { sessionOptions } from '../lib/session'
+
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  const user = req.session.user
+  if (user === undefined) {
+    res.setHeader('location', '/Login')
+    res.statusCode = 302
+    res.end()
+    return {
+      props: {
+        user: { isLoggedIn: false, login: '', avatarUrl: '',id:-1,email:"NOTLOGIN",username:"NOTLOGIN" },
+      },
+    }
+  }
+
+  const product = await prisma.product.findMany({
+          where: {
+            seller_id: user.id,
+          },
+          select: {
+            id: true,
+            price:true,
+            post_title: true,
+
+            images: {
+              select: {
+                src: true,
+              },
+            },
+          },
+        });
+
+
+  const wishlistItems = await prisma.wishlist.findMany({
+    where: {
+      user_id: user.id,
+    },
+    select: {
+      product_id: true,
+      products: {
+        select: {
+          price:true,
+          post_title: true,
+          images: {
+            select: {
+              src: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+
+  // const wishlistItems = await fetch("/api/fetchWishlistFromUser", {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  
+  return {
+    props: { user: req.session.user, wishlistItems:wishlistItems, product:product},
+  }
+},
+sessionOptions)
+
+
+const PersonalCenter = ({user,wishlistItems,product}) => {
+
+  console.log(product);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const [showWishlistContent, setShowWishlistContent] = useState(false);
-  const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
+    // const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
   const [showMyProduct, setShowMyProduct] = useState(false); // Add state for showing account content
 
   const handleWishlistClick = () => {
     setShowWishlistContent(true);
-    setShowAccountContent(false);
+    // setShowAccountContent(false);
     setShowMyProduct(false); // Hide account content when wishlist is clicked
   };
   const handleMyProductClick = () => {
     setShowMyProduct(true);
-    setShowAccountContent(false); // Hide account content when wishlist is clicked
+    // setShowAccountContent(false); // Hide account content when wishlist is clicked
     setShowWishlistContent(false);
   };
-  const handleAccountClick = () => {
-    setShowAccountContent(true);
-    setShowWishlistContent(false);
-    setShowMyProduct(false); // Hide wishlist content when account is clicked
-  };
+    // const handleAccountClick = () => {
+    //   setShowAccountContent(true);
+    //   setShowWishlistContent(false);
+    //   setShowMyProduct(false); // Hide wishlist content when account is clicked
+    // };
 
   // Set the default page to display as Account page
   useEffect(() => {
-    setShowAccountContent(true);
+    setShowWishlistContent(true);
   }, []);
 
   return (
@@ -49,7 +124,7 @@ const PersonalCenter = () => {
         <div className="m1">
         <Sider 
           breakpoint="lg"
-          collapsedWidth="0"
+          // collapsedWidth="0"
           onBreakpoint={(broken) => {
             console.log(broken);
           }}
@@ -66,15 +141,15 @@ const PersonalCenter = () => {
           {/* Add user name information */}
           {/* <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark"> */}
           <Menu defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="1" onClick={handleAccountClick}>
+            {/* <Menu.Item key="1" onClick={handleAccountClick}>
               <HomeOutlined />
               <span> Change password </span>
-            </Menu.Item>
-            <Menu.Item key="2" onClick={handleWishlistClick}>
-              <ShoppingCartOutlined />
+            </Menu.Item> */}
+            <Menu.Item key="1" onClick={handleWishlistClick}>
+              <HeartOutlined />
               <span> My Wishlist </span>
             </Menu.Item>
-            <Menu.Item key="3" onClick={handleMyProductClick}>
+            <Menu.Item key="2" onClick={handleMyProductClick}>
               <ShoppingOutlined />
               <span> My Product </span>
             </Menu.Item>
@@ -101,6 +176,10 @@ const PersonalCenter = () => {
               background: "#fff",
               textAlign: "center",
               padding: 0,
+              margin: "0 0 0",
+              position: "absolute",
+              top: "250px",
+              right: "400px",
             }}
           >
             Welcome to this website, Header!
@@ -119,9 +198,9 @@ const PersonalCenter = () => {
                 
               }}
             >
-              {showWishlistContent && <Wishlist />}{" "}
-              {showAccountContent && <PersonalInfo />}{" "}
-              {showMyProduct && <UserProduct />}{" "}
+              {showWishlistContent && <UserWishlist wishlistItems={wishlistItems} />}{" "}
+              {/* {showAccountContent && <PersonalInfo />}{" "} */}
+              {showMyProduct && <UserProduct  product={product}/>}{" "}
             </div>
           </Content>
           </div>
@@ -140,6 +219,8 @@ const PersonalCenter = () => {
       }
       .m2{
         // background:pink;
+        width:80%;
+        margin-top:-60px;
       }
       `}</style>
     </div>

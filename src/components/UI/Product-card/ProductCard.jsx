@@ -1,23 +1,19 @@
-import React from "react";
 import Link from "next/link";
 // import productImg from '../../../images/product_01_image_01.jpg';
-import "./ProductCard.module.css";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 import { cartActions } from "../../../store/wish-list/cartSlice";
-
+import "./ProductCard.module.css";
 //import image 0130
-import Image from "next/image";
-const user_id = 1;
+// const user_id = 1;
 
-const ProductCard =  (props) => {
-  // const {id, title, image01, price} = props.item;
+const ProductCard = (props) => {
   const { id, images, post_title, price } = props.item;
-  // console.log(Array.isArray(images));
-  // console.log(id,images,post_title,price);
-  // console.log(`/productDetails/${id}`);
+  const user_id = props.user_id;
+
   const dispatch = useDispatch();
-  
-  const addToCart = async() => {
+
+  const addToCart = async () => {
     dispatch(
       cartActions.addItem({
         id,
@@ -28,21 +24,22 @@ const ProductCard =  (props) => {
         price,
       })
     );
-    try{
+    try {
       let data = {
-          product_id: id,
-          user_id: user_id,
-        };
+        product_id: id,
+        user_id: user_id,
+      };
       const body = { data };
       await fetch("/api/addWishlist", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          });
-          // await Router.push('/drafts');
-  } catch (error) {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      swal("Successfully added to wishlist!", "", "success");
+      // await Router.push('/drafts');
+    } catch (error) {
       console.error(error);
-  }
+    }
   };
   return (
     <div>
@@ -56,21 +53,9 @@ const ProductCard =  (props) => {
               />
             </div>
             <h3 className="mt-4 text-lg text-gray-700">{post_title}</h3>
-            {/* <div className="product_content"> */}
-            {/* <h5><Link>Pasta Maker</Link></h5> */}
-            {/* <h5>
-          <Link href={`/products/${id}`}>{post_title}</Link>
-        </h5> */}
+
             <div className="d-flex align-items-center justify-content-between">
-              {/* <span className='product_price'>$15.00</span> */}
-              {/* <span className="product_price">
-            <b>${price}</b>
-          </span> */}
               <p className="mt-1 text-lg font-medium text-gray-900">${price}</p>
-              {/* <button className="addToWl_btn" onClick={addToCart}>
-                Add to Wishlist
-              </button> */}
-              {/* </div> */}
             </div>
           </a>
         </Link>

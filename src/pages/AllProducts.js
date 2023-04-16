@@ -1,8 +1,10 @@
-import { useState } from "react";
-
+import { HeartOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 import prisma from "../lib/prisma";
-
+import { cartActions } from "../store/wish-list/cartSlice";
 const Categories = [
   {
     id: "category",
@@ -90,20 +92,25 @@ function classNames(...classes) {
 }
 
 export default function AllProducts({ products_init }) {
+  const { id, images, post_title, price } = products_init;
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    event.preventDefault();
+    dispatch(
+      cartActions.addItem({
+        id,
+        //title,
+        post_title,
+        // image01,
+        // images: images[0].src,
+        price,
+      })
+    );
+    swal("Successfully added to wishlist!", "", "success");
+  };
   const [products, setProducts] = useState(products_init);
   console.log(products);
 
-  // function handleLocations(e) {
-  //   const location = e.target.value;
-  //   if (e.target.checked) {
-  //     const filteredProducts = products_init.filter(
-  //       (p) => p.location === location
-  //     );
-  //     setProducts(filteredProducts);
-  //   } else {
-  //     setProducts(products_init);
-  //   }
-  // }
   function handleLocations(e) {
     const selectedValue = e.target.value;
     const selectedOption = Locations.flatMap(
@@ -298,14 +305,21 @@ export default function AllProducts({ products_init }) {
                               className="w-full h-full object-center object-cover group-hover:opacity-75"
                             />
                           </div>
-                          <h3 className="mt-4 text-sm text-gray-700">
-                            {post_title}
-                          </h3>
-                          <p className="mt-1 text-lg font-medium text-gray-900">
-                            ${price}
-                          </p>
                         </a>
                       </Link>
+                      <h3 className="mt-4 text-lg text-gray-700">
+                        {post_title}
+                      </h3>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <p className="mt-1 text-lg font-medium text-gray-900">
+                          ${price}
+                        </p>
+                        <button onClick={addToCart}>
+                          <HeartOutlined
+                            style={{ fontSize: "24px", color: "grey" }}
+                          />
+                        </button>
+                      </div>
                     </li>
                   );
                 })}

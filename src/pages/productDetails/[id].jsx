@@ -1,11 +1,11 @@
 // import { getPostDetails, getPostIdList } from "../../lib/products";
-import { Fragment, useState } from "react";
 import prisma from "../../lib/prisma";
 
 import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 import { cartActions } from "../../store/wish-list/cartSlice";
-
+import useUser from '../../lib/userUser'
 // const relatedProducts = [
 //   {
 //     id: 1,
@@ -41,6 +41,7 @@ export async function getStaticPaths(req) {
     fallback: false,
   };
 }
+
 export async function getStaticProps({ params }) {
   const product = await prisma.product.findUnique({
     where: {
@@ -67,14 +68,16 @@ export async function getStaticProps({ params }) {
     },
   };
 }
-// console.log(product[1]);
-
-
 
 export default function product_details({ product }) {
   const { id, images, post_title, price } = product;
+  const { user } = useUser({
+    redirectTo: '/login',
+  })
+  // console.log(user);
+
   const dispatch = useDispatch();
-  const addToCart = () => {
+  const addToCart = async () => {
     event.preventDefault();
     dispatch(
       cartActions.addItem({
@@ -86,25 +89,29 @@ export default function product_details({ product }) {
         price,
       })
     );
-  };
-  // const [isAddingToWishlist, setIsAddingToWishlist] = useState(false);
 
-  // const handleAddToWishlist = async () => {
-  //   setIsAddingToWishlist(true);
-  //   const response = await fetch("/api/wishlist", {
-  //     method: "POST",
-  //     body: JSON.stringify(product),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   if (response.ok) {
-  //     alert("Product added to wishlist!");
-  //   } else {
-  //     alert("Error adding product to wishlist.");
-  //   }
-  //   setIsAddingToWishlist(false);
-  // };
+    try {
+      let data = {
+        product_id: id,
+        user_id: user.id,
+      };
+      const body = { data };
+      await fetch("/api/addWishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      swal("Successfully added to wishlist!", "", "success");
+      // await Router.push('/drafts');
+    } catch (error) {
+      console.error(error);
+    }
+
+    swal("Successfully added to wishlist!", "", "success");
+
+
+  };
+
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
