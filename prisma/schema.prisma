@@ -34,7 +34,7 @@ model Product {
   id              Int       @id @default(autoincrement())
   post_title      String
   price           Float
-  free            String?
+  free            Boolean?
   condition       String?
   location        String?
   product_details String?
