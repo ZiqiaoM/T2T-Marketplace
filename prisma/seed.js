@@ -58,7 +58,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-
 const products = [
   {
     post_title: "Digital Alarm Clock",
@@ -71,7 +70,10 @@ const products = [
     reference_link:
       "https://www.amazon.com/Digital-Electronic-Charging-Adjustable-Brightness/dp/B091CHRBSQ/ref=sr_1_6?crid=3GE0JQB21J8YQ&keywords=electronic&qid=1681598841&sprefix=electronic%2B%2Caps%2C124&sr=8-6&th=1",
     email: "101@gamil.com",
+<<<<<<< HEAD
     free: false,
+=======
+>>>>>>> d65fd5e2a0cc335b2b2bd05e47d754405cd74a2f
     category_name: "Electronics",
   },
   {

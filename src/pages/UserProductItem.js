@@ -1,7 +1,8 @@
+import { ListGroupItem } from "reactstrap";
+
 import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { ListGroupItem } from "reactstrap";
 import { cartActions } from "../store/wish-list/cartSlice";
 
 // export async function getStaticPaths(req) {
@@ -54,9 +55,11 @@ const UserProductItem = (props) => {
   const  product  = props.product;
   if (!product) {
     return (
-      <h6 className="text-center mt-5">
-        You haven't uploaded any products yet.
-      </h6>
+      <div>
+        <h6 className="text-center mt-5">
+          You haven't uploaded any products yet.
+        </h6>
+      </div>
     );
   }
 
