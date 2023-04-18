@@ -59,6 +59,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
       product_id: true,
       products: {
         select: {
+          // id:true,
           price:true,
           post_title: true,
           images: {
