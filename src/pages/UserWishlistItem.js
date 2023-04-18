@@ -3,32 +3,30 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/wish-list/cartSlice";
 
-export async function getStaticProps({ params, req }) {
-  // const user = {};
-  console.log("333");
-  const wishlistItems = await prisma.wishlist.findMany({
-    select: {
-      id: true,
-      product_id: true,
-      products: {
-        select: {
-          post_title: true,
-          images: {
-            select: {
-              src: true,
-            },
-          },
-        },
-      },
-    },
-  });
+// export async function getStaticProps({ params, req }) {
+//   const wishlistItems = await prisma.wishlist.findMany({
+//     select: {
+//       id: true,
+//       product_id: true,
+//       products: {
+//         select: {
+//           post_title: true,
+//           images: {
+//             select: {
+//               src: true,
+//             },
+//           },
+//         },
+//       },
+//     },
+//   });
 
-  return {
-    props: {
-      wishlistItems,
-    },
-  };
-}
+//   return {
+//     props: {
+//       wishlistItems,
+//     },
+//   };
+// }
 
 const UserWishlistItem = (props) => {
   const wishlistItems = props.wishlistItems;
@@ -54,10 +52,6 @@ const UserWishlistItem = (props) => {
         const { product_id, products } = item;
         const id = product_id;
         const { post_title, price, images } = products;
-        // const imageList = images.map((image) => ({
-        //   original: image.src,
-        //   thumbnail: image.src,
-        // }));
         const image = images[0].src;
 
         return (

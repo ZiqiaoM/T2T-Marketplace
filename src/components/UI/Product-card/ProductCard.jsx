@@ -1,3 +1,4 @@
+import { HeartOutlined } from "@ant-design/icons";
 import Link from "next/link";
 // import productImg from '../../../images/product_01_image_01.jpg';
 import { useDispatch } from "react-redux";
@@ -46,22 +47,24 @@ const ProductCard = (props) => {
       <li key={id}>
         <Link passHref legacyBehavior href={`/productDetails/${id}`}>
           <a key={id} className="group">
-            <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+            <div className="w-full aspect-w-1 aspect-h-1 bg-white-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
               <img
                 src={images}
-                className="w-full h-full object-center object-cover group-hover:opacity-75"
+                className="w-full h-full object-center object-contain group-hover:opacity-75"
               />
             </div>
             <h3 className="mt-4 text-lg text-gray-700">{post_title}</h3>
-
-            <div className="d-flex align-items-center justify-content-between">
-              <p className="mt-1 text-lg font-medium text-gray-900">${price}</p>
-            </div>
           </a>
         </Link>
-        <button className="addToWl_btn" onClick={addToCart}>
+        {/* <button className="addToWl_btn" onClick={addToCart}>
           Add to Wishlist
-        </button>
+        </button> */}
+        <div className="d-flex align-items-center justify-content-between">
+          <p className="mt-1 text-lg font-medium text-gray-900">${price}</p>
+          <button onClick={addToCart}>
+            <HeartOutlined style={{ fontSize: "24px", color: "grey" }} />
+          </button>
+        </div>
       </li>
       <style jsx>{`
         li {

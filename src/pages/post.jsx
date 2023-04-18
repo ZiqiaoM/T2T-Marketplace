@@ -1,5 +1,4 @@
 import { Cloudinary } from "@cloudinary/url-gen";
-import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import CldGallery from "../components/cloudinary/CldGallery";
 import ImageUploader from "../components/cloudinary/ImageUploader";
@@ -150,21 +149,12 @@ export default function Example({ user }) {
                     type="text"
                     name="product_title"
                     id="product_title"
-                    // aria-invalid="true"
-                    inputProps={{ maxLength: 30 }}
-                    aria-describedby="product_title_error"
                     className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <ExclamationCircleIcon
-                      className="h-5 w-5 text-red-500"
-                      aria-hidden="true"
-                    />
-                  </div>
                 </div>
-                <p className="mt-2 text-sm text-red-600" id="email-error">
+                {/* <p className="mt-2 text-sm text-red-600" id="email-error">
                   Your title must be less than 30 characters.
-                </p>
+                </p> */}
               </div>
             </div>
             {/* Price */}

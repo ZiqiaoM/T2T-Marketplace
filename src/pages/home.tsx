@@ -1,41 +1,47 @@
-import React, { useState, useEffect } from "react";
 import { type NextPage } from "next";
+import { useEffect, useState } from "react";
+import { Col, Container, Row } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
-import { Container, Row, Col } from "reactstrap";
-import Hero from "./Hero/Hero";
-import "./home.module.css";
 import CategorySect from "../components/UI/Category/Category";
 import ProductCard from "../components/UI/Product-card/ProductCard";
+import Hero from "./Hero/Hero";
+import "./home.module.css";
 
 // import products from "../sample-data/products";
 
-import { withIronSessionSsr } from 'iron-session/next'
-import { sessionOptions } from '../lib/session'
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "../lib/session";
 
 export const getServerSideProps = withIronSessionSsr(async function ({
   req,
   res,
 }) {
-  const user = req.session.user
+  const user = req.session.user;
   if (user === undefined) {
     // res.setHeader('location', '/Login')
     // res.statusCode = 302
     // res.end()
     return {
       props: {
-        user: { isLoggedIn: false, login: '', avatarUrl: '',id:-1,email:"NOTLOGIN",username:"NOTLOGIN" },
+        user: {
+          isLoggedIn: false,
+          login: "",
+          avatarUrl: "",
+          id: -1,
+          email: "NOTLOGIN",
+          username: "NOTLOGIN",
+        },
       },
-    }
+    };
   }
 
   return {
-    props: { user: req.session.user},
-  }
+    props: { user: req.session.user },
+  };
 },
-sessionOptions)
+sessionOptions);
 
-
-const Home: NextPage = ( {user} ) => {
+const Home: NextPage = ({ user }) => {
   //0407 update products display
 
   const [productsDisp, setProducts] = useState([]);
@@ -100,7 +106,7 @@ const Home: NextPage = ( {user} ) => {
       );
       setAllProducts(filteredProducts);
     }
-  }, [Category,productsDisp]);
+  }, [Category, productsDisp]);
 
   return (
     <Helmet title="Home">
@@ -197,7 +203,7 @@ const Home: NextPage = ( {user} ) => {
             </Col>
             {allProducts.map((item) => (
               <Col lg="3" md="4" key={item.id} className="mt-5">
-                <ProductCard item={item} user_id = {user.id} />
+                <ProductCard item={item} user_id={user.id} />
               </Col>
             ))}
             {/* <h2>---Testing---</h2>

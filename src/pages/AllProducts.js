@@ -299,17 +299,20 @@ export default function AllProducts({ products_init }) {
                         href={`/productDetails/${id}`}
                       >
                         <a key={id} href={product.href} className="group">
-                          <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                          <div className="w-full aspect-w-1 aspect-h-1 bg-white-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                             <img
                               src={images[0].src}
-                              className="w-full h-full object-center object-cover group-hover:opacity-75"
+                              className="w-full h-full object-center object-contain group-hover:opacity-75"
                             />
                           </div>
                         </a>
                       </Link>
-                      <h3 className="mt-4 text-lg text-gray-700">
-                        {post_title}
-                      </h3>
+                      <Link passHref href={`/productDetails/${id}`}>
+                        <h3 className="mt-4 text-lg text-gray-700">
+                          {post_title}
+                        </h3>
+                      </Link>
+
                       <div className="d-flex align-items-center justify-content-between">
                         <p className="mt-1 text-lg font-medium text-gray-900">
                           ${price}
