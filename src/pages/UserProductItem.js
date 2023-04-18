@@ -52,7 +52,7 @@ import { cartActions } from "../store/wish-list/cartSlice";
 // }
 
 const UserProductItem = (props) => {
-  const  product  = props.product;
+  const product = props.product;
   if (!product) {
     return (
       <div>
@@ -63,10 +63,7 @@ const UserProductItem = (props) => {
     );
   }
 
-  const { id, price,post_title, images } = product;
-
-  console.log(product);
-
+  const { id, price, post_title, images } = product;
   const dispatch = useDispatch();
 
   //delete item

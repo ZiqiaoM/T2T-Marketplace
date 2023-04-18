@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/wish-list/cartSlice";
 
@@ -29,7 +30,6 @@ export async function getStaticProps({ params, req }) {
     },
   };
 }
-console.log(wishlistItems[0]);
 
 const UserWishlistItem = (props) => {
   const wishlistItems = props.wishlistItems;
@@ -56,14 +56,22 @@ const UserWishlistItem = (props) => {
         const { post_title, price, images } = products;
         const imageList = images.map((image) => ({
           original: image.src,
-          thumbnail: image.src,
         }));
 
         return (
           <li key={id} className="flex py-6">
             <Link passHref href={`/productDetails/${id}`}>
-              <div className="flex-shrink-0">
-                <ImageGallery items={imageList} showThumbnails={true} />
+              <div className="flex-shrink-0 image-gallery-container">
+                <ImageGallery items={imageList} showThumbnails={false} />
+                <style>{`.image-gallery-container {
+                          width: 40%;
+                          height: auto;
+                        }
+                        .image-gallery-slide img {
+                          max-width: 100%;
+                          height: auto;
+                        }
+              `}</style>
               </div>
             </Link>
             <div className="ml-4 flex-1 flex flex-col sm:ml-6">
@@ -91,6 +99,17 @@ const UserWishlistItem = (props) => {
   );
 };
 export default UserWishlistItem;
+
+// CSS
+// .image-gallery-container {
+//   width: 40%;
+//   height: auto;
+// }
+
+// .image-gallery-slide img {
+//   max-width: 100%;
+//   height: auto;
+// }
 // return (
 //   <ListGroupItem className="border-0 cart_item">
 //     <div className="ml-4 flex-1 flex flex-col sm:ml-6">
