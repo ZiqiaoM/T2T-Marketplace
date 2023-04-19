@@ -36,8 +36,8 @@ export class FetchError extends Error {
   
     // if the server replies, there's always some data in json
     // if there's a network error, it will throw at the previous line
-    const data = await response.json()
-  
+
+    const data = await response.json() as JSON
     // response.ok is true when res.status is 2xx
     // https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
     if (response.ok) {
@@ -47,6 +47,8 @@ export class FetchError extends Error {
     throw new FetchError({
       message: response.statusText,
       response,
-      data,
+      data: {
+        message: "check fetchJson.ts if this occured"
+      } ,
     })
   }

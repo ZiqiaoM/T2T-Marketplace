@@ -57,7 +57,7 @@ const UserProductItem = (props) => {
     return (
       <div>
         <h6 className="text-center mt-5">
-          You haven't uploaded any products yet.
+          You have not uploaded any products yet.
         </h6>
       </div>
     );
@@ -67,12 +67,12 @@ const UserProductItem = (props) => {
 
   console.log(product);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  //delete item
-  const deleteItem = () => {
-    dispatch(cartActions.deleteItem(id));
-  };
+  // //delete item
+  // const deleteItem = () => {
+  //   dispatch(cartActions.deleteItem(id));
+  // };
 
   return (
     <ListGroupItem className="border-0 cart_item">
@@ -103,7 +103,7 @@ const UserProductItem = (props) => {
               <p className="mt-1 text-sm text-gray-500">Price: ${price}</p>
               <span
                 className="delete_btn text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                onClick={deleteItem}
+                onClick={}
               >
                 <CloseIcon />
                 remove
