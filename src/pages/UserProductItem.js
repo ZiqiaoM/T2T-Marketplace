@@ -14,7 +14,8 @@ const UserProductItem = (props) => {
     );
   }
 
-  const { id, price, post_title, images } = product;
+  // const { id, price, post_title, images } = product;
+  const { id } = product;
   const dispatch = useDispatch();
 
   //delete item

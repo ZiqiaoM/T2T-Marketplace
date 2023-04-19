@@ -106,8 +106,6 @@ export default function product_details({ product }) {
     } catch (error) {
       console.error(error);
     }
-
-    swal("Successfully added to wishlist!", "", "success");
   };
 
   return (

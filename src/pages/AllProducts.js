@@ -94,19 +94,46 @@ function classNames(...classes) {
 export default function AllProducts({ products_init }) {
   const { id, images, post_title, price } = products_init;
   const dispatch = useDispatch();
-  const addToCart = () => {
-    event.preventDefault();
+  const user_id = products_init.user_id;
+  // const addToCart = () => {
+  //   event.preventDefault();
+  //   dispatch(
+  //     cartActions.addItem({
+  //       id,
+  //       //title,
+  //       post_title,
+  //       // image01,
+  //       // images: images[0].src,
+  //       price,
+  //     })
+  //   );
+  //   swal("Successfully added to wishlist!", "", "success");
+  // };
+  const addToCart = async () => {
     dispatch(
       cartActions.addItem({
         id,
-        //title,
         post_title,
-        // image01,
-        // images: images[0].src,
+        images,
         price,
       })
     );
-    swal("Successfully added to wishlist!", "", "success");
+    try {
+      let data = {
+        product_id: id,
+        user_id: user_id,
+      };
+      const body = { data };
+      await fetch("./api/addWishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      swal("Successfully added to wishlist!", "", "success");
+      // await Router.push('/drafts');
+    } catch (error) {
+      console.error(error);
+    }
   };
   const [products, setProducts] = useState(products_init);
   console.log(products);

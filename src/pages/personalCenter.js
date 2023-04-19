@@ -75,6 +75,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
         },
       },
     },
+    distinct: ["product_id"],
   });
 
   // const wishlistItems = await fetch("/api/fetchWishlistFromUser", {
