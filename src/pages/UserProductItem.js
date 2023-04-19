@@ -103,7 +103,7 @@ const UserProductItem = (props) => {
               <p className="mt-1 text-sm text-gray-500">Price: ${price}</p>
               <span
                 className="delete_btn text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                onClick={}
+                // onClick={}
               >
                 <CloseIcon />
                 remove
