@@ -1,8 +1,8 @@
 import { Cloudinary } from "@cloudinary/url-gen";
 import { useState } from "react";
+import swal from "sweetalert";
 import CldGallery from "../components/cloudinary/CldGallery";
 import ImageUploader from "../components/cloudinary/ImageUploader";
-
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
   { id: "kitchenware", title: "Kitchenware" },
@@ -107,9 +107,9 @@ export default function Example({ user }) {
     if (ImageUrl.length == 0) {
       setImageUrl((prevState) => [...prevState, defaultImg]);
     }
-    console.log("submit posts.");
-    console.log(data);
-    console.log(ImageUrl);
+    // console.log("submit posts.");
+    // console.log(data);
+    // console.log(ImageUrl);
     try {
       const body = { data, ImageUrl };
       await fetch("/api/post", {
@@ -118,6 +118,11 @@ export default function Example({ user }) {
         body: JSON.stringify(body),
       });
       // await Router.push('/drafts');
+      // show success message
+      swal("You have successfully posted the item!", "", "success");
+
+      // redirect to allproducts page
+      window.location.href = "/AllProducts";
     } catch (error) {
       console.error(error);
     }
