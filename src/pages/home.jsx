@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { type NextPage } from "next";
+// import { type NextPage } from "next";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col } from "reactstrap";
 import Hero from "./Hero/Hero";
@@ -37,7 +37,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 sessionOptions)
 
 
-const Home: NextPage = ( {user} ) => {
+const Home = ( {user} ) => {
   //0407 update products display
 
   const [productsDisp, setProducts] = useState([]);
