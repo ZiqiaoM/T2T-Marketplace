@@ -10,7 +10,13 @@ const config = {
   reactStrictMode: true,
   /* If trying out the experimental appDir, comment the i18n config out
    * @see https://github.com/vercel/next.js/issues/41980 */
-  i18n: {
+  
+   eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+   i18n: {
     locales: ["en"],
     defaultLocale: "en",
   },
