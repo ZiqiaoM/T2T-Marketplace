@@ -3,6 +3,8 @@ import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import CldGallery from "../components/cloudinary/CldGallery";
 import ImageUploader from "../components/cloudinary/ImageUploader";
+import { useRouter } from 'next/router';
+import Router from 'next/router'
 
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
@@ -33,10 +35,13 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   res,
 }) {
   const user = req.session.user;
-  if (user === undefined) {
-    res.setHeader("location", "/Login");
-    res.statusCode = 302;
-    res.end();
+  if (user === undefined || user.id == -1) {
+
+    // Router.push("/Login");
+    // res.redirect(307, '/Login');
+    // res.setHeader("location", "/Login");
+    // res.statusCode = 302;
+    // res.end();
     return {
       props: {
         user: {
@@ -58,6 +63,8 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 sessionOptions);
 
 export default function Example({ user }) {
+
+
   const [imagesUploadedList, setImagesUploadedList] = useState([]);
   const [ImageUrl, setImageUrl] = useState([]);
 
