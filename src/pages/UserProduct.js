@@ -4,7 +4,8 @@ import UserProductItem from "./UserProductItem.js";
 import Link from "next/link";
 
 
-const UserProduct = ({product}) => {
+const UserProduct = (props) => {
+  const product  = props.product
   const cartProducts = useSelector((state) => state.cart.cartItems);
 
   return (

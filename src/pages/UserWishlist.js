@@ -1,7 +1,8 @@
 import Link from "next/link";
 import UserWishlistItem from "./UserWishlistItem";
 
-const UserWishList = ({wishlistItems}) => {
+const UserWishList = (props) => {
+  const wishlistItems=props.wishlistItems;
   // const cartProducts = useSelector((state) => state.cart.cartItems);
 
   return (
