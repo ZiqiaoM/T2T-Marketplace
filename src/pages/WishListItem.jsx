@@ -7,9 +7,16 @@ import { cartActions } from "../store/wish-list/cartSlice";
 
 const WishlistItem = ({ item }) => {
   //add products
-  
-  const { id, post_title, price, images, quantity, totalPrice } = item;
+  if (item){
 
+    const { id, post_title, price, images, quantity, totalPrice } = item;
+  }
+
+  else{
+    return(
+      <ListGroupItem className="border-0 cart_item"></ListGroupItem>
+    )
+  }
   const dispatch = useDispatch();
 
   // const increase_item
