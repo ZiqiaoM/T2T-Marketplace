@@ -1,10 +1,9 @@
 import { Cloudinary } from "@cloudinary/url-gen";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
+import swal from "sweetalert";
 import CldGallery from "../components/cloudinary/CldGallery";
 import ImageUploader from "../components/cloudinary/ImageUploader";
-import { useRouter } from 'next/router';
-import Router from 'next/router'
 
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
@@ -36,7 +35,6 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 }) {
   const user = req.session.user;
   if (user === undefined || user.id == -1) {
-
     // Router.push("/Login");
     // res.redirect(307, '/Login');
     // res.setHeader("location", "/Login");
@@ -63,8 +61,6 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 sessionOptions);
 
 export default function Example({ user }) {
-
-
   const [imagesUploadedList, setImagesUploadedList] = useState([]);
   const [ImageUrl, setImageUrl] = useState([]);
 
@@ -126,6 +122,12 @@ export default function Example({ user }) {
         body: JSON.stringify(body),
       });
       // await Router.push('/drafts');
+      // show success message
+      swal("You have successfully posted the item!", "", "success");
+
+      // redirect to allproducts page
+      window.location.href = "/AllProducts";
+      // await Router.push('/drafts');
     } catch (error) {
       console.error(error);
     }
@@ -169,9 +171,9 @@ export default function Example({ user }) {
                     />
                   </div>
                 </div>
-                <p className="mt-2 text-sm text-red-600" id="email-error">
+                {/* <p className="mt-2 text-sm text-red-600" id="email-error">
                   Your title must be less than 30 characters.
-                </p>
+                </p> */}
               </div>
             </div>
             {/* Price */}

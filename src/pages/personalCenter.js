@@ -1,6 +1,5 @@
 import {
   HeartOutlined,
-  HomeOutlined,
   LogoutOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
@@ -13,23 +12,29 @@ import UserWishlist from "./UserWishlist";
 // import PersonalInfo from "./Personal/myaccount";
 const { Header, Content, Sider } = Layout;
 
-import prisma from "../lib/prisma"
-import { withIronSessionSsr } from 'iron-session/next'
-import { sessionOptions } from '../lib/session'
+import { withIronSessionSsr } from "iron-session/next";
+import prisma from "../lib/prisma";
+import { sessionOptions } from "../lib/session";
 
 export const getServerSideProps = withIronSessionSsr(async function ({
   req,
   res,
 }) {
   let user = req.session.user;
-  if (user === undefined || user == undefined ||user.id ==-1) {
+  if (user === undefined || user == undefined || user.id == -1) {
     // res.setHeader('location', '/Login');
     // res.statusCode = 302
     // res.redirect(307, '/Login');
     // res.end()
-    
-    
-    user = { isLoggedIn: false, login: '', avatarUrl: '',id: -1,email:"NOTLOGIN",username:"NOTLOGIN" };
+
+    user = {
+      isLoggedIn: false,
+      login: "",
+      avatarUrl: "",
+      id: -1,
+      email: "NOTLOGIN",
+      username: "NOTLOGIN",
+    };
 
     // console.log(user);
   }
@@ -41,22 +46,21 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   // }
 
   const product = await prisma.product.findMany({
-          where: {
-            seller_id: user.id,
-          },
-          select: {
-            id: true,
-            price:true,
-            post_title: true,
+    where: {
+      seller_id: user.id,
+    },
+    select: {
+      id: true,
+      price: true,
+      post_title: true,
 
-            images: {
-              select: {
-                src: true,
-              },
-            },
-          },
-        });
-
+      images: {
+        select: {
+          src: true,
+        },
+      },
+    },
+  });
 
   const wishlistItems = await prisma.wishlist.findMany({
     where: {
@@ -67,7 +71,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
       products: {
         select: {
           // id:true,
-          price:true,
+          price: true,
           post_title: true,
           images: {
             select: {
@@ -77,31 +81,27 @@ export const getServerSideProps = withIronSessionSsr(async function ({
         },
       },
     },
+    distinct: ["product_id"],
   });
-
 
   // const wishlistItems = await fetch("/api/fetchWishlistFromUser", {
   //     method: "GET",
   //     headers: { "Content-Type": "application/json" },
   //   });
-  
+
   return {
-    props: { user:user, wishlistItems:wishlistItems, product:product},
-  }
+    props: { user: user, wishlistItems: wishlistItems, product: product },
+  };
 },
-sessionOptions)
+sessionOptions);
 
-
-const PersonalCenter = ({user,wishlistItems,product}) => {
-
-  
-
+const PersonalCenter = ({ user, wishlistItems, product }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const [showWishlistContent, setShowWishlistContent] = useState(false);
-    // const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
+  // const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
   const [showMyProduct, setShowMyProduct] = useState(false); // Add state for showing account content
 
   const handleWishlistClick = () => {
@@ -114,11 +114,11 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
     // setShowAccountContent(false); // Hide account content when wishlist is clicked
     setShowWishlistContent(false);
   };
-    // const handleAccountClick = () => {
-    //   setShowAccountContent(true);
-    //   setShowWishlistContent(false);
-    //   setShowMyProduct(false); // Hide wishlist content when account is clicked
-    // };
+  // const handleAccountClick = () => {
+  //   setShowAccountContent(true);
+  //   setShowWishlistContent(false);
+  //   setShowMyProduct(false); // Hide wishlist content when account is clicked
+  // };
 
   // Set the default page to display as Account page
   useEffect(() => {
@@ -130,52 +130,49 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
       {/* <Layout> */}
       <div className="pMain">
         <div className="m1">
-        <Sider 
-          breakpoint="lg"
-          // collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
-        >
-
-
-          {/* <div style={{ color: "white", textAlign: "center", margin: "24px 0" }}>
+          <Sider
+            breakpoint="lg"
+            // collapsedWidth="0"
+            onBreakpoint={(broken) => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              console.log(collapsed, type);
+            }}
+          >
+            {/* <div style={{ color: "white", textAlign: "center", margin: "24px 0" }}>
             Hello, User Name
           </div> */}
 
-          {/* Add user name information */}
-          {/* <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark"> */}
-          <Menu defaultSelectedKeys={["1"]} mode="inline">
-            {/* <Menu.Item key="1" onClick={handleAccountClick}>
+            {/* Add user name information */}
+            {/* <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark"> */}
+            <Menu defaultSelectedKeys={["1"]} mode="inline">
+              {/* <Menu.Item key="1" onClick={handleAccountClick}>
               <HomeOutlined />
               <span> Change password </span>
             </Menu.Item> */}
-            <Menu.Item key="1" onClick={handleWishlistClick}>
-              <HeartOutlined />
-              <span> My Wishlist </span>
-            </Menu.Item>
-            <Menu.Item key="2" onClick={handleMyProductClick}>
-              <ShoppingOutlined />
-              <span> My Product </span>
-            </Menu.Item>
+              <Menu.Item key="1" onClick={handleWishlistClick}>
+                <HeartOutlined />
+                <span> My Wishlist </span>
+              </Menu.Item>
+              <Menu.Item key="2" onClick={handleMyProductClick}>
+                <ShoppingOutlined />
+                <span> My Product </span>
+              </Menu.Item>
 
-            <Menu.Item
-              key="4"
-              style={{ color: "white", position: "absolute", bottom: -70 }}
-            >
-              <Link href="/Login">
-                <LogoutOutlined style={{ color: "#4B9CD3" }} />
+              <Menu.Item
+                key="4"
+                style={{ color: "white", position: "absolute", bottom: -70 }}
+              >
+                <Link href="/Login">
+                  <LogoutOutlined style={{ color: "#4B9CD3" }} />
 
-                <span style={{ color: "#4B9CD3" }}> Logout </span>
-              </Link>
-            </Menu.Item>
-          </Menu>
-        </Sider>
+                  <span style={{ color: "#4B9CD3" }}> Logout </span>
+                </Link>
+              </Menu.Item>
+            </Menu>
+          </Sider>
         </div>
-
 
         {/* <Layout> */}
         <div className="m2">
@@ -193,9 +190,9 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
             Welcome to this website, Header!
           </Header> */}
           <Content
-            // style={{
-            //   margin: "0 16px 0",
-            // }}
+          // style={{
+          //   margin: "0 16px 0",
+          // }}
           >
             <div
               style={{
@@ -203,33 +200,33 @@ const PersonalCenter = ({user,wishlistItems,product}) => {
                 minHeight: 560,
                 // background: colorBgContainer,
                 // background: "#f0f0f0",
-                
               }}
             >
-              {showWishlistContent && <UserWishlist wishlistItems={wishlistItems} />}{" "}
+              {showWishlistContent && (
+                <UserWishlist wishlistItems={wishlistItems} />
+              )}{" "}
               {/* {showAccountContent && <PersonalInfo />}{" "} */}
-              {showMyProduct && <UserProduct  product={product}/>}{" "}
+              {showMyProduct && <UserProduct product={product} />}{" "}
             </div>
           </Content>
-          </div>
+        </div>
         {/* </Layout> */}
-
       </div>
       {/* </Layout> */}
       <style jsx>{`
-      .pMain{
-        // background:red !important;
-        display:flex;
-      }
-      .m1{
-        // background:yellow;
-        margin-top:60px;
-      }
-      .m2{
-        // background:pink;
-        width:80%;
-        margin-top:-60px;
-      }
+        .pMain {
+          // background:red !important;
+          display: flex;
+        }
+        .m1 {
+          // background:yellow;
+          margin-top: 60px;
+        }
+        .m2 {
+          // background:pink;
+          width: 80%;
+          margin-top: -60px;
+        }
       `}</style>
     </div>
   );

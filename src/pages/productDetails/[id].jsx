@@ -4,8 +4,8 @@ import prisma from "../../lib/prisma";
 import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
+import useUser from "../../lib/userUser";
 import { cartActions } from "../../store/wish-list/cartSlice";
-import useUser from '../../lib/userUser'
 // const relatedProducts = [
 //   {
 //     id: 1,
@@ -72,8 +72,8 @@ export async function getStaticProps({ params }) {
 export default function product_details({ product }) {
   const { id, images, post_title, price } = product;
   const { user } = useUser({
-    redirectTo: '/login',
-  })
+    redirectTo: "/login",
+  });
   // console.log(user);
 
   const dispatch = useDispatch();
@@ -106,10 +106,6 @@ export default function product_details({ product }) {
     } catch (error) {
       console.error(error);
     }
-
-    swal("Successfully added to wishlist!", "", "success");
-
-
   };
 
   return (
@@ -137,6 +133,7 @@ export default function product_details({ product }) {
                               className="w-full h-full object-center object-cover"
                             />
                           </span>
+
                           <span
                             className={classNames(
                               selected ? "ring-indigo-500" : "ring-transparent",
@@ -157,7 +154,7 @@ export default function product_details({ product }) {
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-center object-cover sm:rounded-lg"
+                      className="w-full h-auto max-w-sm max-h-sm object-center object-cover sm:rounded-lg"
                     />
                   </Tab.Panel>
                 ))}
@@ -207,7 +204,7 @@ export default function product_details({ product }) {
                 />
               </div>
               {/* Reference Link */}
-              <div className="mt-10">
+              {/* <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">
                   Reference Link:
                 </h2>
@@ -215,7 +212,22 @@ export default function product_details({ product }) {
                   className="mt-4 prose prose-sm text-gray-500"
                   dangerouslySetInnerHTML={{ __html: product.reference_link }}
                 />
+              </div> */}
+              <div className="mt-10">
+                <h2 className="text-sm font-medium text-gray-900">
+                  Reference Link:
+                </h2>
+                <div className="mt-4 prose prose-sm text-gray-500">
+                  <a
+                    href={product.reference_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {product.reference_link}
+                  </a>
+                </div>
               </div>
+
               {/* Reference Link */}
               <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">
