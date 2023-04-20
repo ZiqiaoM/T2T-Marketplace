@@ -6,19 +6,30 @@ import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import useUser from "../../lib/userUser";
 import { cartActions } from "../../store/wish-list/cartSlice";
-// const relatedProducts = [
-//   {
-//     id: 1,
-//     name: "Basic Tee",
-//     href: "#",
-//     imageSrc:
-//       "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg",
-//     imageAlt: "Front of men's Basic Tee in white.",
-//     price: "$35",
-//     color: "Aspen White",
-//   },
-//   // More products...
-// ];
+const relatedProducts = [
+  {
+    id: 1,
+    name: "Basic Tee",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg",
+    imageAlt: "Front of men's Basic Tee in white.",
+    price: "$35",
+    color: "Aspen White",
+  },
+  {
+    id: 2,
+    name: "Fusion",
+    href: "#",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
+    imageAlt:
+      "Payment application dashboard screenshot with transaction table, financial highlights, and main clients on colorful purple background.",
+    price: "$49",
+    color: "Aspen black",
+  },
+  // More products...
+];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -249,6 +260,48 @@ export default function product_details({ product }) {
               </div>
             </div>
           </div>
+          {/* Related products */}
+          <section aria-labelledby="related-heading" className="mt-16 sm:mt-24">
+            <h2
+              id="related-heading"
+              className="text-lg font-medium text-gray-900"
+            >
+              Customers also purchased
+            </h2>
+
+            <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+              {relatedProducts.map((relatedProduct) => (
+                <div key={relatedProduct.id} className="group relative">
+                  <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                    <img
+                      src={relatedProduct.imageSrc}
+                      alt={relatedProduct.imageAlt}
+                      className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                    />
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-sm text-gray-700">
+                        <a href={relatedProduct.href}>
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0"
+                          />
+                          {relatedProduct.name}
+                        </a>
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-500">
+                        {relatedProduct.color}
+                      </p>
+                    </div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {relatedProduct.price}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         </main>
       </div>
     </div>

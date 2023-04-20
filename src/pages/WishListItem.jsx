@@ -7,16 +7,10 @@ import { cartActions } from "../store/wish-list/cartSlice";
 
 const WishlistItem = ({ item }) => {
   //add products
-  if (item){
+  if (item) {
     const { id, post_title, price, images, quantity, totalPrice } = item;
-  }
-
-  else{
-    return(
-      <h6 className="text-center mt-5">
-      You have not added any products to your wishlist yet.
-    </h6>
-    )
+  } else {
+    return <ListGroupItem className="border-0 cart_item"></ListGroupItem>;
   }
   const dispatch = useDispatch();
 
