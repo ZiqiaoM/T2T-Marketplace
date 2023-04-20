@@ -28,7 +28,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
     // res.redirect(307, '/Login');
     res.end()
 
-    const user = { isLoggedIn: false, login: '', avatarUrl: '',id:-1,email:"NOTLOGIN",username:"NOTLOGIN" };
+    const user = { isLoggedIn: false, login: '', avatarUrl: '',id:1,email:"NOTLOGIN",username:"NOTLOGIN" };
 
   }
 
