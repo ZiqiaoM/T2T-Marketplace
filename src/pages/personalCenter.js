@@ -21,21 +21,24 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   req,
   res,
 }) {
-  const user = req.session.user
-  if (user === undefined || user.id ==-1) {
+  let user = req.session.user;
+  if (user === undefined || user == undefined ||user.id ==-1) {
     // res.setHeader('location', '/Login');
     // res.statusCode = 302
     // res.redirect(307, '/Login');
-    res.end()
+    // res.end()
+    
+    
+    user = { isLoggedIn: false, login: '', avatarUrl: '',id: -1,email:"NOTLOGIN",username:"NOTLOGIN" };
 
-    const user = { isLoggedIn: false, login: '', avatarUrl: '',id: -1,email:"NOTLOGIN",username:"NOTLOGIN" };
-
+    // console.log(user);
   }
 
+  console.log(user);
   // demo
-  if (user.id==-1){
-    user.id = 1
-  }
+  // if (user.id == -1){
+  //   user.id = 1
+  // }
 
   const product = await prisma.product.findMany({
           where: {
@@ -83,7 +86,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
   //   });
   
   return {
-    props: { user: req.session.user, wishlistItems:wishlistItems, product:product},
+    props: { user:user, wishlistItems:wishlistItems, product:product},
   }
 },
 sessionOptions)
