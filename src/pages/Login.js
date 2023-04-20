@@ -4,9 +4,6 @@ import Router from 'next/router'
 import Link from 'next/link';
 import useUser from '../lib/userUser';
 
-
-
-
 export default function Login () {
 
   // const { usersss } = useUser();
@@ -18,7 +15,7 @@ export default function Login () {
 
   const { mutateUser } = useUser({
     redirectTo: '/home',
-    redirectIfFound: true,
+    redirectIfFound: false,
   })
 
   const [email, setEmail] = useState('');

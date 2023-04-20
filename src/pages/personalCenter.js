@@ -16,10 +16,13 @@ import { withIronSessionSsr } from "iron-session/next";
 import prisma from "../lib/prisma";
 import { sessionOptions } from "../lib/session";
 
+import useUser from '../lib/userUser';
+
 export const getServerSideProps = withIronSessionSsr(async function ({
   req,
   res,
 }) {
+
   let user = req.session.user;
   if (user === undefined || user == undefined || user.id == -1) {
     // res.setHeader('location', '/Login');
@@ -33,18 +36,9 @@ export const getServerSideProps = withIronSessionSsr(async function ({
       avatarUrl: "",
       id: -1,
       email: "NOTLOGIN",
-      username: "NOTLOGIN",
+      username: "New Comer",
     };
-
-    // console.log(user);
   }
-
-  // demo
-  if (user.id == -1) {
-    user.id = 1;
-  }
-
-  console.log(user);
 
   const null_product = {
     product_id: -1,
@@ -105,10 +99,12 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 },
 sessionOptions);
 
+
 const PersonalCenter = ({ user, wishlistItems, product }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
 
   const [showWishlistContent, setShowWishlistContent] = useState(false);
   // const [showAccountContent, setShowAccountContent] = useState(false); // Add state for showing account content
@@ -150,6 +146,7 @@ const PersonalCenter = ({ user, wishlistItems, product }) => {
               console.log(collapsed, type);
             }}
           >
+
             {/* <div style={{ color: "white", textAlign: "center", margin: "24px 0" }}>
             Hello, User Name
           </div> */}
