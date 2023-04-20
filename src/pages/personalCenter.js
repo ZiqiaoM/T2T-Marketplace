@@ -27,12 +27,11 @@ export const getServerSideProps = withIronSessionSsr(async function ({
     // res.statusCode = 302
     // res.redirect(307, '/Login');
     res.end()
-    return {
-      props: {
-        user: { isLoggedIn: false, login: '', avatarUrl: '',id:-1,email:"NOTLOGIN",username:"NOTLOGIN" },
-      },
-    }
+
+    const user = { isLoggedIn: false, login: '', avatarUrl: '',id:-1,email:"NOTLOGIN",username:"NOTLOGIN" },
+
   }
+
 
   const product = await prisma.product.findMany({
           where: {
@@ -88,7 +87,7 @@ sessionOptions)
 
 const PersonalCenter = ({user,wishlistItems,product}) => {
 
-  console.log(product);
+  
 
   const {
     token: { colorBgContainer },
