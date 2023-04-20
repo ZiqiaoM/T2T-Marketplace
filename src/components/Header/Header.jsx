@@ -1,14 +1,13 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Container } from "reactstrap";
 // import {NavLink, Link} from "react-router-dom";
-import Link from "next/link";
 import WishltIcon from "@mui/icons-material/Loyalty";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import Link from "next/link";
 // import MenuIcon from '@mui/icons-material/Menu';
+import { useSelector } from "react-redux";
 import "./Header.module.css";
-import { useSelector, useDispatch } from "react-redux";
 
-import { cartUiActions } from "../../store/wish-list/cartUISlice";
 import Carts from "../UI/Cart/Carts";
 
 //import image 0130
@@ -26,13 +25,13 @@ const nav_links = [
     path: "/AllProducts",
   },
   {
-    display: "About",
-    path: "/personalCenter",
-    // path: "/Login",
-  },
-  {
     display: "Publish Post",
     path: "/post",
+  },
+  {
+    display: "Personal Center",
+    path: "/personalCenter",
+    // path: "/Login",
   },
 ];
 
