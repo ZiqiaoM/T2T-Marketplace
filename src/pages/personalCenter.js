@@ -34,13 +34,20 @@ export const getServerSideProps = withIronSessionSsr(async function ({
     // console.log(user);
   }
 
-  console.log(user);
-  // demo
-  // if (user.id == -1){
-  //   user.id = 1
-  // }
 
-  const product = await prisma.product.findMany({
+  
+  // demo
+  if (user.id == -1){
+    user.id = 1
+  }
+
+  console.log(user);
+
+  const null_product = {
+    product_id:-1,
+  }
+
+  let product = await prisma.product.findMany({
           where: {
             seller_id: user.id,
           },
@@ -58,7 +65,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({
         });
 
 
-  const wishlistItems = await prisma.wishlist.findMany({
+    let wishlistItems = await prisma.wishlist.findMany({
     where: {
       user_id: user.id,
     },
@@ -78,13 +85,19 @@ export const getServerSideProps = withIronSessionSsr(async function ({
       },
     },
   });
-
-
   // const wishlistItems = await fetch("/api/fetchWishlistFromUser", {
   //     method: "GET",
   //     headers: { "Content-Type": "application/json" },
   //   });
   
+  console.log(product,wishlistItems);
+
+  if (product.length==0){
+    product = {
+
+    }
+  }
+
   return {
     props: { user:user, wishlistItems:wishlistItems, product:product},
   }
