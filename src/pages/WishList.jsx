@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 import { ListGroup } from "reactstrap";
 
 const WishList = () => {
-  const cartProducts = useSelector((state) => state.cart.cartItems);
+  let cartProducts = useSelector((state) => state.cart.cartItems);
+  console.log(cartProducts);
+  if (cartProducts === undefined || cartProducts == undefined ){
+    cartProducts = {};
+  }
 
   return (
     <div className="Container">
