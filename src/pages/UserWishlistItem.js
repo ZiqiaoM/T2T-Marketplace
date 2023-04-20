@@ -3,33 +3,6 @@ import ImageGallery from "react-image-gallery";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/wish-list/cartSlice";
 
-export async function getStaticProps({ params, req }) {
-  // const user = {};
-  console.log("333");
-  const wishlistItems = await prisma.wishlist.findMany({
-    select: {
-      id: true,
-      product_id: true,
-      products: {
-        select: {
-          post_title: true,
-          images: {
-            select: {
-              src: true,
-            },
-          },
-        },
-      },
-    },
-  });
-
-  return {
-    props: {
-      wishlistItems,
-    },
-  };
-}
-console.log(wishlistItems[0]);
 
 const UserWishlistItem = (props) => {
   const wishlistItems = props.wishlistItems;
