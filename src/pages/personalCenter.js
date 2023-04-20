@@ -28,10 +28,14 @@ export const getServerSideProps = withIronSessionSsr(async function ({
     // res.redirect(307, '/Login');
     res.end()
 
-    const user = { isLoggedIn: false, login: '', avatarUrl: '',id:1,email:"NOTLOGIN",username:"NOTLOGIN" };
+    const user = { isLoggedIn: false, login: '', avatarUrl: '',id: -1,email:"NOTLOGIN",username:"NOTLOGIN" };
 
   }
 
+  // demo
+  if (user.id==-1){
+    user.id = 1
+  }
 
   const product = await prisma.product.findMany({
           where: {
