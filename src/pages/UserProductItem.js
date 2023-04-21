@@ -5,8 +5,8 @@ import { cartActions } from "../store/wish-list/cartSlice";
 const UserProductItem = (props) => {
   const product = props.product;
 
-  console.log(product);
-  console.log(product.length);
+  // console.log(product);
+  // console.log(product.length);
 
   if (!product || Object.keys(product).length === 0) {
     return (
