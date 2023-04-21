@@ -8,7 +8,7 @@ const UserProductItem = (props) => {
   console.log(product);
   console.log(product.length);
 
-  if (!product || product == undefined || product === undefined || product.length === undefined || product.length === 0) {
+  if (!product || Object.keys(product).length === 0) {
     return (
       <div>
         <h6 className="text-center mt-5">

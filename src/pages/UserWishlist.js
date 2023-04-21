@@ -2,7 +2,7 @@ import Link from "next/link";
 import UserWishlistItem from "./UserWishlistItem";
 
 const UserWishList = (props) => {
-  const wishlistItems=props.wishlistItems;
+  const wishlistItems = props.wishlistItems;
   // const cartProducts = useSelector((state) => state.cart.cartItems);
 
   return (
@@ -40,14 +40,14 @@ const UserWishList = (props) => {
             <section aria-labelledby="summary-heading" className="mt-10">
               <div>
                 <dl className="space-y-4">
-                  <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center justify-between">
                     <dt className="text-base font-medium text-gray-900">
                       Subtotal
                     </dt>
                     <dd className="ml-4 text-base font-medium text-gray-900">
                       $96.00
                     </dd>
-                  </div>
+                  </div> */}
                 </dl>
               </div>
 

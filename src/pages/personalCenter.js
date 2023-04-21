@@ -105,14 +105,15 @@ const PersonalCenter = ({ user, wishlistItems, product }) => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  if(user.isLoggedIn==false){
-    swal("You have not login yet!", "", "");
-  }
 
-  const { mutateUser } = useUser({
-    redirectTo: "/Login",
-    redirectIfFound: false,
-  });
+  
+  // if(user.isLoggedIn==false){
+  //   swal("You have not login yet!", "", "");
+  // }
+  // const { mutateUser } = useUser({
+  //   redirectTo: "/Login",
+  //   redirectIfFound: false,
+  // });
 
 
 
