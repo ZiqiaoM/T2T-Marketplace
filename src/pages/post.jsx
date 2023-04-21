@@ -5,6 +5,8 @@ import swal from "sweetalert";
 import CldGallery from "../components/cloudinary/CldGallery";
 import ImageUploader from "../components/cloudinary/ImageUploader";
 
+import useUser from '../lib/userUser';
+
 const ProductCategory = [
   { id: "cloth", title: "Cloth" },
   { id: "kitchenware", title: "Kitchenware" },
@@ -61,6 +63,16 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 sessionOptions);
 
 export default function Example({ user }) {
+
+
+  if(user.isLoggedIn==false){
+    swal("You have not login yet!", "", "");
+  }
+  const { mutateUser } = useUser({
+    redirectTo: "/Login",
+    redirectIfFound: false,
+  });
+
   const [imagesUploadedList, setImagesUploadedList] = useState([]);
   const [ImageUrl, setImageUrl] = useState([]);
 

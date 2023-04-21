@@ -5,6 +5,11 @@ import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import prisma from "../lib/prisma";
 import { cartActions } from "../store/wish-list/cartSlice";
+import useUser from "../lib/userUser";
+
+
+
+
 const Categories = [
   {
     id: "category",
@@ -92,10 +97,24 @@ function classNames(...classes) {
 }
 
 export default function AllProducts({ products_init }) {
-  const { id, images, post_title, price } = products_init;
+
+  // const { id, images, post_title, price } = products_init;
+
+  const [products, setProducts] = useState(products_init);
+
+  // console.log(products);
+  // console.log(id);
+
+  const { user } = useUser({
+    // redirectTo: "/Login",
+  });
+
   const dispatch = useDispatch();
-  const addToCart = () => {
+  const addToCart = async (itp,e) => {
     event.preventDefault();
+    // console.log(e,itp);
+    const { id, images, post_title, price } = itp;
+
     dispatch(
       cartActions.addItem({
         id,
@@ -107,9 +126,26 @@ export default function AllProducts({ products_init }) {
       })
     );
     swal("Successfully added to wishlist!", "", "success");
+
+    try {
+      let data = {
+        product_id: id,
+        user_id: user.id,
+      };
+      const body = { data };
+      await fetch("/api/addWishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      swal("Successfully added to wishlist!", "", "success");
+      // await Router.push('/drafts');
+    } catch (error) {
+      console.error(error);
+    }
+
+
   };
-  const [products, setProducts] = useState(products_init);
-  console.log(products);
 
   function handleLocations(e) {
     const selectedValue = e.target.value;
@@ -317,7 +353,7 @@ export default function AllProducts({ products_init }) {
                         <p className="mt-1 text-lg font-medium text-gray-900">
                           ${price}
                         </p>
-                        <button onClick={addToCart}>
+                        <button onClick={ addToCart.bind(this,product) }>
                           <HeartOutlined
                             style={{ fontSize: "24px", color: "grey" }}
                           />

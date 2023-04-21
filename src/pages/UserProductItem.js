@@ -4,7 +4,11 @@ import { cartActions } from "../store/wish-list/cartSlice";
 
 const UserProductItem = (props) => {
   const product = props.product;
-  if (!product) {
+
+  console.log(product);
+  console.log(product.length);
+
+  if (!product || product === undefined || product.length === 0) {
     return (
       <div>
         <h6 className="text-center mt-5">

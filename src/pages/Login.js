@@ -12,13 +12,16 @@ export default function Login() {
   //   redirectTo: '/home',
   // })
 
-  const { mutateUser } = useUser({
+  const { user, mutateUser } = useUser({
     redirectTo: "/home",
     redirectIfFound: true,
   });
-    redirectTo: '/home',
-    redirectIfFound: false,
-  })
+  // console.log(user);
+
+  if(user != undefined && user.isLoggedIn == true){
+    swal("You've successfully login!", "", "");
+  }
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
