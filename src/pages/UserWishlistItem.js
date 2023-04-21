@@ -14,7 +14,7 @@ const UserWishlistItem = (props) => {
     dispatch(cartActions.deleteItem(id));
   };
 
-  if (!wishlistItems || product === undefined || wishlistItems.length === undefined || wishlistItems.length === 0) {
+  if (!wishlistItems || wishlistItems == undefined || wishlistItems === undefined || wishlistItems.length === undefined || wishlistItems.length === 0) {
     return (
       <h6 className="text-center mt-5">
         You haven't added any products to your wishlist yet.
