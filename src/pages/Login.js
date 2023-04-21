@@ -4,8 +4,7 @@ import Router from 'next/router'
 import Link from 'next/link';
 import useUser from '../lib/userUser';
 
-export default function Login () {
-
+export default function Login() {
   // const { usersss } = useUser();
   // console.log(usersss);
 
@@ -14,13 +13,16 @@ export default function Login () {
   // })
 
   const { mutateUser } = useUser({
+    redirectTo: "/home",
+    redirectIfFound: true,
+  });
     redirectTo: '/home',
     redirectIfFound: false,
   })
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   // const router = useRouter();
 
@@ -35,13 +37,13 @@ export default function Login () {
     //   body: JSON.stringify({ email, password }),
     // });
 
-    const response = await fetch('/api/LoginSessionNoUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      })
+    const response = await fetch("/api/LoginSessionNoUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
     const data = await response.json();
 
@@ -58,103 +60,121 @@ export default function Login () {
     // Save user information to local storage
     // localStorage.setItem('userInfo', JSON.stringify(data));
     // Router.push('/test');
-    Router.push('/home');
+    Router.push("/home");
   };
 
-
   return (
-            <>
-          <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8" >
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <>
+      <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign in
+          </h2>
+          <Link
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+            href="/Signup0318"
+          >
+            <p className="mt-2 text-center text-sm ">
+              Or sign up and start a trip with T2T
+            </p>
+          </Link>
+        </div>
 
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in</h2>
-              <Link href='/Signup0318'>
-              <p className="mt-2 text-center text-sm text-gray-600">
-                Or{' '}
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  sign up and start a trip with T2T
-                </a>
-              </p>
-              </Link>
-              {/* <img className="lg_img flex" src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png" alt="ppdj1YT.png" width="500px" border="0" /> */}
-            </div>
-
-    
-            <div className="container1 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-              <div className='con_img'><img className="lg_img flex" src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png" alt="ppdj1YT.png" width="500px" border="0" /></div>
-              <div className="con_input bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <form onSubmit={handleSubmit} className="space-y-6" action="#" method="POST">
-                  <div className='email'>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                      Email address
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        autoComplete="email"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-    
-                  <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                      Password
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        autoComplete="current-password"
-                        required
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-    
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-blue-300 rounded"
-                      />
-                      <label htmlFor="remember-me" className="ml-2 block text-sm text-blue-900">
-                        Remember me
-                      </label>
-                    </div>
-    
-                    <div className="text-sm">
-                      <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        <Link href='/forgetPassword'>
-                        Forgot your password?
-                        </Link>
-                      </a>
-                    </div>
-                  </div>
-    
-                  <div>
-                  {error && <p>{error}</p>}
-                    <button
-                      type="submit"
-                       className='btn'
-                    >
-                      Sign in
-                    </button>
-                  </div>
-                </form>
+        <div className="container1 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="con_img">
+            <img
+              className="lg_img flex"
+              src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png"
+              alt="ppdj1YT.png"
+              width="500px"
+              border="0"
+            />
+          </div>
+          <div className="con_input bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+              action="#"
+              method="POST"
+            >
+              <div className="email">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email address
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
               </div>
-            </div>
-            <style jsx>{`
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-blue-300 rounded"
+                  />
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-2 block text-sm text-blue-900"
+                  >
+                    Remember me
+                  </label>
+                </div>
+
+                <div className="text-sm">
+                  <Link
+                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                    href="/forgetPassword"
+                  >
+                    Forgot your password?
+                  </Link>
+                </div>
+              </div>
+
+              <div>
+                {error && <p>{error}</p>}
+                <button type="submit" className="btn">
+                  Sign in
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <style jsx>{`
 
   .container1{
     display:flex;
@@ -192,16 +212,10 @@ export default function Login () {
 }
 
 `}</style>
-          </div> 
-        </>
+      </div>
+    </>
   );
-};
-
-
-
-
-
-
+}
 
 // import React from 'react'
 // // 0318 update-zq
@@ -248,7 +262,6 @@ export default function Login () {
 // //   return token;
 // // }
 
-
 // const Login = () => {
 //     return (
 //         <>
@@ -269,7 +282,7 @@ export default function Login () {
 //               </p>
 //               <img className="lg_img flex" src="https://s1.ax1x.com/2023/03/23/ppdj1YT.png" alt="ppdj1YT.png" width="500px" border="0" />
 //             </div>
-    
+
 //             <div className="container mt-8 sm:mx-auto sm:w-full sm:max-w-md">
 //               <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 //                 <form className="space-y-6" action="#" method="POST">
@@ -288,7 +301,7 @@ export default function Login () {
 //                       />
 //                     </div>
 //                   </div>
-    
+
 //                   <div>
 //                     <label htmlFor="password" className="block text-sm font-medium text-gray-700">
 //                       Password
@@ -304,7 +317,7 @@ export default function Login () {
 //                       />
 //                     </div>
 //                   </div>
-    
+
 //                   <div className="flex items-center justify-between">
 //                     <div className="flex items-center">
 //                       <input
@@ -317,14 +330,14 @@ export default function Login () {
 //                         Remember me
 //                       </label>
 //                     </div>
-    
+
 //                     <div className="text-sm">
 //                       <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
 //                         Forgot your password?
 //                       </a>
 //                     </div>
 //                   </div>
-    
+
 //                   <div>
 //                     <button
 //                       type="submit"
@@ -335,7 +348,7 @@ export default function Login () {
 //                     </button>
 //                   </div>
 //                 </form>
-    
+
 //                 {/* <div className="mt-6">
 //                   <div className="relative">
 //                     <div className="absolute inset-0 flex items-center">
@@ -345,7 +358,7 @@ export default function Login () {
 //                       <span className="px-2 bg-white text-gray-500">Or continue with</span>
 //                     </div>
 //                   </div>
-    
+
 //                   <div className="mt-6 grid grid-cols-3 gap-3">
 //                     <div>
 //                       <a
@@ -362,7 +375,7 @@ export default function Login () {
 //                         </svg>
 //                       </a>
 //                     </div>
-    
+
 //                     <div>
 //                       <a
 //                         href="#"
@@ -374,7 +387,7 @@ export default function Login () {
 //                         </svg>
 //                       </a>
 //                     </div>
-    
+
 //                     <div>
 //                       <a
 //                         href="#"
@@ -422,7 +435,7 @@ export default function Login () {
 // }
 
 // `}</style>
-//           </div> 
+//           </div>
 //         </>
 //       )
 // }
